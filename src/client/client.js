@@ -12,7 +12,7 @@ import { ConnectedRouter } from "connected-react-router";
 
 import "./styles/main.scss";
 
-const PROXY_ROUTE = "/api_call";
+const PROXY_ROUTE = "/api";
 const axiosInstance = axios.create({
 	baseURL: PROXY_ROUTE
 });
