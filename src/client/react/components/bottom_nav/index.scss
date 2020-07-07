@@ -1,4 +1,4 @@
-.app-navigation {
+.app_navigation {
     position: fixed;
     bottom: 0;
     height: $navigationHeight;
@@ -8,4 +8,40 @@
     background: $black;
     display: flex;
     justify-content: space-between;
+    transition: all 0.15s cubic-bezier(.19,1,.22,1);
+    transform: translateY(0px);
+
+    .main_links_container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 15px;
+
+        .main_link_container {
+            &.add_jam  {
+                position: relative;
+                top: -5px;
+            }
+        }
+
+        
+
+        .link_wrapper {
+            width:100%;
+        }
+
+        .link_icon {
+            width: 50px;
+            display: block;
+            padding: 28px 0 0 0;
+            display: flex;
+            justify-content: center;
+
+            
+        }
+    }
+
+    &.hidden {
+        transform: translateY(100px);
+    }
 }

@@ -3,11 +3,45 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import classNames from "classnames"
 import posed, { PoseGroup } from 'react-pose';
+import HomeInactive from "../icons/tab_home_inactive"
+import HomeActive from "../icons/tab_home_active"
+import FireInactive from "../icons/tab_fire_inactive"
+import FireActive from "../icons/tab_fire_active"
+import Add from "../icons/tab_Add"
+import SearchInactive from "../icons/tab_search_inactive"
+import SearchActive from "../icons/tab_search_active"
+import UserInactive from "../icons/tab_user_inactive"
+import UserActive from "../icons/tab_user_active"
 
 class BottomNav extends Component {
 
-    isActivePath = (pathname, url) => {
-        return this.props.location.pathname == url
+    isActivePath = (pathname) => {
+        return this.props.location.pathname == pathname
+    }
+
+    renderIcon(url) {
+        switch (url) {
+            case "/":
+                if(this.isActivePath(url)) {
+                    return <HomeActive />
+                } else return <HomeInactive />
+            case "/trending":
+                if(this.isActivePath(url)) {
+                    return <FireActive />
+                } else return <FireInactive />
+            case "/add":
+                return <Add />
+            case "/search":
+                if(this.isActivePath(url)) {
+                    return <SearchActive />
+                } else return <SearchInactive />
+            case "/profile":
+                if(this.isActivePath(url)) {
+                    return <UserActive />
+                } else return <UserInactive />
+            default:
+                return;
+        }
     }
     
 	render() {
@@ -15,45 +49,52 @@ class BottomNav extends Component {
         let links = [
             {
               url: "/",
-              name: "Home"
+              name: "Home",
             },
             {
               url: "/trending",
-              name: "Trending"
+              name: "Trending",
             },
             {
               url: "/add",
-              name: "Add Jam"
+              name: "Add Jam",
             },
             {
               url: "/search",
-              name: "Search"
+              name: "Search",
             },
             {
               url: "/profile",
-              name: "Profile"
+              name: "Profile",
             }
-          ]
+        ]
 		return (
-			<div className="app-navigation">
-                <ul>
-                {links.map(link => {
-                    return (
-                        <li key={link.url} className={classNames("main_link_container", {
-                            "main_link_active": this.isActivePath(link.url, link.url),
-                            "add_jam": link.url == "/add"
-                            })}
+
+            <div 
+                className={classNames({
+                    "hidden": this.props.location.pathname == "/add" 
+                }, "app_navigation")}
             >
-                                <div className="link_wrapper">
-                                    <Link to ={link.url} className="main_link">
-                                        <span className="main_link+label">{link.name}</span>
-                                    </Link>
-                                </div>
-                        </li>
-                        )
-                    })}
+                
+                    <ul className="main_links_container">
+                    {links.map(link => {
+                        return (
+                            <li key={link.url} className={classNames("main_link_container", {
+                                "main_link_active": this.isActivePath(link.url),
+                                "add_jam": link.url == "/add"
+                                })}
+                >
+                                    <div className="link_wrapper">
+                                        <Link to ={link.url} className="link_icon">
+                                            {this.renderIcon(link.url)}
+                                        </Link>
+                                    </div>
+                            </li>
+                            )
+                        })}
                 </ul>
             </div>
+			
 		);
 	}
 }
