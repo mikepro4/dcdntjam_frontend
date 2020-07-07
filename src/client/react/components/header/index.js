@@ -11,13 +11,13 @@ class Header extends Component {
 			<div className="user-info">
 
 			<div className="user-avatar-container">
-				<Link to={`/profile/${this.props.user._id}`}>
+				<Link to={`/profile/${this.props.user.profile._id}`}>
 					<img
 						className="user-avatar"
-						src={this.props.user.profile.photos[0].value}
+						src={this.props.user.profile.profile.photos[0].value}
 					/>
 					<span className="user-display-name">
-						{this.props.user.profile.displayName}
+						{this.props.user.profile.profile.displayName}
 					</span>
 				</Link>
 			</div>
