@@ -11,7 +11,7 @@ class Header extends Component {
 			<div className="user-info">
 
 			<div className="user-avatar-container">
-				<Link to={`/profile/${this.props.user.profile._id}`}>
+				{/* <Link to={`/profile/${this.props.user.profile._id}`}>
 					<img
 						className="user-avatar"
 						src={this.props.user.profile.profile.photos[0].value}
@@ -19,7 +19,7 @@ class Header extends Component {
 					<span className="user-display-name">
 						{this.props.user.profile.profile.displayName}
 					</span>
-				</Link>
+				</Link> */}
 			</div>
 
 			<a href="/api/logout" className="logout-button">

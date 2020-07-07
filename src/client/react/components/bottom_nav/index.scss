@@ -1,0 +1,11 @@
+.app-navigation {
+    position: fixed;
+    bottom: 0;
+    height: $navigationHeight;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: $black;
+    display: flex;
+    justify-content: space-between;
+}

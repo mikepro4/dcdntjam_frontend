@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { renderRoutes } from "react-router-config";
 
 import Header from "./react/components/header"
+import BottomNav from "./react/components/bottom_nav"
 
 import {
 	fetchCurrentUser,
@@ -26,6 +27,7 @@ class App extends Component {
 			<div className="app">
 				<Header/>
 				{renderRoutes(this.props.route.routes)}
+				<BottomNav/>
 			</div>
 		)
 	}

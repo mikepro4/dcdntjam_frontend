@@ -11,7 +11,7 @@ class HomePage extends Component {
 	render() {
 
 		return (
-     		<div>
+     		<div className="home-page">
 				  This is home. Updated
 				  <Link to="/about"> Go to about > </Link>
 				  React version: {REACT_VERSION}

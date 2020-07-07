@@ -16,6 +16,14 @@
 
 //components
 
+//pages 
+@import "../App";
+@import "../react/pages/home/index";
+
+//components
+@import "../react/components/header/index";
+@import "../react/components/bottom_nav/index";
+
 html {
 	// overflow: hidden;
 	// overflow-y: scroll;
@@ -25,7 +33,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background: #141414;
-	font-family: "Compete", sans-serif;
+	font-family: "Jam", sans-serif;
 	font-weight: 400;
 	-webkit-font-smoothing: subpixel-antialiased;
 	// -webkit-overflow-scrolling: touch;
@@ -49,13 +57,14 @@ body {
 // -------------------------
 
 ::selection {
-  background: $white;
-  color: $black;
+  background: rgb(76, 0, 255);
+  opacity: 1;
+  color: $white;
 }
 
 ::-moz-selection {
-  background: $white;
-  color: $black;
+	background: rgba(0, 255, 197, 0.88);
+  color: $white;
 }
 
 // Links
