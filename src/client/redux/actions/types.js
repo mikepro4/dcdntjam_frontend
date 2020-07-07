@@ -4,6 +4,9 @@ export const FETCH_AUTH = "app/FETCH_AUTH";
 
 export const TOGGLE_FULLSCREN = "app/TOGGLE_FULLSCREN";
 
+export const SCROLLING_UP = "app/SCROLLING_UP";
+export const SCROLLING_DOWN = "app/SCROLLING_DOWN";
+
 // =============================================================================
 
 // Jam

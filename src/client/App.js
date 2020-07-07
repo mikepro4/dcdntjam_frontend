@@ -6,6 +6,8 @@ import Header from "./react/components/header"
 import BottomNav from "./react/components/bottom_nav"
 
 import {
+	scrollingUp,
+	scrollingDown,
 	fetchCurrentUser,
 } from "./redux/actions/appActions";
 
@@ -20,7 +22,24 @@ class App extends Component {
 
 	componentDidMount() {
 		this.props.fetchCurrentUser();
+		this.prev = window.scrollY;
+		window.addEventListener('scroll', e => this.handleNavigation(e));
 	}
+	
+	handleNavigation = (e) => {
+		const window = e.currentTarget;
+		if(window.scrollY <= 0) {
+			this.props.scrollingUp()
+		} else {
+			if (this.prev > window.scrollY) {
+				this.props.scrollingUp()
+			} else if (this.prev < window.scrollY) {
+				this.props.scrollingDown()
+			}
+		}
+	
+		this.prev = window.scrollY;
+	};
 
 	render() {
 		return (
@@ -40,6 +59,8 @@ function mapStateToProps(state) {
 
 export default {
 	component: connect(mapStateToProps, { 
-		fetchCurrentUser 
+		fetchCurrentUser,
+		scrollingUp,
+		scrollingDown
 	})(App)
 };

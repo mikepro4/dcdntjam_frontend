@@ -72,7 +72,7 @@ class BottomNav extends Component {
 
             <div 
                 className={classNames({
-                    "hidden": this.props.location.pathname == "/add" 
+                    "hidden": (this.props.location.pathname == "/add") || this.props.scrollingDown
                 }, "app_navigation")}
             >
                 
@@ -102,7 +102,8 @@ class BottomNav extends Component {
 function mapStateToProps(state) {
 	return {
 		user: state.app.user,
-		location: state.router.location
+        location: state.router.location,
+        scrollingDown: state.app.scrollingDown
 	};
 }
 
