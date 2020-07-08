@@ -12,7 +12,8 @@ class Header extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			menuOpen: false
+			menuOpen: false,
+			menuClosing: false
 		}
 	}
 
@@ -45,12 +46,227 @@ class Header extends Component {
 			</div>
 		) : (
 			<div className="user-info">
-				<a href="/api/auth/google" className="login-button">
+				{/* <a href="/api/auth/google" className="login-button">
 					Login with Google
-				</a>
+				</a> */}
 			</div>
 		);
 	}
+
+	renderLines() {
+		const bottomOpen = [
+			{ value: 'M39.50625,9.5 C30.8788547,9.5 28.639837,0.5 20,0.5 C11.360163,0.5 8.88972652,9.5 0.5,9.5' }]
+
+		const bottomClosed = [
+			{ value: 'M39.50625,9.5 C30.8788547,9.5 28.642962,9.5 20.003125,9.5 C11.363288,9.5 8.88972652,9.5 0.5,9.5' }]
+
+		const topOpen = [
+			{ value: 'M39.50625,0.5 C30.8788547,0.5 28.642962,0.5 20.003125,0.5 C11.363288,0.5 8.88972652,0.5 0.5,0.5' }]
+
+		const topClosed = [
+			{ value: 'M39.50625,0.5 C30.8788547,0.5 28.642962,9.5109931 20.003125,9.5109931 C11.363288,9.5109931 8.88972652,0.5 0.5,0.5' }]
+
+
+		if(!this.state.menuOpen && !this.state.menuClosing) {
+			return(
+				<div>
+					<div className="line_bottom">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="40"
+							height="10"
+						>
+							<g
+							fill="none"
+							fillRule="evenodd"
+							stroke="#FFF"
+							strokeLinecap="square"
+							strokeWidth="1"
+							>
+
+								<path d="M39.50625,9.5 C30.8788547,9.5 28.642962,9.5 20.003125,9.5 C11.363288,9.5 8.88972652,9.5 0.5,9.5"></path>
+						
+							</g>
+						</svg>
+
+					</div>
+
+					<div className="line_top">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="40"
+							height="10"
+						>
+							<g
+							fill="none"
+							fillRule="evenodd"
+							stroke="#FFF"
+							strokeLinecap="square"
+							strokeWidth="1"
+							>
+								<path d="M39.50625,0.5 C30.8788547,0.5 28.642962,0.5 20.003125,0.5 C11.363288,0.5 8.88972652,0.5 0.5,0.5"></path>
+							</g>
+						</svg>
+
+					</div>
+				</div>
+			)
+		}
+
+		if(this.state.menuOpen) {
+			return(<div>
+				<div className="line_bottom">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="40"
+						height="10"
+					>
+						<g
+						fill="none"
+						fillRule="evenodd"
+						stroke="#FFF"
+						strokeLinecap="square"
+						strokeWidth="1"
+						>
+						<Anime
+							easing="easeInOutCubic"
+							duration={1000}
+							d={bottomOpen}
+							loop={false}
+							key={11+Date.now()}
+						>
+								<path d="M39.50625,9.5 C30.8788547,9.5 28.642962,9.5 20.003125,9.5 C11.363288,9.5 8.88972652,9.5 0.5,9.5"></path>
+						</Anime>
+						)
+						</g>
+					</svg>
+
+				</div>
+
+				<div className="line_top">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="40"
+						height="10"
+					>
+						<g
+						fill="none"
+						fillRule="evenodd"
+						stroke="#FFF"
+						strokeLinecap="square"
+						strokeWidth="1"
+						>
+							<Anime
+							easing="easeInOutCubic"
+							duration={1000}
+							d={topClosed}
+							loop={false}
+							key={11+Date.now()}
+						>	
+								<path d="M39.50625,0.5 C30.8788547,0.5 28.642962,0.5 20.003125,0.5 C11.363288,0.5 8.88972652,0.5 0.5,0.5"></path>
+
+						</Anime>
+						)}
+						
+						
+						</g>
+					</svg>
+
+				</div>
+				</div>
+			)
+		}
+
+		if(this.state.menuClosing) {
+			return(
+				<div>
+					<div className="line_bottom">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="40"
+						height="10"
+					>
+						<g
+						fill="none"
+						fillRule="evenodd"
+						stroke="#FFF"
+						strokeLinecap="square"
+						strokeWidth="1"
+						>
+						<Anime
+							easing="easeInOutCubic"
+							duration={1000}
+							d={bottomClosed}
+							loop={false}
+							key={11+Date.now()}
+						>
+							<path d="M39.50625,9.5 C30.8788547,9.5 28.639837,0.5 20,0.5 C11.360163,0.5 8.88972652,9.5 0.5,9.5"></path>
+								
+						</Anime>
+						
+						
+						</g>
+					</svg>
+
+				</div>
+
+				<div className="line_top">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="40"
+						height="10"
+					>
+						<g
+						fill="none"
+						fillRule="evenodd"
+						stroke="#FFF"
+						strokeLinecap="square"
+						strokeWidth="1"
+						>
+			
+							<Anime
+								easing="easeInOutCubic"
+								duration={1000}
+								d={topOpen}
+								loop={false}
+								key={11+Date.now()}
+							>
+
+								<path d="M39.50625,0.5 C30.8788547,0.5 28.642962,9.5109931 20.003125,9.5109931 C11.363288,9.5109931 8.88972652,0.5 0.5,0.5"></path>
+									
+							</Anime>
+						
+						
+						</g>
+					</svg>
+
+				</div>
+				</div>
+			)
+		}
+	}
+
+	handleClick() {
+		if(!this.state.menuOpen && !this.state.menuClosing) {
+			this.setState({
+				menuOpen: true
+			})
+		}
+		
+		if(this.state.menuOpen) {
+			this.setState({
+				menuOpen: false,
+				menuClosing: true
+			})
+
+			setTimeout(() => {
+				this.setState({
+					menuClosing: false
+				})
+			}, 1000)
+		}
+	}
+
 
 	render() {
 
@@ -78,100 +294,10 @@ class Header extends Component {
 			</div>
 
 			<div className="menu_icon" onClick={() => {
-				this.setState({
-					menuOpen: !this.state.menuOpen
-				})
+				this.handleClick()
 			}}>
 				
-				<div className="line_bottom">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="40"
-						height="10"
-					>
-						<g
-						fill="none"
-						fillRule="evenodd"
-						stroke="#FFF"
-						strokeLinecap="square"
-						strokeWidth="1"
-						>
-						{this.state.menuOpen ? (
-							<Anime
-							easing="easeInOutCubic"
-							duration={1000}
-							d={bottomOpen}
-							direction='alternate'
-							loop={false}
-							key={11+Date.now()}
-						>
-								<path d="M39.50625,9.5 C30.8788547,9.5 28.642962,9.5 20.003125,9.5 C11.363288,9.5 8.88972652,9.5 0.5,9.5"></path>
-						</Anime>
-						): (
-							<Anime
-								easing="easeInOutCubic"
-								duration={1000}
-								d={bottomClosed}
-								direction='alternate'
-								loop={false}
-								key={11+Date.now()}
-							>
-								<path d="M39.50625,9.5 C30.8788547,9.5 28.639837,0.5 20,0.5 C11.360163,0.5 8.88972652,9.5 0.5,9.5"></path>
-									
-							</Anime>
-						)}
-						
-						
-						</g>
-					</svg>
-
-				</div>
-
-				<div className="line_top">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="40"
-						height="10"
-					>
-						<g
-						fill="none"
-						fillRule="evenodd"
-						stroke="#FFF"
-						strokeLinecap="square"
-						strokeWidth="1"
-						>
-						{this.state.menuOpen ? (
-							<Anime
-							easing="easeInOutCubic"
-							duration={1000}
-							d={topClosed}
-							direction='alternate'
-							loop={false}
-							key={11+Date.now()}
-						>	
-								<path d="M39.50625,0.5 C30.8788547,0.5 28.642962,0.5 20.003125,0.5 C11.363288,0.5 8.88972652,0.5 0.5,0.5"></path>
-
-						</Anime>
-						): (
-							<Anime
-								easing="easeInOutCubic"
-								duration={1000}
-								d={topOpen}
-								direction='alternate'
-								loop={false}
-								key={11+Date.now()}
-							>
-
-								<path d="M39.50625,0.5 C30.8788547,0.5 28.642962,9.5109931 20.003125,9.5109931 C11.363288,9.5109931 8.88972652,0.5 0.5,0.5"></path>
-									
-							</Anime>
-						)}
-						
-						
-						</g>
-					</svg>
-
-				</div>
+				{this.renderLines()}
 
 				{/* <div className="line_top">
 					<svg
