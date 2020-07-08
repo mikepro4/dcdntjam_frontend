@@ -166,7 +166,7 @@ class Header extends Component {
 								<path d="M39.50625,0.5 C30.8788547,0.5 28.642962,0.5 20.003125,0.5 C11.363288,0.5 8.88972652,0.5 0.5,0.5"></path>
 
 						</Anime>
-						)}
+					
 						
 						
 						</g>
@@ -287,7 +287,20 @@ class Header extends Component {
 			<div className="app-header">
 
         	<div className="header-left">
-				<Logo/>
+				<Link to="/"  onClick={() => {
+				if(this.state.menuOpen) {
+					this.setState({
+						menuOpen: false,
+						menuClosing: true
+					})
+		
+					setTimeout(() => {
+						this.setState({
+							menuClosing: false
+						})
+					}, 1000)
+				}
+			}}><Logo/></Link>
 			</div>
 			<div className="header-right">
 				{this.renderAuthButton()}
