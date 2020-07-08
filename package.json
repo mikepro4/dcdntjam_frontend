@@ -79,6 +79,7 @@
 		"postcss-loader": "^2.0.9",
 		"react": "^16.13.1",
 		"react-addons-css-transition-group": "^15.6.2",
+		"react-anime": "2.1.0",
 		"react-dnd": "^2.5.4",
 		"react-dnd-html5-backend": "^2.5.4",
 		"react-dom": "^16.13.1",
