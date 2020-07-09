@@ -1,3 +1,7 @@
+.profile-page {
+    height: 3000px;
+}
+
 .profile-avatar {
     width: 130px;
     height: 130px;
@@ -49,13 +53,35 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px 0 0  0;
+    margin: 10px 0 25px  0;
 
     .button-edit {
         width: 160px;
     }
 }
 
-.profile-page {
-    height: 3000px;
+.profile-bio {
+    font-size: 13px;
+    font-weight: 200;
+    text-align: center;
+    margin: 0 auto 5px auto;
+    padding: 0 20px 0 20px;
+    width: 340px;
+}
+
+.profile-link {
+    font-size: 12px;
+    font-weight: 350;
+    text-align: center;
+    margin: 10px 0 5px 0;
+    padding: 0 20px 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.youtube-icon {
+    position: relative;
+    top: 2px;
+    margin: 0 6px 0 0;
 }

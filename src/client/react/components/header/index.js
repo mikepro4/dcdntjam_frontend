@@ -293,7 +293,7 @@ class Header extends Component {
 				type: "spring",
 				damping: 2,
 				stiffness: 10,
-				transition: { duration: 0.2 }
+				transition: { duration: 0.2, delay: 0.05 }
 			},
 		}
 

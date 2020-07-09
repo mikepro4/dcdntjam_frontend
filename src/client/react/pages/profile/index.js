@@ -11,6 +11,8 @@ import {
 	updateUser,
 } from "../../../redux/actions/appActions";
 
+import YoutubeIcon from "../../components/icons/youtube"
+
 
 class ProfilePage extends Component {
 
@@ -88,6 +90,17 @@ class ProfilePage extends Component {
                         <div className="main-group">
                             <a className="button button-edit">Edit profile</a>
                         </div>
+                    </div>
+
+                    <div className="profile-bio">
+                        Designer and musician from New York performing DAWless Techno.
+                    </div>
+
+                    <div className="profile-link">
+                        <div className="youtube-icon">
+                            <YoutubeIcon />
+                        </div>
+                        <a href="https://youtube.com/DCDNT" target="_blank">youtube.com/DCDNT</a>
                     </div>
                     {/* {this.props.match.params.googleId && this.props.match.params.googleId}
                     <UserEditorForm
