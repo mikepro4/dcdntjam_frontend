@@ -1,0 +1,61 @@
+.profile-avatar {
+    width: 130px;
+    height: 130px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto;
+
+    img { 
+        max-width: 100%;
+    }
+}
+
+.profile-name {
+    font-size: 20px;
+    font-weight: 550;
+    text-align: center;
+    margin: 20px 0 5px 0;
+
+}
+
+.profile-username {
+    font-size: 12px;
+    text-align: center;
+    font-weight: 200;
+}
+
+.profile-stats {
+    width: 280px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin: 20px auto 30px auto;
+
+    .stat-number {
+        font-size: 18px;
+        font-weight: 500;
+        margin: 0 0 2px 0;
+    }
+
+    .stat-label {
+        font-size: 8px;
+        font-weight: 100;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+    }
+}
+
+.actions-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 0  0;
+
+    .button-edit {
+        width: 180px;
+    }
+}
+
+.profile-page {
+    height: 3000px;
+}

@@ -273,7 +273,7 @@ class Header extends Component {
 
 	chooseColor() {
 		let colors = [
-			"#ffffff", "#5C00FF"
+			"#FF0042", "#5C00FF"
 		]
 
 		return colors[Math.floor(Math.random() * colors.length)];

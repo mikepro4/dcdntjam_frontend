@@ -1,0 +1,60 @@
+.button {
+    font-size: 14px;
+    font-family: 'Jam';
+	font-weight: 350;
+	display: flex;
+	align-items: center;
+	position: relative;
+	color: $white;
+	white-space: nowrap;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	text-align: center;
+	justify-content: center;
+	user-select: none;
+	user-select: none;
+	background: rgba(255,255,255,0.1);
+	box-shadow: none;
+    padding: 5px 25px 10px 25px;
+    height: 40px;
+    border-radius: 50px;
+
+	.pt-icon-standard {
+		margin: 0 5px 0 0;
+
+		&:last-child {
+			margin: 0;
+		}
+	}
+
+	&:hover {
+	}
+
+	&:active {
+	}
+
+	&.white-button {
+		background: $white;
+
+		&:hover {
+			background: $white;
+		}
+
+		&:active {
+			background: $white;
+		}
+	}
+
+	&.blue-button {
+		color: $white;
+
+		&:hover {
+			color: $white;
+		}
+
+		&:active {
+			color: $white;
+		}
+	}
+}

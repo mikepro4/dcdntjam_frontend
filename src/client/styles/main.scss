@@ -13,17 +13,20 @@
 @import "./imports/blueprint_overides";
 @import "./imports/animations";
 @import "./imports/grid";
+@import "./imports/buttons";
 
 //components
 
 //pages 
 @import "../App";
 @import "../react/pages/home/index";
+@import "../react/pages/profile/index";
 
 //components
 @import "../react/components/header/index";
 @import "../react/components/bottom_nav/index";
 @import "../react/components/loader/index";
+
 
 html {
 	// overflow: hidden;
@@ -37,11 +40,11 @@ body {
 	font-family: "Jam", sans-serif;
 	font-weight: 400;
 	-webkit-font-smoothing: subpixel-antialiased;
-	// -webkit-overflow-scrolling: touch;
+	-webkit-overflow-scrolling: touch;
 	width: 100%;
 	height: 100%;
 	color: white;
-	position: absolute;
+	// position: absolute;
 	top: 0;
 	right: 0;
 	left: 0;

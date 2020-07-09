@@ -27,17 +27,78 @@ class ProfilePage extends Component {
 
 	render() {
 
-		return (
-     		<div className="profile-page">
-                 {this.props.match.params.googleId && this.props.match.params.googleId}
-                 <UserEditorForm
-                    initialValues={
-                        this.props.user
-                    }
-                    onSubmit={this.handleSubmit.bind(this)}
-                />
-			</div>
-		);
+        if(!this.props.match.params.googleId) {
+            return(
+                <div>
+                    <a href="/api/auth/google" className="login-button">
+                        Login with Google
+                    </a>
+                </div>
+            )
+        } else {
+            return (
+                <div className="profile-page">
+                    <div className="profile-avatar">
+                        <img src={this.props.user.profile.photos[0].value}/>
+                    </div>
+
+                    <div className="profile-name">
+                        {this.props.user.profile.displayName}
+                    </div>
+
+                    <div className="profile-username">
+                        @{this.props.user.username}
+                    </div>
+
+                    <ul className="profile-stats">
+                        <li className="single-stat">
+                            <div className="stat-number">
+                                256
+                            </div>
+
+                            <div className="stat-label">Claps</div>
+                        </li>
+
+                        <li className="single-stat">
+                            <div className="stat-number">
+                                2.5hrs
+                            </div>
+
+                            <div className="stat-label">WATCHED</div>
+                        </li>
+
+                        <li className="single-stat">
+                            <div className="stat-number">
+                                5.5K
+                            </div>
+
+                            <div className="stat-label">FOLLOWERS</div>
+                        </li>
+
+                        <li className="single-stat">
+                            <div className="stat-number">
+                                176
+                            </div>
+
+                            <div className="stat-label">FOLLOWING</div>
+                        </li>
+                    </ul>
+
+                    <div className="actions-container">
+                        <div className="main-group">
+                            <a className="button button-edit">Edit profile</a>
+                        </div>
+                    </div>
+                    {/* {this.props.match.params.googleId && this.props.match.params.googleId}
+                    <UserEditorForm
+                       initialValues={
+                           this.props.user
+                       }
+                       onSubmit={this.handleSubmit.bind(this)}
+                   /> */}
+               </div>
+           );
+        }
 	}
 }
 

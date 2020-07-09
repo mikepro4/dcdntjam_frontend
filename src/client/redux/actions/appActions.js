@@ -39,13 +39,11 @@ export const updateUser = (user, success) => async (
 	api
 ) => {
 	const response = await api.post("/user/update", user);
-	if (response.data) {
-		dispatch({
-			type: FETCH_AUTH,
-			payload: response.data
-		});
-		if (success) {
-			success();
-		}
+	dispatch({
+		type: FETCH_AUTH,
+		payload: response.data
+	});
+	if (success) {
+		success();
 	}
 };
