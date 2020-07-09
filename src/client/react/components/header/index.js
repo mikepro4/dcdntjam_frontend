@@ -273,7 +273,7 @@ class Header extends Component {
 
 	chooseColor() {
 		let colors = [
-			"#FF0042", "#5C00FF"
+			"#FF0042", "#5C00FF", "#A100FF", "#00FF5F", "#00F6FF", "#FFDD00"
 		]
 
 		return colors[Math.floor(Math.random() * colors.length)];
@@ -282,14 +282,14 @@ class Header extends Component {
 	renderMenu() {
 		const menuContainer = {
 			open: { 
-				y: 0,
+				height: "100%",
 				type: "spring",
 				damping: 2,
 				stiffness: 10,
 				transition: { duration: 0.4, delay: 0.3 }
 			},
 			closed: { 
-				y: "-100%",
+				height: "0",
 				type: "spring",
 				damping: 2,
 				stiffness: 10,
@@ -311,6 +311,7 @@ class Header extends Component {
 			}),
 			closed: (custom) => ({
 				y: "-100%",
+				backgroundColor: this.chooseColor(),
 				type: "spring",
 				damping: 2,
 				stiffness: 10,
