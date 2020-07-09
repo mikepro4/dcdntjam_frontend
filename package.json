@@ -66,6 +66,7 @@
 		"express": "^4.17.1",
 		"express-http-proxy": "^1.0.7",
 		"file-loader": "^1.1.6",
+		"framer-motion": "^1.11.1",
 		"history": "^4.7.2",
 		"immutability-helper": "^2.6.4",
 		"instagram-profile-picture": "^1.0.5",

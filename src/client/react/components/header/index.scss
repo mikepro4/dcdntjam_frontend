@@ -13,6 +13,8 @@
     display: flex;
     align-items: center;
     padding: 0 0 0 20px;
+    position: relative;
+    z-index: 10;
 
     .main-links-container {
       display: flex;
@@ -35,7 +37,7 @@
   .app-logo {
     display: flex;
     align-items: center;
-    margin: 0 0 0 20px;
+    margin: 0 0 0 15px;
   }
 
   .header-right {
@@ -83,6 +85,7 @@
   position: relative;
   margin: 20px 20px 0 0 ;
   cursor: pointer;
+  z-index: 5;
 
   .line_bottom {
     display: block;
@@ -91,7 +94,7 @@
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 5;
   }
 
   .line_top{
@@ -101,6 +104,46 @@
     height: 100%;
     top: 0px;
     left: 0;
-    z-index: 2;
+    z-index: 5;
+  }
+}
+
+.menu_container {
+  display: block;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background: #070709;
+  overflow-y: scroll;
+  transform: translateY(-100%);
+
+  .menu_content {
+    margin: 150px 40px 40px 40px;
+  }
+}
+
+.menu_bar {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  width: 50%;
+  overflow: hidden;
+  transform: translateY(-100%);
+
+  &.menu_bar_1 {
+    top: 0;
+    left: 0;
+    height: 100%;
+    transform: translateY(-100%);
+  }
+
+  &.menu_bar_2 {
+    top: 0;
+    right: 0;
+    height: 100%;
+    transform: translateY(-100%);
   }
 }

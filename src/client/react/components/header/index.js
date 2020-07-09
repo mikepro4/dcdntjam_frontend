@@ -6,6 +6,7 @@ import posed, { PoseGroup } from 'react-pose';
 import Logo from '../icons/logo'
 
 import Anime from 'react-anime';
+import { motion } from "framer-motion"
 
 class Header extends Component {
 
@@ -39,16 +40,16 @@ class Header extends Component {
 
 		
 
-			{/* <a href="/api/logout" className="logout-button">
+			<a href="/api/logout" className="logout-button">
 				Logout
-			</a> */}
+			</a>
 
 			</div>
 		) : (
 			<div className="user-info">
-				{/* <a href="/api/auth/google" className="login-button">
+				<a href="/api/auth/google" className="login-button">
 					Login with Google
-				</a> */}
+				</a>
 			</div>
 		);
 	}
@@ -251,6 +252,7 @@ class Header extends Component {
 			this.setState({
 				menuOpen: true
 			})
+			document.body.classList.add("no-scroll")
 		}
 		
 		if(this.state.menuOpen) {
@@ -259,12 +261,94 @@ class Header extends Component {
 				menuClosing: true
 			})
 
+			document.body.classList.remove("no-scroll")
+
 			setTimeout(() => {
 				this.setState({
 					menuClosing: false
 				})
 			}, 1000)
 		}
+	}
+
+	chooseColor() {
+		let colors = [
+			"#ffffff", "#5C00FF"
+		]
+
+		return colors[Math.floor(Math.random() * colors.length)];
+	}
+
+	renderMenu() {
+		const menuContainer = {
+			open: { 
+				y: 0,
+				type: "spring",
+				damping: 2,
+				stiffness: 10,
+				transition: { duration: 0.4, delay: 0.3 }
+			},
+			closed: { 
+				y: "-100%",
+				type: "spring",
+				damping: 2,
+				stiffness: 10,
+				transition: { duration: 0.2 }
+			},
+		}
+
+		const menuBar = {
+			open: (custom) => ({
+				y: 0,
+				backgroundColor: this.chooseColor(),
+				type: "spring",
+				damping: 2,
+				stiffness: 10,
+				transition: { 
+					delay: 0 + custom,
+					duration: 0.4, 
+				}
+			}),
+			closed: (custom) => ({
+				y: "-100%",
+				type: "spring",
+				damping: 2,
+				stiffness: 10,
+				transition: { 
+					delay: 0,
+					duration: 0.2
+				}
+			})
+		}
+
+		return (
+			<div>
+				<motion.div
+					animate={this.state.menuOpen ? "open" : "closed"}
+					variants={menuContainer}
+					className="menu_container"
+				>
+						<div className="menu_content">
+							{this.renderAuthButton()}
+						</div>
+				</motion.div>
+
+				<motion.div
+					animate={this.state.menuOpen ? "open" : "closed"}
+					variants={menuBar}
+					custom={0}
+					className="menu_bar menu_bar_1"
+				/>
+
+				<motion.div
+					animate={this.state.menuOpen ? "open" : "closed"}
+					variants={menuBar}
+					custom={0.1}
+					className="menu_bar menu_bar_2"
+				/>
+			</div>
+
+		)
 	}
 
 
@@ -282,6 +366,8 @@ class Header extends Component {
 		const topClosed = [
 			{ value: 'M39.50625,0.5 C30.8788547,0.5 28.642962,9.5109931 20.003125,9.5109931 C11.363288,9.5109931 8.88972652,0.5 0.5,0.5' }]
 
+		
+
 
 		return (
 			<div className="app-header">
@@ -293,6 +379,8 @@ class Header extends Component {
 						menuOpen: false,
 						menuClosing: true
 					})
+
+					document.body.classList.remove("no-scroll")
 		
 					setTimeout(() => {
 						this.setState({
@@ -303,42 +391,16 @@ class Header extends Component {
 			}}><Logo/></Link>
 			</div>
 			<div className="header-right">
-				{this.renderAuthButton()}
 			</div>
 
 			<div className="menu_icon" onClick={() => {
 				this.handleClick()
 			}}>
 				
-				{this.renderLines()}
+			{this.renderLines()}
 
-				{/* <div className="line_top">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="40"
-						height="10"
-					>
-						<g
-						fill="none"
-						fillRule="evenodd"
-						stroke="#FFF"
-						strokeLinecap="square"
-						strokeWidth="1"
-						>
-						<Anime
-							easing="easeInOutCubic"
-							duration={1000}
-							d={[{value: "M39.50625,0.5 C30.8788547,0.5 28.642962,9.5109931 20.003125,9.5109931 C11.363288,9.5109931 8.88972652,0.5 0.5,0.5"}]}
-							direction='alternate'
-							loop={false}
-							key={11+Date.now()}
-						>
-								<path d="M39.50625,0.5 C30.8788547,0.5 28.642962,0.5 20.003125,0.5 C11.363288,0.5 8.88972652,0.5 0.5,0.5"></path>
-						</Anime>
-						
-						</g>
-					</svg>
-				</div> */}
+			{this.renderMenu()}
+			
 			</div>
       </div>
 		);

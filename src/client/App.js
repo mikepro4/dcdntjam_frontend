@@ -24,6 +24,7 @@ class App extends Component {
 		this.props.fetchCurrentUser();
 		this.prev = window.scrollY;
 		window.addEventListener('scroll', e => this.handleNavigation(e));
+		
 	}
 	
 	handleNavigation = (e) => {
