@@ -12,3 +12,9 @@ export const SCROLLING_DOWN = "app/SCROLLING_DOWN";
 
 export const FETCH_USER = "app/FETCH_USER";
 
+export const UPDATE_RIGHT_SLIDER = "app/UPDATE_RIGHT_SLIDER";
+export const CLEAR_RIGHT_SLIDER = "app/UPDATE_RIGHT_SLIDER";
+
+export const UPDATE_BOTTOM_SLIDER = "app/UPDATE_BOTTOM_SLIDER";
+export const CLEAR_BOTTOM_SLIDER = "app/UPDATE_BOTTOM_SLIDER";
+

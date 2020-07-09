@@ -4,6 +4,7 @@ import { renderRoutes } from "react-router-config";
 
 import Header from "./react/components/header"
 import BottomNav from "./react/components/bottom_nav"
+import Slider from "./react/sliders"
 
 import {
 	scrollingUp,
@@ -48,6 +49,7 @@ class App extends Component {
 				<Header/>
 				{renderRoutes(this.props.route.routes)}
 				<BottomNav/>
+				<Slider />
 			</div>
 		)
 	}

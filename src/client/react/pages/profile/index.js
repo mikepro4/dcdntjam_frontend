@@ -8,7 +8,9 @@ import UserEditorForm from "./editForm";
 
 
 import {
-	updateUser,
+    updateUser,
+    updateRightSlider,
+	updateBottomSlider
 } from "../../../redux/actions/appActions";
 
 import {
@@ -98,7 +100,11 @@ class ProfilePage extends Component {
 
                     <ul className="profile-stats">
                         <li className="single-stat">
-                            <div className="stat-number">
+                            <div className="stat-number" onClick={() => {
+                                this.props.updateRightSlider({
+                                    type: "claps"
+                                });
+                            }}>
                                 256
                             </div>
 
@@ -130,7 +136,11 @@ class ProfilePage extends Component {
                         </li>
                     </ul>
 
-                    <div className="actions-container">
+                    <div className="actions-container" onClick={() => {
+                                this.props.updateBottomSlider({
+                                    type: "edit"
+                                });
+                            }}>
                         <div className="main-group">
                             <a className="button button-edit">Edit profile</a>
                         </div>
@@ -198,6 +208,8 @@ function mapStateToProps(state) {
 export default {
 	component: connect(mapStateToProps, {
         updateUser,
-        fetchUser
+        fetchUser,
+        updateRightSlider,
+        updateBottomSlider
     })(ProfilePage)
 }

@@ -4,7 +4,11 @@ import axios from "axios";
 import {
 	FETCH_AUTH,
 	SCROLLING_UP,
-	SCROLLING_DOWN
+	SCROLLING_DOWN,
+	UPDATE_RIGHT_SLIDER,
+	UPDATE_BOTTOM_SLIDER,
+	CLEAR_RIGHT_SLIDER,
+	CLEAR_BOTTOM_SLIDER
 } from "../actions/types";
 
 // =============================================================================
@@ -47,3 +51,34 @@ export const updateUser = (user, success) => async (
 		success();
 	}
 };
+
+/////////////////////////////////////////////////
+
+export const updateRightSlider = (slider) => async (dispatch, getState, api) => {
+	dispatch({
+		type: UPDATE_RIGHT_SLIDER,
+		payload: slider
+	})
+}
+
+export const updateBottomSlider= (slider) => async (dispatch, getState, api) => {
+	dispatch({
+		type: UPDATE_BOTTOM_SLIDER,
+		payload: slider
+	})
+}
+
+export const clearRightSlider = (slider) => async (dispatch, getState, api) => {
+	dispatch({
+		type: CLEAR_RIGHT_SLIDER,
+		payload: slider
+	})
+}
+
+export const clearBottomSlider= (slider) => async (dispatch, getState, api) => {
+	dispatch({
+		type: CLEAR_BOTTOM_SLIDER,
+		payload: slider
+	})
+}
+
