@@ -6,22 +6,16 @@ import {
 import { action } from "popmotion";
 
 export const initialState = {
-	user:  {
-		profile: null
-	},
+	user: null,
 	scrollingDown: false
 };
 
 export const appReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case FETCH_AUTH:
-			let newUser = state.user 
-
-			newUser.profile = action.payload
-
 			return {
 				...state,
-				user: newUser
+				user:  action.payload
 			}
 		case SCROLLING_UP:
 			return {

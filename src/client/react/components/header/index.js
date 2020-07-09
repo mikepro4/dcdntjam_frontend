@@ -23,7 +23,7 @@ class Header extends Component {
 
 	}
 	renderAuthButton() {
-		return this.props.user.profile ? (
+		return this.props.user ? (
 			<div className="user-info">
 
 			<div className="user-avatar-container">

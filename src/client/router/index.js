@@ -1,6 +1,7 @@
 import React from "react";
 import App from "../App";
 import Home from "../react/pages/home";
+import Profile from "../react/pages/profile";
 
 export default [
 	{
@@ -14,6 +15,22 @@ export default [
 					name: "home"
 				},
 
+			},
+			{
+				...Profile,
+				path: "/profile/:googleId",
+				params: {
+					name: "profile"
+				}
+			},
+			,
+			{
+				...Profile,
+				path: "/profile",
+				exact: true,
+				params: {
+					name: "profile-empty"
+				}
 			}
 		]
 	}

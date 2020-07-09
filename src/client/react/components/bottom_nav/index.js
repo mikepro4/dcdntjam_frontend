@@ -20,31 +20,49 @@ class BottomNav extends Component {
     }
 
     renderIcon(url) {
-        switch (url) {
-            case "/":
-                if(this.isActivePath(url)) {
-                    return <HomeActive />
-                } else return <HomeInactive />
-            case "/trending":
-                if(this.isActivePath(url)) {
-                    return <FireActive />
-                } else return <FireInactive />
-            case "/add":
-                return <Add />
-            case "/search":
-                if(this.isActivePath(url)) {
-                    return <SearchActive />
-                } else return <SearchInactive />
-            case "/profile":
-                if(this.isActivePath(url)) {
+        if(url.includes("/profile")) {
+            if(this.props.user) {
+                if(this.props.location.pathname.includes(this.props.user.googleId)) {
                     return <UserActive />
                 } else return <UserInactive />
-            default:
-                return;
+            } else {
+                if(this.props.location.pathname == "/profile") {
+                    return <UserActive />
+                } else return <UserInactive />
+            }
+            
+        } else {
+            switch (url) {
+                case "/":
+                    if(this.isActivePath(url)) {
+                        return <HomeActive />
+                    } else return <HomeInactive />
+                case "/trending":
+                    if(this.isActivePath(url)) {
+                        return <FireActive />
+                    } else return <FireInactive />
+                case "/add":
+                    return <Add />
+                case "/search":
+                    if(this.isActivePath(url)) {
+                        return <SearchActive />
+                    } else return <SearchInactive />
+                default:
+                    return;
+            }
         }
+        
     }
     
 	render() {
+
+        let profileLink;
+
+        if (this.props.user) {
+            profileLink = `/profile/${this.props.user.googleId}`
+        } else {
+            profileLink = "/profile"
+        }
 
         let links = [
             {
@@ -64,7 +82,7 @@ class BottomNav extends Component {
               name: "Search",
             },
             {
-              url: "/profile",
+              url: profileLink,
               name: "Profile",
             }
         ]
