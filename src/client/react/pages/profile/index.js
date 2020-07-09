@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-
+import classNames from "classnames";
 import React, { Component, useCallback, useEffect, useState, useRef, useMemo } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -11,10 +11,31 @@ import {
 	updateUser,
 } from "../../../redux/actions/appActions";
 
+import {
+    fetchUser
+} from "../../../redux/actions/userActions";
+
 import YoutubeIcon from "../../components/icons/youtube"
 
 
 class ProfilePage extends Component {
+
+    constructor(props){
+		super(props)
+		this.state = {
+            activeTab: 1
+		}
+		// this.handleChange = this.handleChange.bind(this)
+    }
+    
+    static loadData(store, match) {
+		return store.dispatch(fetchUser(match.params.googleId));
+	}
+
+	componentDidMount() {
+		this.props.fetchUser(this.props.match.params.googleId);
+	}
+
 
     handleSubmit = values => {
         console.log(values)
@@ -27,7 +48,21 @@ class ProfilePage extends Component {
 		);
     };
 
+    changeTab(tab) {
+		this.setState({
+			activeTab: tab
+		})
+	}
+
 	render() {
+
+        let user = ""
+
+        if(this.props.match.params.googleId !== this.props.user.googleId) {
+            user = this.props.externalUser
+        } else {
+            user = this.props.user
+        }
 
         if(!this.props.match.params.googleId) {
             return(
@@ -40,17 +75,26 @@ class ProfilePage extends Component {
         } else {
             return (
                 <div className="profile-page">
-                    <div className="profile-avatar">
-                        <img src={this.props.user.profile.photos[0].value}/>
-                    </div>
 
-                    <div className="profile-name">
-                        {this.props.user.profile.displayName}
-                    </div>
+                    {user && (
+                        <div>
+                            <div className="profile-avatar">
+                                <img src={user.profile.photos[0].value}/>
+                            </div>
 
-                    <div className="profile-username">
-                        @{this.props.user.username}
-                    </div>
+                            <div className="profile-name">
+                                {user.profile.displayName}
+                            </div>
+
+                            {user.username && (
+                                <div className="profile-username">
+                                    @{user.username}
+                                </div> 
+                            )}
+                           
+                        </div>
+                    )}
+                    
 
                     <ul className="profile-stats">
                         <li className="single-stat">
@@ -102,6 +146,35 @@ class ProfilePage extends Component {
                         </div>
                         <a href="https://youtube.com/DCDNT" target="_blank">youtube.com/DCDNT</a>
                     </div>
+
+                    <div className="tab-container">
+                        <div 
+                            className={
+                                classNames({"active": this.state.activeTab == 1}
+                            , "tab")}
+                            onClick={() => this.changeTab(1)}
+                        >
+                            <div className="tab-label">My Jams</div>
+                        </div>
+
+                        <div  
+                            className={
+                                classNames({"active": this.state.activeTab == 2}
+                            , "tab")}
+                            onClick={() => this.changeTab(2)}
+                        >
+                            <div className="tab-label">My Claps</div>
+                        </div>
+
+                        <div  
+                            className={
+                                classNames({"active": this.state.activeTab == 3}
+                            , "tab")}
+                            onClick={() => this.changeTab(3)}
+                        >
+                            <div className="tab-label">Reposts</div>
+                        </div>
+                    </div>
                     {/* {this.props.match.params.googleId && this.props.match.params.googleId}
                     <UserEditorForm
                        initialValues={
@@ -118,11 +191,13 @@ class ProfilePage extends Component {
 function mapStateToProps(state) {
 	return {
         user: state.app.user,
+        externalUser: state.app.externalUser
 	};
 }
 
 export default {
 	component: connect(mapStateToProps, {
-        updateUser
+        updateUser,
+        fetchUser
     })(ProfilePage)
 }

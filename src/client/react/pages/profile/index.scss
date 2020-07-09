@@ -10,7 +10,7 @@
     margin: 0 auto;
 
     img { 
-        max-width: 100%;
+        width: 100%;
     }
 }
 
@@ -56,7 +56,7 @@
     margin: 10px 0 25px  0;
 
     .button-edit {
-        width: 160px;
+        width: 150px;
     }
 }
 
@@ -84,4 +84,40 @@
     position: relative;
     top: 2px;
     margin: 0 6px 0 0;
+}
+
+.tab-container {
+    width: 100%;
+    margin: 25px 0 0 0;
+    border-top: 1px solid  rgba(white, 0.1);
+    border-bottom: 1px solid  rgba(white, 0.1);
+    display: flex;
+    
+    .tab {
+        height: 50px;
+        font-size: 14px;
+        font-weight: 200;
+        border-bottom: 1px solid transparent;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        text-align: center;
+
+        .tab-label {
+            position: relative;
+            top: -2px;
+            opacity: 0.5;
+        }
+
+        &.active {
+            font-weight: 500;
+            border-bottom: 1px solid white;
+
+            .tab-label {
+                opacity: 1;
+            }
+        }
+    }
 }
