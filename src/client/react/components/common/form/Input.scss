@@ -3,10 +3,12 @@
 	width: 100%;
 	min-height: 55px;
 	position: relative;
+	max-width: 1000px;
+	margin: 0 auto;
 
-	&:last-child {
-		margin: 0;
-	}
+	// &:last-child {
+	// 	margin: 0;
+	// }
 
 	.input-group-left {
 		width: 110px;
