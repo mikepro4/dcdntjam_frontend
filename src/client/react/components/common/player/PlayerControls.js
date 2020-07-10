@@ -1,6 +1,6 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
-import { updateCurrentVideo } from "../../../../redux/actions";
+import { updateCurrentVideo } from "../../../../redux/actions/appActions";
 import { updateTime } from "../../../../redux/actions/player";
 import _ from "lodash";
 

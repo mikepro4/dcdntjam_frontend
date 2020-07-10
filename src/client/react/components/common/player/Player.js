@@ -245,6 +245,7 @@ class YoutubePlayer extends React.Component {
 			playerVars: {
 				controls: 0,
 				showinfo: 0,
+				playsinline: 1,
 				modestbranding: 1
 			}
 		};

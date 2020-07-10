@@ -13,6 +13,7 @@ import {
 } from "../../../redux/actions/youtubeVideoSearch";
 
 import YoutubePlayer from "../../components/common/player/Player";
+import PlayerControls from "../../components/common/player/PlayerControls";
 
 import RightSlider from '../rightSlider'
 
@@ -74,14 +75,15 @@ class SliderEditUser extends Component {
 							<div className="loaded-video-container">
 								<div className="loaded-video-player-area">
 									<YoutubePlayer
-										width="680"
-										height="380"
+										width="100%"
 										videoId={this.props.currentVideo.videoId}
 									/>
 									<div className="video-description">
 										<h2 className="video-title">
 											{this.props.video.snippet.title}
 										</h2>
+
+                                        <PlayerControls/>
 									</div>
 								</div>
 								<button
