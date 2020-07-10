@@ -51,7 +51,7 @@ class SliderEditUser extends Component {
                 }, "slider-content-wrapper")}
             >
      
-                    <div className="slider-claps-content">Edit user container
+                    <div className="slider-claps-content">
 
                             {this.props.match.params.googleId && this.props.match.params.googleId}
                             <UserEditorForm

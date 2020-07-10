@@ -177,7 +177,7 @@ class BottomSlider extends Component {
 										}
 									}}
 								>
-									Done
+									{this.props.buttonName}
 								</div>
 							</motion.div>
 							

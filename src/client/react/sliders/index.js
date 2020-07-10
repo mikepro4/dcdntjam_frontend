@@ -78,6 +78,7 @@ class Slider extends Component {
                              clear={() => this.props.clearBottomSlider()}
                              name="Edit profile"
                              formName="editUserForm"
+                             buttonName="Done"
                         >
                             <SliderEditUser/>
                         </BottomSlider>

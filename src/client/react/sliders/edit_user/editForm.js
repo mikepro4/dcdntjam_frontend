@@ -32,10 +32,18 @@ class UserEditorForm extends React.Component {
 					role="presentation"
 					className=""
 				>
-					<div className="generic-properties">
-						<h1 className="form-headline">User settings:</h1>
+					<div className="main-properties">
 						<RenderField
-							key="canContainEntities"
+							key="displayName"
+							property={{
+								displayName: "Display Name",
+								propertyName: "displayName",
+                                fieldType: "input",
+                                propertyType: "string"
+							}}
+						/>
+						<RenderField
+							key="username"
 							property={{
 								displayName: "Username",
 								propertyName: "username",
@@ -43,14 +51,23 @@ class UserEditorForm extends React.Component {
                                 propertyType: "string"
 							}}
 						/>
-					</div>
+						<RenderField
+							key="website"
+							property={{
+								displayName: "website",
+								propertyName: "website",
+                                fieldType: "input",
+                                propertyType: "string"
+							}}
+						/>
 
-					<div className="form-footer">
-						<Button
-							intent={Intent.SUCCESS}
-							disabled={this.props.pristine}
-							type="submit"
-							text="Update User"
+						<RenderField
+							key="bio"
+							property={{
+								displayName: "Bio",
+								propertyName: "bio",
+                                fieldType: "textarea"
+							}}
 						/>
 					</div>
 				</Form>

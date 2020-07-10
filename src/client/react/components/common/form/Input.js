@@ -12,15 +12,15 @@ const Input = ({
 }) => {
 	let containerClassName = classnames({
 		"input-group": true,
-		"pt-large": large,
+		"input-large": large,
 		"input-valid": touched && !error,
 		"input-invalid": touched && error
 	});
 
 	let inputClassName = classnames({
-		"pt-input": true,
-		"pt-intent-success": touched && !error,
-		"pt-intent-danger": touched && error
+		"input": true,
+		"intent-success": touched && !error,
+		"intent-danger": touched && error
 	});
 
 	return (

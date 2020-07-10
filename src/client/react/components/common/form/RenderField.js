@@ -100,6 +100,18 @@ class RenderField extends Component {
 						ref={property.propertyName}
 					/>
 				);
+			case "textarea":
+				return (
+					<Field
+						name={property.propertyName}
+						component={Textarea}
+						type="textarea"
+						label={property.displayName + ":"}
+						placeholder={property.description}
+						ref={property.propertyName}
+					/>
+				);
+	
 			default:
 				return;
 		}

@@ -52,6 +52,7 @@
     z-index: 100;
     top: -2px;
     font-weight: 200;;
+    cursor: pointer;
 }
 
 .button-done {
@@ -67,6 +68,7 @@
     right: -10px;
     opacity: 0.5;
     transition: all 0.15s;
+    cursor: pointer;
 
     &.button-ready {
       opacity: 1;
