@@ -9,7 +9,9 @@ import {
 	UPDATE_BOTTOM_SLIDER,
 	CLEAR_RIGHT_SLIDER,
 	CLEAR_BOTTOM_SLIDER,
-	HIDE_BOTTOM_SLIDER
+	HIDE_BOTTOM_SLIDER,
+	CURRENT_VIDEO_UPDATE,
+	RESET_INITIAL
 } from "../actions/types";
 
 import { reset, submit } from "redux-form";
@@ -103,3 +105,20 @@ export const submitForm = formName => dispatch => {
 	dispatch(submit(formName));
 };
 
+/////////////////////////////////////////////////
+
+export const updateCurrentVideo = (id, action, initial) => dispatch => {
+	dispatch({
+		type: CURRENT_VIDEO_UPDATE,
+		payload: id,
+		playerAction: action,
+		initial: initial
+	});
+};
+
+export const resetInitial = () => dispatch => {
+	dispatch({
+		type: RESET_INITIAL,
+		initial: false
+	});
+};

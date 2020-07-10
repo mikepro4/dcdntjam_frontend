@@ -12,6 +12,8 @@ import {
     loadYoutubeVideoDetails
 } from "../../../redux/actions/youtubeVideoSearch";
 
+import YoutubePlayer from "../../components/common/player/Player";
+
 import RightSlider from '../rightSlider'
 
 class SliderEditUser extends Component {
@@ -68,6 +70,30 @@ class SliderEditUser extends Component {
                             
                         />
 
+                        {this.props.currentVideo.videoId && this.props.video.snippet ? (
+							<div className="loaded-video-container">
+								<div className="loaded-video-player-area">
+									<YoutubePlayer
+										width="680"
+										height="380"
+										videoId={this.props.currentVideo.videoId}
+									/>
+									<div className="video-description">
+										<h2 className="video-title">
+											{this.props.video.snippet.title}
+										</h2>
+									</div>
+								</div>
+								<button
+									className="button blue-button"
+								>
+									{this.props.newVideo ? "Add video" : "Go to video"}
+								</button>
+							</div>
+						) : (
+							""
+						)}
+
                         <div onClick={() => {
                                 this.setState({
                                     rightSlider: true,
@@ -105,6 +131,11 @@ function mapStateToProps(state) {
         location: state.router.location,
         rightSlider: state.app.rightSlider,
         bottomSlider: state.app.bottomSlider,
+        video: state.youtubeVideoSearch.singleVideo,
+		newVideo: state.youtubeVideoSearch.newVideo,
+		isFetching: state.youtubeVideoSearch.isFetching,
+		player: state.player,
+		currentVideo: state.currentVideo
 	};
 }
 

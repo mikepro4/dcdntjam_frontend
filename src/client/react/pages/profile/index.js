@@ -178,7 +178,7 @@ class ProfilePage extends Component {
                             , "tab")}
                             onClick={() => this.changeTab(1)}
                         >
-                            <div className="tab-label">My Jams</div>
+                            <div className="tab-label">Videos</div>
                         </div>
 
                         <div  
@@ -187,7 +187,7 @@ class ProfilePage extends Component {
                             , "tab")}
                             onClick={() => this.changeTab(2)}
                         >
-                            <div className="tab-label">My Claps</div>
+                            <div className="tab-label">Hardware</div>
                         </div>
 
                         <div  

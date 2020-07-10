@@ -9,8 +9,7 @@ import {
 	updateTime,
 	updatePlaylist
 } from "../../../../redux/actions/player";
-import { selectClip } from "../../../../redux/actions/objectTrackActions";
-import { updateCurrentVideo } from "../../../../redux/actions/";
+import { updateCurrentVideo } from "../../../../redux/actions/appActions";
 
 class YoutubePlayer extends React.Component {
 	constructor(props) {
@@ -291,5 +290,4 @@ export default connect(mapStateToProps, {
 	updateCurrentVideo,
 	updateTime,
 	updatePlaylist,
-	selectClip
 })(YoutubePlayer);
