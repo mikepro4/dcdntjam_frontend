@@ -56,7 +56,7 @@ class Slider extends Component {
                     <RightSlider
                         open={this.props.rightSlider}
                         clear={() => this.props.clearRightSlider()}
-                        ame="Watch Time"
+                        name="Watch time"
                     >
                         Watch Time
                     </RightSlider>
@@ -71,7 +71,13 @@ class Slider extends Component {
             case "edit":
                 return (
                     <div>
-                        <BottomSlider>Edit</BottomSlider>
+                        <BottomSlider
+                             open={this.props.bottomSlider}
+                             clear={() => this.props.clearBottomSlider()}
+                             name="Edit profile"
+                        >
+                            Edit
+                        </BottomSlider>
                     </div>
                 )
             default:
@@ -89,9 +95,7 @@ class Slider extends Component {
                     </div>)}
 
                 {this.props.bottomSlider && (
-                    <div onClick={()=> {
-                        this.props.clearBottomSlider()
-                    }}>
+                    <div>
                         {this.renderBottomSlider()}
                     </div>)}
             </div>
