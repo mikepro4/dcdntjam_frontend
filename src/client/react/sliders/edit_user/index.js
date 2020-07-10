@@ -11,12 +11,15 @@ import {
     clearBottomSlider
 } from "../../../redux/actions/appActions";
 
+import RightSlider from '../rightSlider'
+
 class SliderEditUser extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
             slider: null,
-            noScroll: false
+            noScroll: false,
+            rightSlider: false
 		}
 	}
 
@@ -53,6 +56,7 @@ class SliderEditUser extends Component {
      
                     <div className="slider-claps-content">
 
+
                             {this.props.match.params.googleId && this.props.match.params.googleId}
                             <UserEditorForm
                             touchOnChange={true}
@@ -62,7 +66,31 @@ class SliderEditUser extends Component {
                             onSubmit={this.handleSubmit.bind(this)}
                         />
 
+                        <div onClick={() => {
+                                this.setState({
+                                    rightSlider: true,
+                                    noScroll: true
+                                })
+                        }}>Next Slider</div>
+
                     </div>
+
+                    
+                    {this.state.rightSlider && (
+                        <RightSlider
+                            open={this.state.rightSlider}
+                            clear={() => {
+                                this.setState({
+                                    rightSlider: false,
+                                    noScroll: false
+                                })} 
+                            }
+                            name="Watch time"
+                        >
+                            Watch Time
+                        </RightSlider>
+                    )}
+                    
                 
             </div>
 		);

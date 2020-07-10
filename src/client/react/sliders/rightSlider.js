@@ -53,9 +53,14 @@ class RightSlider extends Component {
 		})
 		document.body.classList.remove("no-scroll")
 
+		// if(this.props.close) {
+		// 	this.props.close()
+		// }
+
 		setTimeout(() => {
 			this.props.clear()
 		}, 500)
+
 	}
 	
 	renderSlider() {
