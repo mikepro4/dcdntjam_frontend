@@ -10,7 +10,8 @@ class SliderClaps extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-            slider: null
+            slider: null,
+            noScroll: false
 		}
 	}
 
@@ -28,13 +29,18 @@ class SliderClaps extends Component {
 	render() {
 
 		return (
-			<div className="slider-content-wrapper">
+            <div 
+                className={classNames({
+                    "no-scroll": this.state.noScroll
+                }, "slider-content-wrapper")}
+            >
                 <div onClick={() => {
                     this.setState({
-                        slider: true
+                        slider: true,
+                        noScroll: true
                     })
                 }}>
-                    Claps
+                    <div className="slider-claps-content">Claps</div>
                 </div>
                 {this.state.slider && (
                     <RightSlider 
@@ -42,7 +48,8 @@ class SliderClaps extends Component {
                         name="stuff"
                         clear={() => {
                             this.setState({
-                                slider: null
+                                slider: null,
+                                noScroll: false
                             })
                         }}
                     />
