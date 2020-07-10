@@ -65,14 +65,14 @@ class RightSlider extends Component {
 				type: "spring",
 				damping: 2,
 				stiffness: 10,
-				transition: { duration: 0.3, delay: 0.2 }
+				transition: { duration: 0.3, delay: 0 }
 			},
 			closed: { 
 				width: "0",
 				type: "spring",
 				damping: 2,
 				stiffness: 10,
-				transition: { duration: 0.2, delay: 0.05 }
+				transition: { duration: 0.2, delay: 0 }
 			},
 		}
 
@@ -108,7 +108,7 @@ class RightSlider extends Component {
 				type: "spring",
 				damping: 2,
 				stiffness: 10,
-				transition: { duration: 0.2, delay: 0.4 }
+				transition: { duration: 0.2, delay: 0.3 }
 			},
 			closed: { 
 				x: "30px",
@@ -127,7 +127,7 @@ class RightSlider extends Component {
 				type: "spring",
 				damping: 2,
 				stiffness: 10,
-				transition: { duration: 0.2, delay: 0.4 }
+				transition: { duration: 0.2, delay: 0.15 }
 			},
 			closed: { 
 				type: "spring",
@@ -177,12 +177,12 @@ class RightSlider extends Component {
 						</div>
 				</motion.div>
 
-				<motion.div
+				{/* <motion.div
 					animate={this.state.sliderOpen ? "open" : "closed"}
 					variants={sliderBar}
 					custom={0}
 					className="slider-bar slider-bar-1"
-				/>
+				/> */}
 
 				{/* <motion.div
 					animate={this.state.sliderOpen ? "open" : "closed"}

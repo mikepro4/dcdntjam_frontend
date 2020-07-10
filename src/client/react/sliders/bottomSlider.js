@@ -65,14 +65,14 @@ class BottomSlider extends Component {
 				type: "spring",
 				damping: 2,
 				stiffness: 10,
-				transition: { duration: 0.3, delay: 0.2 }
+				transition: { duration: 0.3, delay: 0 }
 			},
 			closed: { 
 				y: "100%",
 				type: "spring",
 				damping: 2,
 				stiffness: 10,
-				transition: { duration: 0.2, delay: 0.05 }
+				transition: { duration: 0.2, delay: 0 }
 			},
 		}
 
@@ -101,25 +101,6 @@ class BottomSlider extends Component {
 			})
 		}
 
-		const arrowContiner = {
-			open: { 
-				x: "0px",
-				opacity: 1,
-				type: "spring",
-				damping: 2,
-				stiffness: 10,
-				transition: { duration: 0.2, delay: 0.4 }
-			},
-			closed: { 
-				x: "30px",
-				type: "spring",
-				opacity: 0,
-				damping: 2,
-				opacity: 0,
-				stiffness: 10,
-				transition: { duration: 0.2, delay: 0 }
-			},
-		}
 
 		const titleContainer = {
 			open: { 
@@ -127,7 +108,7 @@ class BottomSlider extends Component {
 				type: "spring",
 				damping: 2,
 				stiffness: 10,
-				transition: { duration: 0.2, delay: 0.4 }
+				transition: { duration: 0.2, delay: 0 }
 			},
 			closed: { 
 				type: "spring",
@@ -148,22 +129,22 @@ class BottomSlider extends Component {
 				>
 						<div className="bottom-slider-content">
 							<motion.div  
-								className="slider-header" 
+								className="bottom-slider-header" 
 								animate={this.state.sliderOpen ? "open" : "closed"}
 								variants={titleContainer}
 							>
-								<motion.div  
-									className="back-container" 
-									animate={this.state.sliderOpen ? "open" : "closed"}
-									variants={arrowContiner}
+								<div  
+									className="button-bancel" 
 									onClick={() => {
 									this.closeSlider()
 								}}>
-									<ArrowBack />
-								</motion.div>
+									Cancel
+
+									
+								</div>
 
 								<motion.div  
-									className="slider-title" 
+									className="bottom-slider-title" 
 									animate={this.state.sliderOpen ? "open" : "closed"}
 									variants={titleContainer}
 									>
@@ -171,18 +152,27 @@ class BottomSlider extends Component {
 											<div>{this.props.name}</div>
 										)}
 								</motion.div>
+
+								<div 
+									className="button-done"
+									onClick={() => {
+										this.closeSlider()
+									}}
+								>
+									Done
+								</div>
 							</motion.div>
 							
 							{this.props.children}
 						</div>
 				</motion.div>
 
-				<motion.div
+				{/* <motion.div
 					animate={this.state.sliderOpen ? "open" : "closed"}
 					variants={sliderBar}
 					custom={0}
 					className="bottom-slider-bar bottom-slider-bar-1"
-				/>
+				/> */}
 
 			</div>
 
