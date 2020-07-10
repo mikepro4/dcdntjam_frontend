@@ -4,8 +4,6 @@ import React, { Component, useCallback, useEffect, useState, useRef, useMemo } f
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import UserEditorForm from "./editForm";
-
 
 import {
     updateUser,

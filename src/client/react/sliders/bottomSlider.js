@@ -7,6 +7,11 @@ import { motion } from "framer-motion"
 
 import ArrowBack from '../components/icons/arrow_back'
 
+import {
+	submitForm,
+	hideBottomSlider
+} from "../../redux/actions/appActions";
+
 class BottomSlider extends Component {
 
 	constructor(props){
@@ -34,6 +39,11 @@ class BottomSlider extends Component {
 			document.body.classList.add("no-scroll")
 			console.log("open")
 		}
+
+		if(this.props.hideSlider) {
+			this.closeSlider()
+			this.props.hideBottomSlider(false)
+		}
 	}
 	
 	chooseColor() {
@@ -56,6 +66,10 @@ class BottomSlider extends Component {
 		setTimeout(() => {
 			this.props.clear()
 		}, 500)
+	}
+
+	isButtonReady() {
+		return this.props.form && this.props.form[this.props.formName] && this.props.form[this.props.formName].anyTouched
 	}
 	
 	renderSlider() {
@@ -154,9 +168,13 @@ class BottomSlider extends Component {
 								</motion.div>
 
 								<div 
-									className="button-done"
+									className={classNames({
+										"button-ready": this.isButtonReady()
+									}, "button-done")}
 									onClick={() => {
-										this.closeSlider()
+										if(this.isButtonReady()) {
+											this.props.submitForm(this.props.formName)
+										}
 									}}
 								>
 									Done
@@ -196,9 +214,13 @@ function mapStateToProps(state) {
 		user: state.app.user,
         location: state.router.location,
         rightSlider: state.app.rightSlider,
-        bottomSlider: state.app.bottomSlider,
+		bottomSlider: state.app.bottomSlider,
+		hideSlider: state.app.hideBottomSlider,
+		form: state.form
 	};
 }
 
 export default connect(mapStateToProps, {
+	submitForm,
+	hideBottomSlider
 })(withRouter(BottomSlider));

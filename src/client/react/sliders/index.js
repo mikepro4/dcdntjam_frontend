@@ -14,6 +14,8 @@ import BottomSlider from './bottomSlider'
 
 import SliderClaps from './sliderClaps'
 
+import SliderEditUser from './edit_user'
+
 class Slider extends Component {
 
 	constructor(props){
@@ -75,8 +77,9 @@ class Slider extends Component {
                              open={this.props.bottomSlider}
                              clear={() => this.props.clearBottomSlider()}
                              name="Edit profile"
+                             formName="editUserForm"
                         >
-                            Edit
+                            <SliderEditUser/>
                         </BottomSlider>
                     </div>
                 )

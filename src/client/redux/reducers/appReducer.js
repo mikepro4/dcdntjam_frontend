@@ -8,7 +8,8 @@ import {
 	UPDATE_RIGHT_SLIDER,
 	UPDATE_BOTTOM_SLIDER,
 	CLEAR_RIGHT_SLIDER,
-	CLEAR_BOTTOM_SLIDER
+	CLEAR_BOTTOM_SLIDER,
+	HIDE_BOTTOM_SLIDER
 } from "../actions/types";
 import { action } from "popmotion";
 
@@ -18,7 +19,8 @@ export const initialState = {
 	loading: false,
 	externalUser: null,
 	rightSlider: null,
-	bottomSlider: null
+	bottomSlider: null,
+	hideBottomSlider: false
 };
 
 export const appReducer = (state = initialState, action) => {
@@ -72,6 +74,12 @@ export const appReducer = (state = initialState, action) => {
 			return {
 				...state,
 				bottomSlider: null
+			}
+
+		case HIDE_BOTTOM_SLIDER:
+			return {
+				...state,
+				hideBottomSlider: action.payload
 			}
 		default:
 			return state;

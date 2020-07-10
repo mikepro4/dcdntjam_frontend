@@ -8,8 +8,11 @@ import {
 	UPDATE_RIGHT_SLIDER,
 	UPDATE_BOTTOM_SLIDER,
 	CLEAR_RIGHT_SLIDER,
-	CLEAR_BOTTOM_SLIDER
+	CLEAR_BOTTOM_SLIDER,
+	HIDE_BOTTOM_SLIDER
 } from "../actions/types";
+
+import { reset, submit } from "redux-form";
 
 // =============================================================================
 
@@ -81,4 +84,22 @@ export const clearBottomSlider= (slider) => async (dispatch, getState, api) => {
 		payload: slider
 	})
 }
+
+export const hideBottomSlider= (status) => async (dispatch, getState, api) => {
+	dispatch({
+		type: HIDE_BOTTOM_SLIDER,
+		payload: status
+	})
+}
+
+/////////////////////////////////////////////////
+
+
+export const resetForm = formName => dispatch => {
+	dispatch(reset(formName));
+};
+
+export const submitForm = formName => dispatch => {
+	dispatch(submit(formName));
+};
 
