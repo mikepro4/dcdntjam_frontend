@@ -16,6 +16,8 @@ import SliderClaps from './sliderClaps'
 
 import SliderEditUser from './edit_user'
 
+import SliderNewJam from './new_jam'
+
 class Slider extends Component {
 
 	constructor(props){
@@ -93,7 +95,7 @@ class Slider extends Component {
                                 name="Add new jam"
                                 formName="editUserForm"
                         >
-                            Add jam
+                            <SliderNewJam />
                         </BottomSlider>
                     </div>
                 )
