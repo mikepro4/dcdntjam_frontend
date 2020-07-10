@@ -13,6 +13,10 @@ import SearchActive from "../icons/tab_search_active"
 import UserInactive from "../icons/tab_user_inactive"
 import UserActive from "../icons/tab_user_active"
 
+import {
+	updateBottomSlider
+} from "../../../redux/actions/appActions";
+
 class BottomNav extends Component {
 
     isActivePath = (pathname) => {
@@ -76,6 +80,7 @@ class BottomNav extends Component {
             {
               url: "/add",
               name: "Add Jam",
+              add: true
             },
             {
               url: "/search",
@@ -103,9 +108,24 @@ class BottomNav extends Component {
                                 })}
                 >
                                     <div className="link_wrapper">
-                                        <Link to ={link.url} className="link_icon">
-                                            {this.renderIcon(link.url)}
-                                        </Link>
+
+                                        {link.add ? (
+                                            <div 
+                                                className="add-button"
+                                                onClick={() => {
+                                                    this.props.updateBottomSlider({
+                                                        type: "new_jam"
+                                                    })
+                                                }}
+                                            >
+                                                {this.renderIcon(link.url)}
+                                            </div>
+                                        ) : (
+                                            <Link to={link.url} className="link_icon">
+                                                {this.renderIcon(link.url)}
+                                            </Link>
+                                        )}
+                                        
                                     </div>
                             </li>
                             )
@@ -125,4 +145,6 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, {})(withRouter(BottomNav));
+export default connect(mapStateToProps, {
+    updateBottomSlider
+})(withRouter(BottomNav));

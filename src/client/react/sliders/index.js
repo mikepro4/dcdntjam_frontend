@@ -64,7 +64,7 @@ class Slider extends Component {
                     </RightSlider>
                 )
             default:
-                return state;
+                return;
         }
     }
 
@@ -84,8 +84,21 @@ class Slider extends Component {
                         </BottomSlider>
                     </div>
                 )
+            case "new_jam":
+                return (
+                    <div>
+                        <BottomSlider
+                                open={this.props.bottomSlider}
+                                clear={() => this.props.clearBottomSlider()}
+                                name="Add new jam"
+                                formName="editUserForm"
+                        >
+                            Add jam
+                        </BottomSlider>
+                    </div>
+                )
             default:
-                return state;
+                return;
         }
     }
 

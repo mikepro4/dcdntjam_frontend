@@ -166,19 +166,21 @@ class BottomSlider extends Component {
 											<div>{this.props.name}</div>
 										)}
 								</motion.div>
-
-								<div 
-									className={classNames({
-										"button-ready": this.isButtonReady()
-									}, "button-done")}
-									onClick={() => {
-										if(this.isButtonReady()) {
-											this.props.submitForm(this.props.formName)
-										}
-									}}
-								>
-									{this.props.buttonName}
-								</div>
+								{this.props.buttonName && (
+									<div 
+										className={classNames({
+											"button-ready": this.isButtonReady()
+										}, "button-done")}
+										onClick={() => {
+											if(this.isButtonReady()) {
+												this.props.submitForm(this.props.formName)
+											}
+										}}
+									>
+										{this.props.buttonName}
+									</div>
+								)}
+								
 							</motion.div>
 							
 							{this.props.children}

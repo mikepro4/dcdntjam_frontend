@@ -45,3 +45,11 @@
         transform: translateY(100px);
     }
 }
+
+.add-button {
+    position: relative;
+    top: 26px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+}
