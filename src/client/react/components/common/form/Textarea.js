@@ -11,21 +11,21 @@ const Textarea = ({
 }) => {
 	let containerClassName = classnames({
 		"input-group": true,
-		"pt-large": large,
+		"input-large": large,
 		"input-valid": touched && !error,
 		"input-invalid": touched && error
 	});
 
 	let inputClassName = classnames({
-		"pt-input": true,
-		"pt-intent-success": touched && !error,
-		"pt-intent-danger": touched && error
+		"input": true,
+		"intent-success": touched && !error,
+		"intent-danger": touched && error
 	});
 
 	return (
 		<div className={containerClassName}>
 			<div className="input-group-left">
-				{label ? <div className="input-label">{label}</div> : ""}
+				{label ? <div className="input-label textarea-label">{label}</div> : ""}
 			</div>
 
 			<div className="input-group-right">
@@ -33,6 +33,7 @@ const Textarea = ({
 					{...input}
 					className={inputClassName}
 					placeholder={placeholder}
+					rows="3"
 					type={type}
 				/>
 

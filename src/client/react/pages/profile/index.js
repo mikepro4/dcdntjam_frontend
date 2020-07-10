@@ -87,7 +87,7 @@ class ProfilePage extends Component {
                             </div>
 
                             <div className="profile-name">
-                                {user.profile.displayName}
+                                {user.displayName ? (user.displayName): (user.profile.displayName)}
                             </div>
 
                             {user.username && (
@@ -152,16 +152,24 @@ class ProfilePage extends Component {
                         </div>
                     </div>
 
-                    <div className="profile-bio">
-                        Designer and musician from New York performing DAWless Techno.
-                    </div>
-
-                    <div className="profile-link">
-                        <div className="youtube-icon">
-                            <YoutubeIcon />
+                    {user.bio && (
+                        <div className="profile-bio">
+                            {user.bio}
                         </div>
-                        <a href="https://youtube.com/DCDNT" target="_blank">youtube.com/DCDNT</a>
-                    </div>
+                    )}
+
+                    
+                    {user.website && (
+                        <div className="profile-link">
+                            <div className="youtube-icon">
+                                <YoutubeIcon />
+                            </div>
+                            <a href={`http://${this.props.user.website}`} target="_blank">
+                                {user.website}
+                            </a>
+                        </div>
+                    )}
+                    
 
                     <div className="tab-container">
                         <div 

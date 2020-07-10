@@ -32,11 +32,19 @@ class UserEditorForm extends React.Component {
 					role="presentation"
 					className=""
 				>
+					<div className="edit-avatar-section">
+							<div className="edit-profile-avatar">
+                                <img src={this.props.user.profile.photos[0].value}/>
+                            </div>
+
+							<div className="button-update-photo">Update photo from Youtube</div>
+					</div>
+					
 					<div className="main-properties">
 						<RenderField
 							key="displayName"
 							property={{
-								displayName: "Display Name",
+								displayName: "Full Name",
 								propertyName: "displayName",
                                 fieldType: "input",
                                 propertyType: "string"
@@ -54,7 +62,7 @@ class UserEditorForm extends React.Component {
 						<RenderField
 							key="website"
 							property={{
-								displayName: "website",
+								displayName: "Website",
 								propertyName: "website",
                                 fieldType: "input",
                                 propertyType: "string"
@@ -92,6 +100,7 @@ UserEditorForm = reduxForm({
 })(UserEditorForm);
 
 const mapStateToProps = state => ({
+	user: state.app.user
 });
 
 export default connect(mapStateToProps, {

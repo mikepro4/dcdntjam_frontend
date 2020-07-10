@@ -1,0 +1,23 @@
+
+.edit-avatar-section {
+    padding: 20px 0 20px 0;
+    // border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .edit-profile-avatar {
+        width: 130px;
+        height: 130px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 0 auto;
+    
+        img { 
+            width: 100%;
+        }
+    }
+
+    .button-update-photo {
+        text-align: center;
+        margin: 10px 0 10px 0;
+        display: none;
+    }
+}

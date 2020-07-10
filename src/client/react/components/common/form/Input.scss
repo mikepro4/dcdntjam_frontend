@@ -1,14 +1,15 @@
 .input-group {
 	display: flex;
 	width: 100%;
-	margin: 0 0 20px 0;
+	min-height: 55px;
+	position: relative;
 
 	&:last-child {
 		margin: 0;
 	}
 
 	.input-group-left {
-		width: 160px;
+		width: 110px;
 		margin-right: 10px;
 		flex-grow: 0;
 		flex-shrink: 0;
@@ -35,7 +36,7 @@
 		.input-error {
 			display: block;
 			position: absolute;
-			top: -15px;
+			top: 54px;
 			left: 0;
 			font-size: 11px;
 			color: $red3;
@@ -48,7 +49,38 @@
 		}
 	}
 
-	.pt-control {
-		margin-bottom: 0;
+	.input {
+		background: none;
+		box-shadow: none;
+		border: none;
+		box-shadow: none;
+		background-color: transparent;
+		color: #ffffff;
+		border-radius: none;
+		-webkit-appearance: none;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		padding: 20px 0 7px 0;
+		font-size: 14px;
+		transition: all 0.2s;
+
+		&.intent-danger {
+			border-bottom: 1px solid $red3;
+		}
+	}
+
+	textarea.input {
+		height: 100px;
+		margin: 5px 0 0 0;
+		padding-right: 10px;
+		-webkit-appearance: none;
+	}
+
+	.input-label {
+		font-size: 14px;
+		font-weight: 200;
+		position: absolute;
+		top: 25px;
+		margin-left: 20px;
+
 	}
 }

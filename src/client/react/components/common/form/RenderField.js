@@ -19,7 +19,7 @@ class RenderField extends Component {
 					<Field
 						name={property.propertyName}
 						component={Input}
-						label={property.displayName + ":"}
+						label={property.displayName}
 						placeholder={property.description}
 						ref={property.propertyName}
 					/>
@@ -30,7 +30,7 @@ class RenderField extends Component {
 						name={property.propertyName}
 						component={Input}
 						type="number"
-						label={property.displayName + ":"}
+						label={property.displayName}
 						placeholder={property.description}
 						ref={property.propertyName}
 					/>
@@ -42,7 +42,7 @@ class RenderField extends Component {
 						name={property.propertyName}
 						component={DateInput}
 						minDate={new Date("01/01/1100")}
-						label={property.displayName + ":"}
+						label={property.displayName}
 						placeholder={property.description}
 						ref={property.propertyName}
 					/>

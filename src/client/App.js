@@ -12,6 +12,10 @@ import {
 	fetchCurrentUser,
 } from "./redux/actions/appActions";
 
+import { FocusStyleManager } from "@blueprintjs/core";
+
+FocusStyleManager.onlyShowFocusOnTabs();
+
 class App extends Component {
 
 	static loadData(store, match) {
