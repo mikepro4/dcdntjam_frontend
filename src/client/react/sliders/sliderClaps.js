@@ -52,7 +52,9 @@ class SliderClaps extends Component {
                                 noScroll: false
                             })
                         }}
-                    />
+                    >
+                        stuff content
+                    </RightSlider>
                 )}
                
                 
