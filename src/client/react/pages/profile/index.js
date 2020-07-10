@@ -31,11 +31,15 @@ class ProfilePage extends Component {
     }
     
     static loadData(store, match) {
-		return store.dispatch(fetchUser(match.params.googleId));
+        if(match.params.googleId) {
+            return store.dispatch(fetchUser(match.params.googleId));
+        }
 	}
 
 	componentDidMount() {
-		this.props.fetchUser(this.props.match.params.googleId);
+        if(this.props.match.params.googleId) {
+            this.props.fetchUser(this.props.match.params.googleId);
+        }
 	}
 
 
@@ -111,7 +115,11 @@ class ProfilePage extends Component {
                             <div className="stat-label">Claps</div>
                         </li>
 
-                        <li className="single-stat">
+                        <li className="single-stat" onClick={() => {
+                                this.props.updateRightSlider({
+                                    type: "watch"
+                                });
+                            }}>
                             <div className="stat-number">
                                 2.5hrs
                             </div>

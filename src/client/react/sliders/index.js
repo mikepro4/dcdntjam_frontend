@@ -12,6 +12,8 @@ import {
 import RightSlider from './rightSlider'
 import BottomSlider from './bottomSlider'
 
+import SliderClaps from './sliderClaps'
+
 class Slider extends Component {
 
 	constructor(props){
@@ -41,7 +43,23 @@ class Slider extends Component {
         switch (this.props.rightSlider.type) {
             case "claps":
                 return (
-                    <RightSlider>Claps</RightSlider>
+                    <RightSlider
+                        open={this.props.rightSlider}
+                        clear={() => this.props.clearRightSlider()}
+                        name="Claps"
+                    >
+                        <SliderClaps />
+                    </RightSlider>
+                )
+            case "watch":
+                return (
+                    <RightSlider
+                        open={this.props.rightSlider}
+                        clear={() => this.props.clearRightSlider()}
+                        ame="Watch Time"
+                    >
+                        Watch Time
+                    </RightSlider>
                 )
             default:
                 return state;
@@ -66,9 +84,7 @@ class Slider extends Component {
 		return (
 			<div className="app-slider">
                 {this.props.rightSlider && (
-                    <div onClick={()=> {
-                        this.props.clearRightSlider()
-                    }}>
+                    <div>
                         {this.renderRightSlider()}
                     </div>)}
 
