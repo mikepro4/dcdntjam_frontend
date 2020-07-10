@@ -231,7 +231,7 @@ class YoutubePlayer extends React.Component {
 	}
 
 	clearTime() {
-		// this.props.updateTime(this.state.player.getDuration(), 0);
+		this.props.updateTime(this.state.player.getDuration(), 0);
 	}
 
 	onStop() {
@@ -246,7 +246,9 @@ class YoutubePlayer extends React.Component {
 				controls: 0,
 				showinfo: 0,
 				playsinline: 1,
-				modestbranding: 1
+				disablekb: 1,
+				modestbranding: 1,
+				enablejsapi: 1
 			}
 		};
 

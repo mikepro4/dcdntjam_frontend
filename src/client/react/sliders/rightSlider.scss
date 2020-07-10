@@ -66,6 +66,15 @@
         // top: 20px;
         // left: 15px;
     }
+
+    .slider-header-wrapper {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
 }
 
 

@@ -372,38 +372,40 @@ class Header extends Component {
 
 		return (
 			<div className="app-header">
+				<div className="app-header-wrapper">
 
-        	<div className="header-left">
-				<Link to="/"  onClick={() => {
-				if(this.state.menuOpen) {
-					this.setState({
-						menuOpen: false,
-						menuClosing: true
-					})
+					<div className="header-left">
+							<Link to="/"  onClick={() => {
+							if(this.state.menuOpen) {
+								this.setState({
+									menuOpen: false,
+									menuClosing: true
+								})
 
-					document.body.classList.remove("no-scroll")
-		
-					setTimeout(() => {
-						this.setState({
-							menuClosing: false
-						})
-					}, 1000)
-				}
-			}}><Logo/></Link>
-			</div>
-			<div className="header-right">
-			</div>
+								document.body.classList.remove("no-scroll")
+					
+								setTimeout(() => {
+									this.setState({
+										menuClosing: false
+									})
+								}, 1000)
+							}
+						}}><Logo/></Link>
+						</div>
+						<div className="header-right">
+						</div>
 
-			<div className="menu_icon" onClick={() => {
-				this.handleClick()
-			}}>
-				
-			{this.renderLines()}
+						<div className="menu_icon" onClick={() => {
+							this.handleClick()
+						}}>
+							
+						{this.renderLines()}
 
-			{this.renderMenu()}
-			
-			</div>
-      </div>
+						{this.renderMenu()}
+						
+					</div>
+				</div>
+      	</div>
 		);
 	}
 }

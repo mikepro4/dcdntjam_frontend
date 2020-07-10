@@ -157,25 +157,27 @@ class RightSlider extends Component {
 								animate={this.state.sliderOpen ? "open" : "closed"}
 								variants={titleContainer}
 							>
-								<motion.div  
-									className="back-container" 
-									animate={this.state.sliderOpen ? "open" : "closed"}
-									variants={arrowContiner}
-									onClick={() => {
-									this.closeSlider()
-								}}>
-									<ArrowBack />
-								</motion.div>
+								<div className="slider-header-wrapper">
+									<motion.div  
+										className="back-container" 
+										animate={this.state.sliderOpen ? "open" : "closed"}
+										variants={arrowContiner}
+										onClick={() => {
+										this.closeSlider()
+									}}>
+										<ArrowBack />
+									</motion.div>
 
-								<motion.div  
-									className="slider-title" 
-									animate={this.state.sliderOpen ? "open" : "closed"}
-									variants={titleContainer}
-									>
-										{this.props.name && (
-											<div>{this.props.name}</div>
-										)}
-								</motion.div>
+									<motion.div  
+										className="slider-title" 
+										animate={this.state.sliderOpen ? "open" : "closed"}
+										variants={titleContainer}
+										>
+											{this.props.name && (
+												<div>{this.props.name}</div>
+											)}
+									</motion.div>
+								</div>
 							</motion.div>
 							
 							{this.props.children}

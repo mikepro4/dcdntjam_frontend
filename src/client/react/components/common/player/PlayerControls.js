@@ -65,7 +65,7 @@ class PlayerControls extends React.Component {
 		}
 
 		return (
-			<ul className="player_controls_container">
+			<ul className="player-controls-container">
 				{Play ? (
 					<li className="play">
 						<button onClick={this.onPlay.bind(this)} className="button">
