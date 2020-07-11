@@ -14,6 +14,8 @@ export const SCROLLING_DOWN = "app/SCROLLING_DOWN";
 
 export const FETCH_USER = "app/FETCH_USER";
 
+export const UPDATE_TOKEN = "app/UPDATE_TOKEN";
+
 // =============================================================================
 
 export const UPDATE_RIGHT_SLIDER = "app/UPDATE_RIGHT_SLIDER";

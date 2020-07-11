@@ -9,7 +9,8 @@ import {
 	UPDATE_BOTTOM_SLIDER,
 	CLEAR_RIGHT_SLIDER,
 	CLEAR_BOTTOM_SLIDER,
-	HIDE_BOTTOM_SLIDER
+	HIDE_BOTTOM_SLIDER,
+	UPDATE_TOKEN
 } from "../actions/types";
 import { action } from "popmotion";
 

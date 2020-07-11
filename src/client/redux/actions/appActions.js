@@ -122,3 +122,22 @@ export const resetInitial = () => dispatch => {
 		initial: false
 	});
 };
+
+/////////////////////////////////////////////////
+
+export const updateToken = (refreshToken, success) => async (
+	dispatch,
+	getState,
+	api
+) => {
+	const response = await api.post("/update_token", {
+		refreshToken: refreshToken
+	});
+	dispatch({
+		type: FETCH_AUTH,
+		payload: response.data
+	});
+	if (success) {
+		success();
+	}
+};

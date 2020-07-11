@@ -16,7 +16,7 @@ class HomePage extends Component {
 				  This is home. Updated
 				  <Link to="/about"> Go to about > </Link>
 				  React version: {REACT_VERSION}
-				  {/* <Loader/> */}
+				  <Loader/>
 			</div>
 		);
 	}

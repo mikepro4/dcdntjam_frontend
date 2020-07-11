@@ -17,7 +17,7 @@ import PlayerControls from "../../components/common/player/PlayerControls";
 
 import RightSlider from '../rightSlider'
 
-class SliderEditUser extends Component {
+class NewVideo extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
@@ -37,7 +37,7 @@ class SliderEditUser extends Component {
 
     handleFormSubmit = ({ url }) => {
         if (youtubeUrlParser(url)) {
-			this.props.loadYoutubeVideoDetails(youtubeUrlParser(url), history);
+			this.props.loadYoutubeVideoDetails(youtubeUrlParser(url), this.props.user.accessToken);
 		}
     };
 
@@ -144,4 +144,4 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
     clearLoadedYoutubeVideo,
     loadYoutubeVideoDetails
-})(withRouter(SliderEditUser));
+})(withRouter(NewVideo));

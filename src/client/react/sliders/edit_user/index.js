@@ -8,7 +8,8 @@ import UserEditorForm from "./editForm";
 import {
     updateUser,
     hideBottomSlider,
-    clearBottomSlider
+    clearBottomSlider,
+    updateToken
 } from "../../../redux/actions/appActions";
 
 import RightSlider from '../rightSlider'
@@ -66,17 +67,23 @@ class SliderEditUser extends Component {
                             onSubmit={this.handleSubmit.bind(this)}
                         />
 
-                        <div onClick={() => {
+                        {/* <div onClick={() => {
                                 this.setState({
                                     rightSlider: true,
                                     noScroll: true
                                 })
-                        }}>Next Slider</div>
+                        }}>Next Slider</div> */}
+
+                        <div className="button" onClick={() => {
+                            this.props.updateToken(this.props.user.refreshToken)
+                        }}>
+                            Update Token
+                        </div>
 
                     </div>
 
                     
-                    {this.state.rightSlider && (
+                    {/* {this.state.rightSlider && (
                         <RightSlider
                             open={this.state.rightSlider}
                             clear={() => {
@@ -90,7 +97,7 @@ class SliderEditUser extends Component {
                             Watch Time
                         </RightSlider>
                     )}
-                    
+                     */}
                 
             </div>
 		);
@@ -109,5 +116,6 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
     hideBottomSlider,
     clearBottomSlider,
-    updateUser
+    updateUser,
+    updateToken
 })(withRouter(SliderEditUser));

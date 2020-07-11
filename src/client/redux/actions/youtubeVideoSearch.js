@@ -6,7 +6,7 @@ import {
 	CURRENT_VIDEO_UPDATE
 } from "./types";
 
-export const loadYoutubeVideoDetails = googleId => async (
+export const loadYoutubeVideoDetails = (googleId, accessToken) => async (
 	dispatch,
 	getState,
 	api
@@ -14,14 +14,17 @@ export const loadYoutubeVideoDetails = googleId => async (
 	dispatch({
 		type: LOAD_YOUTUBE_VIDEO_DETAILS
 	});
-	const response = await api.post("/youtube_video_details", {
-		googleId
+	// const response = await api.post("/youtube_video_details", {
+	// 	googleId
+	// });
+	const channelId = await api.post("/get_channel_id", {
+		accessToken: accessToken
 	});
-	console.log(response.data)
-	dispatch({
-		type: LOAD_YOUTUBE_VIDEO_DETAILS_SUCCESS,
-		payload: response.data
-	});
+	console.log(channelId)
+	// dispatch({
+	// 	type: LOAD_YOUTUBE_VIDEO_DETAILS_SUCCESS,
+	// 	payload: response.data
+	// });
 
 	dispatch({
 		type: CURRENT_VIDEO_UPDATE,
