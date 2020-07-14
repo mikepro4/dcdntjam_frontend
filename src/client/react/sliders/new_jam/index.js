@@ -13,7 +13,8 @@ import {
 } from "../../../redux/actions/youtubeVideoSearch";
 
 import {
-    loadChannelInfo
+    loadChannelInfo,
+    updateToken
 } from "../../../redux/actions/appActions";
 
 import YoutubePlayer from "../../components/common/player/Player";
@@ -45,10 +46,14 @@ class NewVideo extends Component {
                 youtubeUrlParser(url), 
                 this.props.user.accessToken, 
                 () => {
-                    this.props.loadChannelInfo(
-                        this.props.video.snippet.channelId,
-                        this.props.user.accessToken
-                    )
+                    this.props.updateToken(
+                        this.props.user.refreshToken,
+                     () => {
+                        this.props.loadChannelInfo(
+                            this.props.video.snippet.channelId,
+                            this.props.user.accessToken
+                        )
+                    })
                 });
 		}
     };
@@ -149,12 +154,13 @@ function mapStateToProps(state) {
 		newVideo: state.youtubeVideoSearch.newVideo,
 		isFetching: state.youtubeVideoSearch.isFetching,
 		player: state.player,
-		currentVideo: state.currentVideo
+        currentVideo: state.currentVideo,
 	};
 }
 
 export default connect(mapStateToProps, {
     clearLoadedYoutubeVideo,
     loadYoutubeVideoDetails,
-    loadChannelInfo
+    loadChannelInfo,
+    updateToken
 })(withRouter(NewVideo));
