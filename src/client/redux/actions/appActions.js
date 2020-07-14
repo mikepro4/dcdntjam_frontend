@@ -199,7 +199,7 @@ export const loadChannelInfo = (channelId, accessToken, success) => async (
 	});
 	console.log(response.data)
 	dispatch({
-		type: FETCH_AUTH,
+		type: FETCH_USER,
 		payload: response.data
 	});
 	if (success) {

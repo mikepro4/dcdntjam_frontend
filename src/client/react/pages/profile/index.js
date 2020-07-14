@@ -56,7 +56,7 @@ class ProfilePage extends Component {
         }
         
 	}
-
+x
 	componentDidMount() {
         if(this.props.match.params.googleId) {
             this.props.fetchUser(this.props.match.params.googleId);
@@ -107,6 +107,16 @@ class ProfilePage extends Component {
 			activeTab: tab
 		})
     }
+
+    renderPhoto(user) {
+        if(user.profile && user.profile.photos) {
+            return (<img src={user.profile.photos[0].value}/>)
+        } else {
+            if(user.channelInfo.thumbnails) {
+                return (<img src={user.channelInfo.thumbnails.medium.url}/>)
+            }
+        }
+    }
     
     renderUser(user) {
         if(user) {
@@ -116,16 +126,26 @@ class ProfilePage extends Component {
                     {user && (
                         <div>
                             <div className="profile-avatar">
-                                <img src={user.profile.photos[0].value}/>
+                                {this.renderPhoto(user)}
                             </div>
     
                             <div className="profile-name">
                                 {user.displayName ? (user.displayName): (user.profile.displayName)}
                             </div>
     
-                            {user.username && (
+                            {user.customUrl && (
                                 <div className="profile-username">
-                                    @{user.username}
+                                    <Link to={`/@${user.customUrl}`}>
+                                        @{user.customUrl}
+                                    </Link>
+                                </div> 
+                            )}
+
+                            {(!user.customUrl && user.channelId ) && (
+                                <div className="profile-username">
+                                    <Link to={`/@channel=${user.channelId}`}>
+                                        @channel={user.channelId}
+                                    </Link>
                                 </div> 
                             )}
                         
