@@ -20,6 +20,7 @@ import {
 import YoutubePlayer from "../../components/common/player/Player";
 import PlayerControls from "../../components/common/player/PlayerControls";
 import Loader from "../../components/loader";
+import VideoHeader from "../../components/common/video_header/";
 
 import RightSlider from '../rightSlider'
 
@@ -97,34 +98,22 @@ class NewVideo extends Component {
 
                                     {this.props.currentVideo.videoId && this.props.video.snippet ? (
                                     <div className="loaded-video-container">
-                                        <div className="loaded-video-player-area">
-                                            <YoutubePlayer
-                                                width="375px"
-                                                height="210px"
-                                                videoId={this.props.currentVideo.videoId}
-                                            />
-                                            <div className="video-description">
-                                                <h2 className="video-title">
-                                                    {this.props.video.snippet.title}
-                                                </h2>
-                                            </div>
-                                        </div>
-
-                                        {this.props.video.snippet && (this.props.video.snippet.channelId == this.props.user.channelId) && (
-                                            <div>My video</div>
-                                        )}
+                                        <YoutubePlayer
+                                            width="375px"
+                                            height="210px"
+                                            videoId={this.props.currentVideo.videoId}
+                                        />
 
                                         {this.props.video.snippet && (this.props.video.snippet.channelId !== this.props.user.channelId) && (
                                             <div>
                                                 {this.props.sliderNewVideo.channelInfo && (this.props.video.snippet.channelId == this.props.sliderNewVideo.channelInfo.channelId) ? (
-                                                    <div>
-                                                         Author: 
-                                                        {this.props.video.snippet.channelId}
-
-                                                        customurl: 
-                                                            {this.props.sliderNewVideo.channelInfo.customUrl}
-                                                        
-                                                    </div>
+                                                    <VideoHeader
+                                                        avatarUrl={this.props.sliderNewVideo.channelInfo.channelInfo.thumbnails.medium.url}
+                                                        videoTitle={this.props.video.snippet.title}
+                                                        author={this.props.sliderNewVideo.channelInfo.channelInfo.title}
+                                                        customUrl={this.props.sliderNewVideo.channelInfo.channelInfo.customUrl}
+                                                    />
+                                                    
                                                 ) : (
                                                     <div className="details-loader-container">
                                                         <Loader/>
@@ -133,12 +122,39 @@ class NewVideo extends Component {
                                                
                                             </div>
                                         )}
+                                        
+                                        {this.props.video.snippet && (this.props.video.snippet.channelId == this.props.user.channelId) && (
+                                            <div>
+                                                {this.props.video.snippet 
+                                                    && this.props.sliderNewVideo.channelInfo
+                                                    && (this.props.sliderNewVideo.channelInfo.channelId == this.props.video.snippet.channelId) 
+                                                    && (this.props.video.snippet.channelId == this.props.user.channelId) ? (
+                                                        <VideoHeader
+                                                            avatarUrl={this.props.sliderNewVideo.channelInfo.profile.photos[0].value}
+                                                            videoTitle={this.props.video.snippet.title}
+                                                            author={this.props.sliderNewVideo.channelInfo.title}
+                                                            customUrl={this.props.sliderNewVideo.channelInfo.customUrl}
+                                                        />
+                                                    ): (
+                                                        <div className="details-loader-container">
+                                                            <Loader/>
+                                                        </div>
+                                                    )}
+                                            </div>
+                                        )}
+                            
 
-                                        <button
+                                        <div className="video-meta">
+                                            {this.props.video.snippet && (this.props.video.snippet.channelId == this.props.user.channelId) && (
+                                                <div>My video</div>
+                                            )}
+                                        </div>
+
+                                        {/* <button
                                             className="button blue-button"
                                         >
                                             {this.props.newVideo ? "Add video" : "Go to video"}
-                                        </button>
+                                        </button> */}
                                     </div>
                                 ) : (
                                     ""
