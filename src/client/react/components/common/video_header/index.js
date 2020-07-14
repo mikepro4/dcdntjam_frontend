@@ -4,7 +4,7 @@ import { withRouter, Link } from "react-router-dom";
 import classNames from "classnames"
 
 import {
-	updateBottomSlider
+	hideBottomSlider
 } from "../../../../redux/actions/appActions";
 
 class VideoHeader extends Component {
@@ -15,7 +15,7 @@ class VideoHeader extends Component {
                     <div 
                         className="video-avatar"
                         onClick={() => {
-                            this.props.updateBottomSlider(null)
+                            this.props.hideBottomSlider(true)
                             document.body.classList.remove("no-scroll")
                         }}
                     >
@@ -51,5 +51,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-    updateBottomSlider
+    hideBottomSlider
 })(withRouter(VideoHeader));

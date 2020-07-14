@@ -6,15 +6,17 @@ import classNames from "classnames"
 import { youtubeUrlParser } from "../../../utils/youtube";
 
 import NewJamForm from "./newJamForm";
-
 import {
     clearLoadedYoutubeVideo,
     loadYoutubeVideoDetails,
+    addYoutubeVideo
 } from "../../../redux/actions/youtubeVideoSearch";
 
 import {
     loadChannelInfo,
-    updateToken
+    updateToken,
+    updateBottomSlider,
+    hideBottomSlider
 } from "../../../redux/actions/appActions";
 
 import YoutubePlayer from "../../components/common/player/Player";
@@ -60,9 +62,34 @@ class NewVideo extends Component {
 		}
     };
 
+    addVideo() {
+        let video = {
+            googleId: this.props.video.googleId,
+            channelId: this.props.video.snippet.channelId,
+            snippet: this.props.video.snippet,
+            contentDetails: this.props.video.contentDetails,
+            userId: this.props.user.googleId,
+            channelAvatar: this.props.sliderNewVideo.channelInfo.channelInfo.thumbnails.medium.url
+        }
+
+        console.log(video)
+
+        this.props.addYoutubeVideo(
+            video, 
+            this.props.history,
+            () => {
+                console.log("added")
+            }
+        )
+    }
+
+    closeSlider()  {
+        this.props.hideBottomSlider(true)
+        document.body.classList.remove("no-scroll")
+    }
+
 
 	render() {
-        console.log(this.props.video.snippet)
 		return (
             <div 
                 className={classNames({
@@ -154,11 +181,34 @@ class NewVideo extends Component {
                                             )}
                                         </div> */}
 
-                                        <button
+                                        {this.props.newVideo ? (
+                                            <button
+                                                className="button blue-button"
+                                                onClick={() => {
+                                                        this.addVideo()
+                                                        this.closeSlider()
+                                                    }
+                                                }
+                                            >
+                                                Add video
+                                            </button>
+                                        ): (
+                                            <Link
+                                                className="button "
+                                                onClick={() => this.closeSlider()}
+                                                to={`/video/${this.props.video.googleId}`}
+                                            >
+                                                Go to video
+                                            </Link>
+                                        )}
+
+                                        
+
+                                        {/* <button
                                             className="button blue-button"
                                         >
                                             {this.props.newVideo ? "Add video" : "Go to video"}
-                                        </button>
+                                        </button> */}
                                     </div>
                                 ) : (
                                     ""
@@ -210,7 +260,10 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
     clearLoadedYoutubeVideo,
+    addYoutubeVideo,
     loadYoutubeVideoDetails,
     loadChannelInfo,
-    updateToken
+    updateToken,
+    updateBottomSlider,
+    hideBottomSlider
 })(withRouter(NewVideo));

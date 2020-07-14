@@ -50,8 +50,11 @@ export const addYoutubeVideo = (video, history, success) => async (
 ) => {
 	const response = await api.post("/youtube_video_add", {
 		googleId: video.googleId,
+		channelId: video.channelId,
 		snippet: video.snippet,
-		contentDetails: video.contentDetails
+		contentDetails: video.contentDetails,
+		channelAvatar: video.channelAvatar,
+		userId: video.userId
 	});
 	handleAddedVideo(response, history, success);
 };
