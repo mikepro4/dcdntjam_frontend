@@ -17,6 +17,11 @@ import {
     fetchUser
 } from "../../../redux/actions/userActions";
 
+import {
+    profileLoadMyVideos
+} from "../../../redux/actions/pageProfileActions";
+
+
 import YoutubeIcon from "../../components/icons/youtube"
 
 
@@ -60,6 +65,9 @@ x
 	componentDidMount() {
         if(this.props.match.params.googleId) {
             this.props.fetchUser(this.props.match.params.googleId);
+            if(this.props.user && this.props.user.channelId) {
+                this.props.profileLoadMyVideos(this.props.user.channelId)
+            }
         }
 
         this.updateExternalUser()
@@ -339,6 +347,7 @@ export default {
         updateRightSlider,
         updateBottomSlider,
         fetchUserByCustomUrl,
-        fetchUserByChannelId
+        fetchUserByChannelId,
+        profileLoadMyVideos
     })(ProfilePage)
 }

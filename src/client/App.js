@@ -13,6 +13,10 @@ import {
 	updateChannelId
 } from "./redux/actions/appActions";
 
+import {
+	profileLoadMyVideos
+} from "./redux/actions/pageProfileActions";
+
 import { FocusStyleManager } from "@blueprintjs/core";
 
 FocusStyleManager.onlyShowFocusOnTabs();
@@ -33,6 +37,10 @@ class App extends Component {
 
 		if(this.props.app.user) {
 
+			if(this.props.app.user.channelId) {
+				this.props.profileLoadMyVideos(this.props.app.user.channelId)
+			} 
+
 			switch (this.props.app.user.status.type) {
 				case "initial":
 					return (
@@ -45,6 +53,7 @@ class App extends Component {
 				default:
 					return;
 			}
+			
 		}
 	}
 
@@ -100,6 +109,7 @@ export default {
 		fetchCurrentUser,
 		scrollingUp,
 		scrollingDown,
-		updateChannelId
+		updateChannelId,
+		profileLoadMyVideos
 	})(App)
 };
