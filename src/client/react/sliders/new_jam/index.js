@@ -146,15 +146,19 @@ class NewVideo extends Component {
 
                                         <div className="video-meta">
                                             {this.props.video.snippet && (this.props.video.snippet.channelId == this.props.user.channelId) && (
-                                                <div>My video</div>
+                                                <div className="single-meta-field">My video</div>
+                                            )}
+
+                                            {this.props.newVideo && (
+                                                <div className="single-meta-field">New video</div>
                                             )}
                                         </div>
 
-                                        {/* <button
+                                        <button
                                             className="button blue-button"
                                         >
                                             {this.props.newVideo ? "Add video" : "Go to video"}
-                                        </button> */}
+                                        </button>
                                     </div>
                                 ) : (
                                     ""

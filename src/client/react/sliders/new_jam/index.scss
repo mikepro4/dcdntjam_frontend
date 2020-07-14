@@ -76,6 +76,11 @@
     width: 100%;
     max-width: 375px;
     margin: 0 auto;
+
+    .blue-button {
+        width: 140px;
+        margin: 20px auto;
+    }
 }
 
 .video-loader-container {
@@ -93,4 +98,7 @@
     margin: 0 auto;
 }
 
+.single-meta-field {
+    margin: 0 0 10px 0;
+}
 

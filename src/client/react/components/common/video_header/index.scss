@@ -1,6 +1,6 @@
 .video-header {
     display: flex;
-    margin: 20px 0 0 ;
+    margin: 15px 0 15px 0 ;
 
     .video-header-left {
         width: 40px;
@@ -9,7 +9,7 @@
         flex-shrink: 0;
         margin-right: 15px;
         border-radius: 50px;
-        margin-left: 20px;
+        margin-left: 15px;
         
         img {
             width: 100%;
@@ -22,9 +22,9 @@
         flex-grow: 1;
 
         .video-title {
-            font-weight: 350;
+            font-weight: 300;
             font-size: 13px;
-            margin: 5px 0 0 0;
+            margin: 5px 5px 0 0;
         }
 
         .video-bottom-bar {
