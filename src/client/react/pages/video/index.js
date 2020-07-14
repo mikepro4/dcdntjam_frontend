@@ -32,6 +32,7 @@ x
 
     componentDidUpdate(prevprops, prevparams) {
         if(prevprops.match.params.googleId !== this.props.match.params.googleId) {
+            this.props.clearVideo()
             this.props.loadVideo(this.props.match.params.googleId);
         }
     }

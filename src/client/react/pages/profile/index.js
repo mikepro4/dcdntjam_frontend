@@ -25,6 +25,8 @@ import {
 
 import YoutubeIcon from "../../components/icons/youtube"
 
+import Results from "../../components/common/results"
+
 
 class ProfilePage extends Component {
 
@@ -82,7 +84,7 @@ x
     componentDidUpdate(prevprops, prevparams) {
         if(prevprops.match.params.customUrl !== this.props.match.params.customUrl) {
             this.props.profileClearMyVideos()
-            
+
             this.updateExternalUser(() => {
                 this.props.profileLoadMyVideos(this.props.externalUser.channelId)
             })
@@ -152,6 +154,36 @@ x
                 return (<img src={user.channelInfo.thumbnails.medium.url}/>)
             }
         }
+    }
+
+    renderTab() {
+        let results
+
+        switch (this.state.activeTab) {
+            case 1:
+                results = (
+                    <Results
+                        searchResults={
+                            this.props.pageProfile.videos ? this.props.pageProfile.videos.all : []
+                        }
+                        format="grid"
+                        isFetching={this.props.pageProfile.isFetching}
+                    />
+                )
+                break
+            case 2:
+                results = " my hardware"
+                break
+            case 3:
+                results = " my submissions"
+                break
+        }
+
+        return (
+            <div>
+                {results}
+            </div>
+        )
     }
     
     renderUser(user) {
@@ -288,6 +320,10 @@ x
                             <div className="tab-label">Reposts</div>
                         </div>
                     </div>
+
+                    <div className="tab-results-container">
+                        {this.renderTab()}
+                    </div>
                     {/* {this.props.match.params.googleId && this.props.match.params.googleId}
                     <UserEditorForm
                     initialValues={
@@ -355,7 +391,8 @@ x
 function mapStateToProps(state) {
 	return {
         user: state.app.user,
-        externalUser: state.app.externalUser
+        externalUser: state.app.externalUser,
+        pageProfile: state.pageProfile
 	};
 }
 
