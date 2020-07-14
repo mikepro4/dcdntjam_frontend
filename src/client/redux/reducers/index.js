@@ -6,6 +6,7 @@ import { connectRouter } from "connected-react-router";
 import { youtubeVideoSearch } from "./youtubeVideoSearch";
 import { currentVideo } from "./currentVideo";
 import { sliderNewVideoReducer } from "./sliderNewVideoReducer";
+import { pageVideoReducer } from "./pageVideoReducer";
 import playerReducer from "./playerReducer";
 
 
@@ -16,5 +17,6 @@ export default (history) => combineReducers({
 	player: playerReducer,
 	currentVideo: currentVideo,
 	youtubeVideoSearch: youtubeVideoSearch,
-	sliderNewVideo: sliderNewVideoReducer
+	sliderNewVideo: sliderNewVideoReducer,
+	pageVideo: pageVideoReducer
 })

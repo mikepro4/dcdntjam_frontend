@@ -2,6 +2,7 @@ import React from "react";
 import App from "../App";
 import Home from "../react/pages/home";
 import Profile from "../react/pages/profile";
+import Video from "../react/pages/video";
 
 export default [
 	{
@@ -31,7 +32,13 @@ export default [
 					name: "profile"
 				}
 			},
-			,
+			{
+				...Video,
+				path: "/video/:googleId",
+				params: {
+					name: "video"
+				}
+			},
 			{
 				...Profile,
 				path: "/profile",
