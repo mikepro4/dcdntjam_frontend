@@ -70,7 +70,7 @@ x
             this.props.fetchUser(this.props.match.params.googleId);
 
             if(this.props.user && this.props.user.channelId) {
-                this.props.profileLoadMyVideos(this.props.externalUser.channelId)
+                this.props.profileLoadMyVideos(this.props.user.channelId)
             }
         }
 

@@ -8,12 +8,11 @@ import GridResultItem from "./gridResultItem"
 class ResultsContainer extends Component {
 
     renderGrid() {
-
         if (this.props.isFetching) {
 			return <div>Loading</div>;
 		} else {
 			return (
-				<div>
+				<div className="grid-container">
 					{this.props.searchResults && this.props.searchResults.map(video => (
 						<GridResultItem
 							key={video._id}
@@ -51,12 +50,11 @@ class ResultsContainer extends Component {
 	render() {
 		return (
             <div 
-                className="results-container"
                 className={classNames({
                     "results-grid": this.props.format == "grid",
                     "results-list": this.props.list == "list",
                     "results-timeline": this.props.list == "timeline"
-                })}
+                }, "results-container")}
             >
                {this.renderResults()}
             </div>

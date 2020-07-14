@@ -13,7 +13,7 @@ class GridResultItem extends Component {
                <Link
                     to={`/video/${this.props.video.googleId}`}
                 >
-                    {this.props.video.googleId}
+                    <img src={this.props.video.snippet.thumbnails.medium.url}/>
                </Link>
 
             </div>
