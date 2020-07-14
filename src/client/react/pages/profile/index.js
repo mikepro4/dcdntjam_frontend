@@ -18,7 +18,8 @@ import {
 } from "../../../redux/actions/userActions";
 
 import {
-    profileLoadMyVideos
+    profileLoadMyVideos,
+    profileClearMyVideos
 } from "../../../redux/actions/pageProfileActions";
 
 
@@ -65,9 +66,14 @@ x
 	componentDidMount() {
         if(this.props.match.params.googleId) {
             this.props.fetchUser(this.props.match.params.googleId);
+
             if(this.props.user && this.props.user.channelId) {
-                this.props.profileLoadMyVideos(this.props.user.channelId)
+                this.props.profileLoadMyVideos(this.props.externalUser.channelId)
             }
+        }
+
+        if(this.props.externalUser) {
+            this.props.profileLoadMyVideos(this.props.externalUser.channelId)
         }
 
         this.updateExternalUser()
@@ -75,19 +81,32 @@ x
 
     componentDidUpdate(prevprops, prevparams) {
         if(prevprops.match.params.customUrl !== this.props.match.params.customUrl) {
-            this.updateExternalUser()
+            this.props.profileClearMyVideos()
+            
+            this.updateExternalUser(() => {
+                this.props.profileLoadMyVideos(this.props.externalUser.channelId)
+            })
         }
     }
+    componentWillUnmount() {
+        this.props.profileClearMyVideos()
+    }
 
-    updateExternalUser() {
+    updateExternalUser(success) {
         if(this.checkAtChannelSymbol()) {
             if(this.props.match.params.customUrl) {
-                this.props.fetchUserByChannelId(this.props.match.params.customUrl.substr(9));
+                this.props.fetchUserByChannelId(
+                    this.props.match.params.customUrl.substr(9),
+                    success
+                );
             }
         } else {
             if(this.checkAtSymbol()) {
                 if(this.props.match.params.customUrl) {
-                    this.props.fetchUserByCustomUrl(this.props.match.params.customUrl.substr(1));
+                    this.props.fetchUserByCustomUrl(
+                        this.props.match.params.customUrl.substr(1),
+                        success
+                    );
                 }
             }
         }
@@ -348,6 +367,7 @@ export default {
         updateBottomSlider,
         fetchUserByCustomUrl,
         fetchUserByChannelId,
-        profileLoadMyVideos
+        profileLoadMyVideos,
+        profileClearMyVideos
     })(ProfilePage)
 }

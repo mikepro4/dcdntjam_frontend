@@ -37,9 +37,7 @@ class App extends Component {
 
 		if(this.props.app.user) {
 
-			if(this.props.app.user.channelId) {
-				this.props.profileLoadMyVideos(this.props.app.user.channelId)
-			} 
+
 
 			switch (this.props.app.user.status.type) {
 				case "initial":

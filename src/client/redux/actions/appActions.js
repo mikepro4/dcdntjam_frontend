@@ -20,16 +20,20 @@ import { reset, submit } from "redux-form";
 
 // =============================================================================
 
-export const fetchCurrentUser = () => async (dispatch, getState, api) => {
+export const fetchCurrentUser = (success) => async (dispatch, getState, api) => {
 	const res = await api.get("/current_user");
 
 	dispatch({
 		type: FETCH_AUTH,
 		payload: res.data
 	})
+
+	if (success) {
+		success();
+	}
 }
 
-export const fetchUserByCustomUrl = (url) => async (dispatch, getState, api) => {
+export const fetchUserByCustomUrl = (url, success) => async (dispatch, getState, api) => {
 	const res = await api.post("/current_user_by_url", {
 		customUrl: url
 	});
@@ -38,9 +42,13 @@ export const fetchUserByCustomUrl = (url) => async (dispatch, getState, api) => 
 		type: FETCH_USER,
 		payload: res.data
 	})
+
+	if (success) {
+		success();
+	}
 }
 
-export const fetchUserByChannelId = (channelId) => async (dispatch, getState, api) => {
+export const fetchUserByChannelId = (channelId, success) => async (dispatch, getState, api) => {
 	const res = await api.post("/current_user_by_channelId", {
 		channelId: channelId
 	});
@@ -49,6 +57,10 @@ export const fetchUserByChannelId = (channelId) => async (dispatch, getState, ap
 		type: FETCH_USER,
 		payload: res.data
 	})
+
+	if (success) {
+		success();
+	}
 }
 
 
