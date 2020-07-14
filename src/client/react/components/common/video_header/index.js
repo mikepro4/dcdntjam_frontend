@@ -16,6 +16,7 @@ class VideoHeader extends Component {
                         className="video-avatar"
                         onClick={() => {
                             this.props.updateBottomSlider(null)
+                            document.body.classList.remove("no-scroll")
                         }}
                     >
                         <Link 
