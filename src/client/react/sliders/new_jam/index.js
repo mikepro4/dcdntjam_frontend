@@ -68,7 +68,7 @@ class NewVideo extends Component {
                 }, "slider-content-wrapper")}
             >
      
-                    <div className="slider-claps-content">
+                    <div className="slider-new-video-content">
 
 
                         <NewJamForm
@@ -92,7 +92,8 @@ class NewVideo extends Component {
 							<div className="loaded-video-container">
 								<div className="loaded-video-player-area">
 									<YoutubePlayer
-										width="100%"
+                                        width="375px"
+                                        height="210px"
 										videoId={this.props.currentVideo.videoId}
 									/>
 									<div className="video-description">
@@ -112,18 +113,18 @@ class NewVideo extends Component {
 						) : (
 							""
 						)}
-
+{/* 
                         <div onClick={() => {
                                 this.setState({
                                     rightSlider: true,
                                     noScroll: true
                                 })
-                        }}>Next step</div>
+                        }}>Next step</div> */}
 
                     </div>
 
                     
-                    {this.state.rightSlider && (
+                    {/* {this.state.rightSlider && (
                         <RightSlider
                             open={this.state.rightSlider}
                             clear={() => {
@@ -136,7 +137,7 @@ class NewVideo extends Component {
                         >
                             Confirm
                         </RightSlider>
-                    )}
+                    )} */}
                     
                 
             </div>

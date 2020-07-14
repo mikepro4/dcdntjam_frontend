@@ -24,15 +24,18 @@ class NewJamForm extends React.Component {
 				>
 					
 					<div className="main-properties">
-						<RenderField
-							key="Youtube Link"
-							property={{
-								displayName: "Youtube URL",
-								propertyName: "url",
-                                fieldType: "input",
-                                propertyType: "string"
-							}}
-						/>
+						<div className="full-input-container youtube_url">
+							<RenderField
+								key="Youtube Link"
+								property={{
+									displayName: "Youtube video URL:",
+									propertyName: "url",
+									fieldType: "input",
+									propertyType: "string",
+									description: "Paste Youtube URL here..."
+								}}
+							/>
+						</div>
 					</div>
 				</Form>
 			</div>
@@ -44,11 +47,11 @@ const validate = values => {
 	const errors = {};
 
 	if (!values.url) {
-		errors.url = "Enter url ";
+		errors.url = "Please enter URL ";
 	}
 
 	if (!youtubeUrlParser(values.url)) {
-		errors.url = "Wrong youtube url";
+		errors.url = "Wrong URL format";
 	}
 
 	return errors;

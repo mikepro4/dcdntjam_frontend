@@ -92,7 +92,7 @@ class Slider extends Component {
                         <BottomSlider
                                 open={this.props.bottomSlider}
                                 clear={() => this.props.clearBottomSlider()}
-                                name="Add new jam"
+                                name="New video"
                                 formName="editUserForm"
                         >
                             <SliderNewJam />

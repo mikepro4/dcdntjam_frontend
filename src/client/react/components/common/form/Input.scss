@@ -65,6 +65,11 @@
 		font-size: 14px;
 		transition: all 0.2s;
 
+		&::placeholder {
+			color: rgba(255,255,255,0.3);
+			font-weight: 100;
+		}
+
 		&.intent-danger {
 			border-bottom: 1px solid $red3;
 		}
