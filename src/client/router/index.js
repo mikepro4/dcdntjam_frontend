@@ -18,6 +18,14 @@ export default [
 			},
 			{
 				...Profile,
+				path: "/:customUrl",
+				exact: true,
+				params: {
+					name: "profile_customurl"
+				}
+			},
+			{
+				...Profile,
 				path: "/profile/:googleId",
 				params: {
 					name: "profile"

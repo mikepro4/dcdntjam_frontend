@@ -11,7 +11,8 @@ import {
 	CLEAR_BOTTOM_SLIDER,
 	HIDE_BOTTOM_SLIDER,
 	CURRENT_VIDEO_UPDATE,
-	RESET_INITIAL
+	RESET_INITIAL,
+	FETCH_USER
 } from "../actions/types";
 
 import { reset, submit } from "redux-form";
@@ -26,6 +27,30 @@ export const fetchCurrentUser = () => async (dispatch, getState, api) => {
 		payload: res.data
 	})
 }
+
+export const fetchUserByCustomUrl = (url) => async (dispatch, getState, api) => {
+	const res = await api.post("/current_user_by_url", {
+		customUrl: url
+	});
+
+	dispatch({
+		type: FETCH_USER,
+		payload: res.data
+	})
+}
+
+export const fetchUserByChannelId = (channelId) => async (dispatch, getState, api) => {
+	const res = await api.post("/current_user_by_channelId", {
+		channelId: channelId
+	});
+
+	dispatch({
+		type: FETCH_USER,
+		payload: res.data
+	})
+}
+
+
 
 
 export const scrollingUp = () => async (dispatch, getState, api) => {
@@ -152,6 +177,27 @@ export const updateChannelId = (googleId, accessToken, success) => async (
 	const response = await api.post("/update_channel_id", {
 		accessToken: accessToken
 	});
+	dispatch({
+		type: FETCH_AUTH,
+		payload: response.data
+	});
+	if (success) {
+		success(response.data);
+	}
+}
+
+/////////////////////////////////////////////////
+
+export const loadChannelInfo = (channelId, accessToken, success) => async (
+	dispatch,
+	getState,
+	api
+) => {
+	const response = await api.post("/get_channel_info", {
+		channelId: channelId,
+		accessToken: accessToken
+	});
+	console.log(response.data)
 	dispatch({
 		type: FETCH_AUTH,
 		payload: response.data

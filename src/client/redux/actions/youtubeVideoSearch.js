@@ -6,7 +6,7 @@ import {
 	CURRENT_VIDEO_UPDATE
 } from "./types";
 
-export const loadYoutubeVideoDetails = (googleId, accessToken) => async (
+export const loadYoutubeVideoDetails = (googleId, accessToken, success) => async (
 	dispatch,
 	getState,
 	api
@@ -31,6 +31,10 @@ export const loadYoutubeVideoDetails = (googleId, accessToken) => async (
 		payload: googleId,
 		playerAction: "stop"
 	});
+	
+	if(success) {
+		success();
+	}
 };
 
 export const clearLoadedYoutubeVideo = () => dispatch => {

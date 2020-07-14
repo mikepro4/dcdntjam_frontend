@@ -9,8 +9,12 @@ import NewJamForm from "./newJamForm";
 
 import {
     clearLoadedYoutubeVideo,
-    loadYoutubeVideoDetails
+    loadYoutubeVideoDetails,
 } from "../../../redux/actions/youtubeVideoSearch";
+
+import {
+    loadChannelInfo
+} from "../../../redux/actions/appActions";
 
 import YoutubePlayer from "../../components/common/player/Player";
 import PlayerControls from "../../components/common/player/PlayerControls";
@@ -37,7 +41,15 @@ class NewVideo extends Component {
 
     handleFormSubmit = ({ url }) => {
         if (youtubeUrlParser(url)) {
-			this.props.loadYoutubeVideoDetails(youtubeUrlParser(url), this.props.user.accessToken);
+			this.props.loadYoutubeVideoDetails(
+                youtubeUrlParser(url), 
+                this.props.user.accessToken, 
+                () => {
+                    this.props.loadChannelInfo(
+                        this.props.video.snippet.channelId,
+                        this.props.user.accessToken
+                    )
+                });
 		}
     };
 
@@ -143,5 +155,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
     clearLoadedYoutubeVideo,
-    loadYoutubeVideoDetails
+    loadYoutubeVideoDetails,
+    loadChannelInfo
 })(withRouter(NewVideo));
