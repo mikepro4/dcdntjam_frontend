@@ -27,6 +27,10 @@
         .input {
             padding: 35px 0 10px 0;
             font-size: 20px;
+
+            &:focus {
+                border-bottom: 1px solid rgba(255, 255, 255, 1);
+            }
     
             &.intent-danger {
                 border-bottom: 1px solid $red3;
@@ -74,11 +78,19 @@
     margin: 0 auto;
 }
 
-.loader-container {
+.video-loader-container {
     max-width: 375px;
-    height: 130px;
+    height: 175px;
     position: relative;
-    animation: fadeIn forwards 0.5s ease-in-out; 
+    animation: fadeIn forwards 0.15s ease-in-out; 
     margin: 0 auto;
 }
+.details-loader-container {
+    max-width: 375px;
+    height: 20px;
+    position: relative;
+    animation: fadeIn forwards 0.15s ease-in-out; 
+    margin: 0 auto;
+}
+
 

@@ -49,3 +49,5 @@ export const RESET_INITIAL = "app/RESET_INITIAL";
 
 
 // =============================================================================
+
+export const LOAD_CHANNEL_INFO = "app/LOAD_CHANNEL_INFO";

@@ -12,7 +12,8 @@ import {
 	HIDE_BOTTOM_SLIDER,
 	CURRENT_VIDEO_UPDATE,
 	RESET_INITIAL,
-	FETCH_USER
+	FETCH_USER,
+	LOAD_CHANNEL_INFO
 } from "../actions/types";
 
 import { reset, submit } from "redux-form";
@@ -197,9 +198,8 @@ export const loadChannelInfo = (channelId, accessToken, success) => async (
 		channelId: channelId,
 		accessToken: accessToken
 	});
-	console.log(response.data)
 	dispatch({
-		type: FETCH_USER,
+		type: LOAD_CHANNEL_INFO,
 		payload: response.data
 	});
 	if (success) {

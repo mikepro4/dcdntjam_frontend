@@ -61,7 +61,7 @@ class NewVideo extends Component {
 
 
 	render() {
-
+        console.log(this.props.video.snippet)
 		return (
             <div 
                 className={classNames({
@@ -90,7 +90,7 @@ class NewVideo extends Component {
                         />
 
                         {this.props.isFetching ? (
-                                <div className="loader-container">
+                                <div className="video-loader-container">
                                     <Loader/>
                                 </div>
                             ) : (<div>
@@ -109,6 +109,31 @@ class NewVideo extends Component {
                                                 </h2>
                                             </div>
                                         </div>
+
+                                        {this.props.video.snippet && (this.props.video.snippet.channelId == this.props.user.channelId) && (
+                                            <div>My video</div>
+                                        )}
+
+                                        {this.props.video.snippet && (this.props.video.snippet.channelId !== this.props.user.channelId) && (
+                                            <div>
+                                                {this.props.sliderNewVideo.channelInfo && (this.props.video.snippet.channelId == this.props.sliderNewVideo.channelInfo.channelId) ? (
+                                                    <div>
+                                                         Author: 
+                                                        {this.props.video.snippet.channelId}
+
+                                                        customurl: 
+                                                            {this.props.sliderNewVideo.channelInfo.customUrl}
+                                                        
+                                                    </div>
+                                                ) : (
+                                                    <div className="details-loader-container">
+                                                        <Loader/>
+                                                    </div>
+                                                )}
+                                               
+                                            </div>
+                                        )}
+
                                         <button
                                             className="button blue-button"
                                         >
@@ -158,6 +183,8 @@ function mapStateToProps(state) {
 		isFetching: state.youtubeVideoSearch.isFetching,
 		player: state.player,
         currentVideo: state.currentVideo,
+        externalUser: state.app.externalUser,
+        sliderNewVideo: state.sliderNewVideo
 	};
 }
 
