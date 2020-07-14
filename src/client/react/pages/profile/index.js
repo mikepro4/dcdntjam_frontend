@@ -62,6 +62,16 @@ x
             this.props.fetchUser(this.props.match.params.googleId);
         }
 
+        this.updateExternalUser()
+    }
+
+    componentDidUpdate(prevprops, prevparams) {
+        if(prevprops.match.params.customUrl !== this.props.match.params.customUrl) {
+            this.updateExternalUser()
+        }
+    }
+
+    updateExternalUser() {
         if(this.checkAtChannelSymbol()) {
             if(this.props.match.params.customUrl) {
                 this.props.fetchUserByChannelId(this.props.match.params.customUrl.substr(9));
@@ -73,7 +83,6 @@ x
                 }
             }
         }
-
     }
     
     checkAtSymbol() {

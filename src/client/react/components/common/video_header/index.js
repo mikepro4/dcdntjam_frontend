@@ -3,12 +3,21 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import classNames from "classnames"
 
+import {
+	updateBottomSlider
+} from "../../../../redux/actions/appActions";
+
 class VideoHeader extends Component {
 	render() {
 		return (
             <div className="video-header">
                 <div className="video-header-left">
-                    <div className="video-avatar">
+                    <div 
+                        className="video-avatar"
+                        onClick={() => {
+                            this.props.updateBottomSlider(null)
+                        }}
+                    >
                         <Link 
                             to={`/@${this.props.customUrl}`}
                         >
@@ -36,7 +45,10 @@ class VideoHeader extends Component {
 
 function mapStateToProps(state) {
 	return {
+        
 	};
 }
 
-export default connect(mapStateToProps, {})(withRouter(VideoHeader));
+export default connect(mapStateToProps, {
+    updateBottomSlider
+})(withRouter(VideoHeader));

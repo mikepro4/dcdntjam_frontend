@@ -132,7 +132,7 @@ class NewVideo extends Component {
                                                         <VideoHeader
                                                             avatarUrl={this.props.sliderNewVideo.channelInfo.profile.photos[0].value}
                                                             videoTitle={this.props.video.snippet.title}
-                                                            author={this.props.sliderNewVideo.channelInfo.title}
+                                                            author={this.props.sliderNewVideo.channelInfo.channelInfo.title}
                                                             customUrl={this.props.sliderNewVideo.channelInfo.customUrl}
                                                         />
                                                     ): (
