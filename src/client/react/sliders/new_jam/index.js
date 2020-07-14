@@ -19,6 +19,7 @@ import {
 
 import YoutubePlayer from "../../components/common/player/Player";
 import PlayerControls from "../../components/common/player/PlayerControls";
+import Loader from "../../components/loader";
 
 import RightSlider from '../rightSlider'
 
@@ -88,38 +89,39 @@ class NewVideo extends Component {
                             
                         />
 
-                        {this.props.currentVideo.videoId && this.props.video.snippet ? (
-							<div className="loaded-video-container">
-								<div className="loaded-video-player-area">
-									<YoutubePlayer
-                                        width="375px"
-                                        height="210px"
-										videoId={this.props.currentVideo.videoId}
-									/>
-									<div className="video-description">
-										<h2 className="video-title">
-											{this.props.video.snippet.title}
-										</h2>
+                        {this.props.isFetching ? (
+                                <div className="loader-container">
+                                    <Loader/>
+                                </div>
+                            ) : (<div>
 
-                                        <PlayerControls/>
-									</div>
-								</div>
-								<button
-									className="button blue-button"
-								>
-									{this.props.newVideo ? "Add video" : "Go to video"}
-								</button>
-							</div>
-						) : (
-							""
-						)}
-{/* 
-                        <div onClick={() => {
-                                this.setState({
-                                    rightSlider: true,
-                                    noScroll: true
-                                })
-                        }}>Next step</div> */}
+                                    {this.props.currentVideo.videoId && this.props.video.snippet ? (
+                                    <div className="loaded-video-container">
+                                        <div className="loaded-video-player-area">
+                                            <YoutubePlayer
+                                                width="375px"
+                                                height="210px"
+                                                videoId={this.props.currentVideo.videoId}
+                                            />
+                                            <div className="video-description">
+                                                <h2 className="video-title">
+                                                    {this.props.video.snippet.title}
+                                                </h2>
+                                            </div>
+                                        </div>
+                                        <button
+                                            className="button blue-button"
+                                        >
+                                            {this.props.newVideo ? "Add video" : "Go to video"}
+                                        </button>
+                                    </div>
+                                ) : (
+                                    ""
+                                )}
+                                </div>
+                            )
+
+                        }
 
                     </div>
 

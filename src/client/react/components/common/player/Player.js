@@ -243,7 +243,7 @@ class YoutubePlayer extends React.Component {
 			height: this.props.height ? this.props.height : "170",
 			width: this.props.width ? this.props.width : "270",
 			playerVars: {
-				controls: 0,
+				controls: 1,
 				showinfo: 0,
 				playsinline: 1,
 				disablekb: 1,

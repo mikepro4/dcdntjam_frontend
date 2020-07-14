@@ -67,3 +67,18 @@
     }
     
 }
+
+.loaded-video-container {
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+}
+
+.loader-container {
+    max-width: 375px;
+    height: 130px;
+    position: relative;
+    animation: fadeIn forwards 0.5s ease-in-out; 
+    margin: 0 auto;
+}
+
