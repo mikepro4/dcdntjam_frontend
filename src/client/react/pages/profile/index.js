@@ -107,7 +107,7 @@ class ProfilePage extends Component {
                                     type: "claps"
                                 });
                             }}>
-                                256
+                                0
                             </div>
 
                             <div className="stat-label">Claps</div>
@@ -119,7 +119,7 @@ class ProfilePage extends Component {
                                 });
                             }}>
                             <div className="stat-number">
-                                2.5hrs
+                                0
                             </div>
 
                             <div className="stat-label">WATCHED</div>
@@ -127,7 +127,7 @@ class ProfilePage extends Component {
 
                         <li className="single-stat">
                             <div className="stat-number">
-                                5.5K
+                                0
                             </div>
 
                             <div className="stat-label">FOLLOWERS</div>
@@ -135,7 +135,7 @@ class ProfilePage extends Component {
 
                         <li className="single-stat">
                             <div className="stat-number">
-                                176
+                                0
                             </div>
 
                             <div className="stat-label">FOLLOWING</div>

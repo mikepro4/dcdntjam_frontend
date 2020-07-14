@@ -138,6 +138,25 @@ export const updateToken = (refreshToken, success) => async (
 		payload: response.data
 	});
 	if (success) {
-		success();
+		success(response.data);
 	}
 };
+
+/////////////////////////////////////////////////
+
+export const updateChannelId = (googleId, accessToken, success) => async (
+	dispatch,
+	getState,
+	api
+) => {
+	const response = await api.post("/update_channel_id", {
+		accessToken: accessToken
+	});
+	dispatch({
+		type: FETCH_AUTH,
+		payload: response.data
+	});
+	if (success) {
+		success(response.data);
+	}
+}

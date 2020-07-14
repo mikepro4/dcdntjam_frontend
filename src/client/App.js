@@ -10,6 +10,7 @@ import {
 	scrollingUp,
 	scrollingDown,
 	fetchCurrentUser,
+	updateChannelId
 } from "./redux/actions/appActions";
 
 import { FocusStyleManager } from "@blueprintjs/core";
@@ -29,7 +30,37 @@ class App extends Component {
 		this.props.fetchCurrentUser();
 		this.prev = window.scrollY;
 		window.addEventListener('scroll', e => this.handleNavigation(e));
-		
+
+		if(this.props.app.user) {
+
+			switch (this.props.app.user.status.type) {
+				case "initial":
+					return (
+							this.handleInitialSignIn()
+						)
+				case "watcher":
+					return (
+							this.handleWatcher()
+						)
+				default:
+					return;
+			}
+		}
+	}
+
+	handleWatcher() {
+		console.log("check if has channel")
+	}
+
+	handleInitialSignIn() {
+		console.log("initial sign in")
+		this.props.updateChannelId(
+			this.props.app.user.googleId,
+			this.props.app.user.accessToken,
+			(data) => {
+				console.log(data)
+			}
+		)
 	}
 	
 	handleNavigation = (e) => {
@@ -68,6 +99,7 @@ export default {
 	component: connect(mapStateToProps, { 
 		fetchCurrentUser,
 		scrollingUp,
-		scrollingDown
+		scrollingDown,
+		updateChannelId
 	})(App)
 };

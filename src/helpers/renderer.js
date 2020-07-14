@@ -64,7 +64,6 @@ export default (
         ${helmetInstance.meta.toString()}
 				<link rel="stylesheet" href="/${buildAssets.bundle.css}">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-				<script async src="//www.instagram.com/embed.js"></script>
       </head>
       <body id="body">
         <div id="app">${content}</div>
