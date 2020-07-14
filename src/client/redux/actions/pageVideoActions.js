@@ -3,7 +3,8 @@ import axios from "axios";
 
 import {
     LOAD_VIDEO,
-    LOAD_VIDEO_SUCCESS
+    LOAD_VIDEO_SUCCESS,
+    CLEAR_PAGE_VIDEO
 } from "../actions/types";
 
 import { reset, submit } from "redux-form";
@@ -24,3 +25,9 @@ export const loadVideo = (googleId) => async (dispatch, getState, api) => {
 		payload: res.data
 	})
 }
+
+export const clearVideo = () => dispatch => {
+	dispatch({
+		type: CLEAR_PAGE_VIDEO
+	});
+};

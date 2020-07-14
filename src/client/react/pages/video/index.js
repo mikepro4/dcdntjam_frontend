@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import {
-    loadVideo
+    loadVideo,
+    clearVideo
 } from "../../../redux/actions/pageVideoActions";
 
 
@@ -34,6 +35,9 @@ x
             this.props.loadVideo(this.props.match.params.googleId);
         }
     }
+    componentWillUnmount() {
+        this.props.clearVideo()
+    }
 
 	render() {
         if(this.props.video.snippet) {
@@ -61,6 +65,7 @@ function mapStateToProps(state) {
 
 export default {
 	component: connect(mapStateToProps, {
-        loadVideo
+        loadVideo,
+        clearVideo
     })(PageVideo)
 }

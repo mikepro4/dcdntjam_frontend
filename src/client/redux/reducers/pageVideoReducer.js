@@ -3,7 +3,8 @@ import update from "immutability-helper";
 
 import {
     LOAD_VIDEO,
-    LOAD_VIDEO_SUCCESS
+    LOAD_VIDEO_SUCCESS,
+    CLEAR_PAGE_VIDEO
 } from "../actions/types";
 
 export const initialState = {
@@ -25,7 +26,12 @@ export const pageVideoReducer = (state = initialState, action) => {
 			return assign({}, state, {
 				singleVideo: action.payload,
 				isFetching: false
-			});
+            });
+        case CLEAR_PAGE_VIDEO:
+            return assign({}, state, {
+                singleVideo: {},
+                isFetching: false
+            });
 		default:
 			return state;
 	}
