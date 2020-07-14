@@ -3,16 +3,26 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import classNames from "classnames"
 
-// import {
-// 	hideBottomSlider
-// } from "../../../../redux/actions/appActions";
+import GridResultItem from "./gridResultItem"
 
 class ResultsContainer extends Component {
 
     renderGrid() {
-        return (
-            <div>Grid</div>
-        )
+
+        if (this.props.isFetching) {
+			return <div>Loading</div>;
+		} else {
+			return (
+				<div>
+					{this.props.searchResults && this.props.searchResults.map(video => (
+						<GridResultItem
+							key={video._id}
+                            video={video}
+						/>
+					))}
+				</div>
+			);
+		}
     }
 
     renderList() {
@@ -57,7 +67,6 @@ class ResultsContainer extends Component {
 
 function mapStateToProps(state) {
 	return {
-        
 	};
 }
 
