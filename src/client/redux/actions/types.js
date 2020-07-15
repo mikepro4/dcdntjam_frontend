@@ -1,5 +1,16 @@
 // =============================================================================
 
+// Main Collection
+
+export const COLLECTION_SEARCH = "app/COLLECTION_SEARCH";
+export const COLLECTION_SEARCH_MORE = "app/COLLECTION_SEARCH_MORE";
+export const COLLECTION_SEARCH_SUCCESS = "app/COLLECTION_SEARCH_SUCCESS";
+
+
+// =============================================================================
+
+// =============================================================================
+
 export const LOADING_START = "app/LOADING_START";
 export const LOADING_END = "app/LOADING_END";
 
@@ -77,4 +88,8 @@ export const PROFILE_CLEAR_MY_HARDWARE = "app/PROFILE_CLEAR_MY_HARDWARE";
 export const PROFILE_LOAD_MY_SUBMISSIONS = "app/PROFILE_LOAD_MY_SUBMISSIONS";
 export const PROFILE_LOAD_MY_SUBMISSIONS_SUCCESS = "app/PROFILE_LOAD_MY_SUBMISSIONS_SUCCESS";
 export const PROFILE_CLEAR_MY_SUBMISSIONS = "app/PROFILE_CLEAR_MY_SUBMISSIONS";
+
+// =============================================================================
+
+export const PAGE_SEARCH_UPDATE_RESULTS = "app/PAGE_SEARCH_UPDATE_RESULTS";
 

@@ -368,45 +368,47 @@ class Header extends Component {
 			{ value: 'M39.50625,0.5 C30.8788547,0.5 28.642962,9.5109931 20.003125,9.5109931 C11.363288,9.5109931 8.88972652,0.5 0.5,0.5' }]
 
 		
-
-
-		return (
-			<div className="app-header">
-				<div className="app-header-wrapper">
-
-					<div className="header-left">
-							<Link to="/"  onClick={() => {
-							if(this.state.menuOpen) {
-								this.setState({
-									menuOpen: false,
-									menuClosing: true
-								})
-
-								document.body.classList.remove("no-scroll")
-					
-								setTimeout(() => {
+		if(this.props.location.pathname == "/search") {
+			return (<div></div>)
+		} else {
+			return (
+				<div className="app-header">
+					<div className="app-header-wrapper">
+	
+						<div className="header-left">
+								<Link to="/"  onClick={() => {
+								if(this.state.menuOpen) {
 									this.setState({
-										menuClosing: false
+										menuOpen: false,
+										menuClosing: true
 									})
-								}, 1000)
-							}
-						}}><Logo/></Link>
-						</div>
-						<div className="header-right">
-						</div>
-
-						<div className="menu_icon" onClick={() => {
-							this.handleClick()
-						}}>
-							
-						{this.renderLines()}
-
-						{this.renderMenu()}
+	
+									document.body.classList.remove("no-scroll")
 						
+									setTimeout(() => {
+										this.setState({
+											menuClosing: false
+										})
+									}, 1000)
+								}
+							}}><Logo/></Link>
+							</div>
+							<div className="header-right">
+							</div>
+	
+							<div className="menu_icon" onClick={() => {
+								this.handleClick()
+							}}>
+								
+							{this.renderLines()}
+	
+							{this.renderMenu()}
+							
+						</div>
 					</div>
-				</div>
-      	</div>
-		);
+			  </div>
+			);
+		}
 	}
 }
 

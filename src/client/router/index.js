@@ -3,6 +3,7 @@ import App from "../App";
 import Home from "../react/pages/home";
 import Profile from "../react/pages/profile";
 import Video from "../react/pages/video";
+import Search from "../react/pages/search";
 
 export default [
 	{
@@ -16,6 +17,14 @@ export default [
 					name: "home"
 				},
 
+			},
+			{
+				...Search,
+				path: "/search",
+				exact: true,
+				params: {
+					name: "search"
+				}
 			},
 			{
 				...Profile,
@@ -47,6 +56,7 @@ export default [
 					name: "profile-empty"
 				}
 			}
+			
 		]
 	}
 ];
