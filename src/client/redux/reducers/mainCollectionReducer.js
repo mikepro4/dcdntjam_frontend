@@ -46,14 +46,14 @@ export const mainCollectionReducer = (state = initialState, action) => {
 		}
 
 		case COLLECTION_SEARCH_SUCCESS: {
-			let newArray = state.collection.all.concat(action.all);
+			// let newArray = state.collection.all.concat(action.all);
 
 			let updatedResults = assign({}, state.collection, {
 				fetching: false,
 				offset: action.offset,
 				limit: action.limit,
 				count: action.count,
-				all: newArray
+				all: action.all
 			});
 			return assign({}, state, {
 				collection: updatedResults

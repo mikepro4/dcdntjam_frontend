@@ -1,0 +1,85 @@
+.search-input-group {
+	display: flex;
+	width: 100%;
+	min-height: 55px;
+	position: relative;
+	max-width: 1000px;
+	margin: 0 auto;
+
+	// &:last-child {
+	// 	margin: 0;
+	// }
+
+	.search-input-group-left {
+		width: 110px;
+		margin-right: 10px;
+		flex-grow: 0;
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		font-size: 13px;
+		font-weight: 400;
+		opacity: 0.6;
+	}
+
+	.search-input-group-right {
+		flex-grow: 1;
+		display: flex;
+		align-items: center;
+		position: relative;
+
+		.search-input-valid {
+			position: absolute;
+			right: 8px;
+			top: 8px;
+			color: $forest3;
+		}
+
+		.search-input-error {
+			display: block;
+			position: absolute;
+			top: 54px;
+			left: 0;
+			font-size: 11px;
+			color: $red3;
+		}
+
+		.serach-input,
+		select,
+		.Select {
+			width: 100%;
+		}
+	}
+
+	.search-input {
+		background: none;
+		box-shadow: none;
+		border: none;
+		box-shadow: none;
+		background-color: transparent;
+		color: #ffffff;
+		border-radius: none;
+		-webkit-appearance: none;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		padding: 20px 0 7px 0;
+		font-size: 14px;
+		transition: all 0.2s;
+
+		&::placeholder {
+			color: rgba(255,255,255,0.3);
+			font-weight: 100;
+		}
+
+		&.intent-danger {
+			border-bottom: 1px solid $red3;
+		}
+	}
+
+	.search-input-label {
+		font-size: 14px;
+		font-weight: 200;
+		position: absolute;
+		top: 25px;
+		margin-left: 20px;
+	}
+}

@@ -27,7 +27,6 @@
 @import "../react/components/header/index";
 @import "../react/components/bottom_nav/index";
 @import "../react/components/loader/index";
-@import "../react/components/common/form/input";
 @import "../react/components/common/player/Player";
 @import "../react/components/common/video_header/index";
 @import "../react/components/common/results/index";
@@ -38,6 +37,10 @@
 @import "../react/sliders/bottomSlider";
 @import "../react/sliders/edit_user/index";
 @import "../react/sliders/new_jam/index";
+
+//form
+@import "../react/components/common/form/input";
+@import "../react/components/common/form/SearchInput";
 
 
 html {

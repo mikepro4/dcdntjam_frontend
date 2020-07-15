@@ -10,6 +10,7 @@ import DateInput from "./DateInput";
 import Textarea from "./Textarea";
 import Checkbox from "./Checkbox";
 import Select from "./Select";
+import SearchInput from "./SearchInput";
 
 class RenderField extends Component {
 	renderInput = property => {
@@ -43,6 +44,15 @@ class RenderField extends Component {
 						component={DateInput}
 						minDate={new Date("01/01/1100")}
 						label={property.displayName}
+						placeholder={property.description}
+						ref={property.propertyName}
+					/>
+				);
+			case "main_search":
+				return (
+					<Field
+						name={property.propertyName}
+						component={SearchInput}
 						placeholder={property.description}
 						ref={property.propertyName}
 					/>
