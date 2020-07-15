@@ -11,17 +11,22 @@ import {
 
 import MainSearchForm from './searchForm'
 
+import Results from "../../components/common/results"
+
 
 class PageSearch extends Component {
 
     constructor(props){
 		super(props)
 		this.state = {
-            offset: 0,
-            limit: 20,
+            collectionVideo: [],
+            collectionVideoUrl: "/search/videos",
+            videoTitle: null,
+            accountName: null,
+            activeTab: 1,
         }
         
-        this.debouncedOnChange = debounce(this.onChange, 1000);
+        this.debouncedOnChange = debounce(this.onChange, 300);
     }
 x
 	componentDidMount() {
@@ -33,35 +38,100 @@ x
     componentWillUnmount() {
     }
 
-    getVideoCollection(data) {
-        console.log("launch video collection")
+    getCollection(offset, limit, url, update) {
+        console.log("load collection")
 
-        if(data) {
-            this.props.collectionSearch(
-                "/search/videos",
-                {
-                    video: data.video,
-                    account: ""
-                },
-                "created",
-                this.state.offset,
-                this.state.limit,
-                (data) => {
-                    console.log(this.props.mainCollection)
+        this.props.collectionSearch(
+            url,
+            {
+                video: this.state.videoTitle,
+                account: this.state.accountName
+            },
+            "created",
+            offset,
+            limit,
+            (data) => {
+                this.setState({
+                    collectionVideo: this.props.mainCollection.collection.all
+                })
+                console.log(this.state)
+
+                if(update) {
+                    console.log("new collection")
+                } else {
+                    console.log("append to collection")
                 }
-            );
-        }
+            }
+        );
     }
 
     onChange = (newValue) => {
-        this.getVideoCollection({
-            video: newValue.search 
-        })
+        if(!newValue.search) {
+            this.setState({
+                videoTitle: null,
+                accountName: null,
+                collectionVideo: []
+            }) 
+        } else {
+            if(this.state.activeTab == 1) {
+                this.setState({
+                    videoTitle: newValue.search,
+                    accountName: null 
+                })
+                this.getCollection(
+                    0,
+                    20,
+                    this.state.collectionVideoUrl,
+                    true
+                )
+            } if(this.state.activeTab == 2) {
+    
+                this.setState({
+                    videoTitle: "",
+                    accountName: newValue.search  
+                })
+    
+                this.getCollection(
+                    0,
+                    20,
+                    "/search/user",
+                    true
+                )
+            }
+        }
     }
     
 
     handleFormSubmit() { 
 
+    }
+
+    renderTab() {
+        let results
+
+        switch (this.state.activeTab) {
+            case 1:
+                results = (
+                    <Results
+                        searchResults={this.state.collectionVideo}
+                        format="grid"
+                        isFetching={this.props.mainCollection.collection.fetching}
+                    />
+                )
+                break
+            case 2:
+                results = " my hardware"
+                break
+            case 3:
+                results = " my submissions"
+                break
+        }
+
+        return (
+            <div>
+                {results}
+            </div>
+        )
     }
 
 	render() {
@@ -70,8 +140,10 @@ x
                 Search
                 <MainSearchForm
                     touchOnChange={true}
+                    onSubmit={() => {}}
                     onChange={this.debouncedOnChange}
                 />
+                {this.renderTab()}
             </div>
         )
 	}
