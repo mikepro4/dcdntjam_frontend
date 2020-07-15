@@ -9,6 +9,13 @@ import {
     clearVideo
 } from "../../../redux/actions/pageVideoActions";
 
+import {
+    updateTime,
+    updateCurrentVideo
+} from "../../../redux/actions/player";
+
+import YoutubePlayer from "../../components/common/player/Player";
+
 
 class PageVideo extends Component {
 
@@ -28,23 +35,40 @@ x
         if(this.props.match.params.googleId !== this.props.pageVideo.googleId) {
             this.props.loadVideo(this.props.match.params.googleId);
         }
+        if(this.props.match.params.googleId) {
+            this.props.updateCurrentVideo(
+                this.props.match.params.googleId,
+                "stop"
+            )
+        }
+       
     }
 
     componentDidUpdate(prevprops, prevparams) {
         if(prevprops.match.params.googleId !== this.props.match.params.googleId) {
-            this.props.clearVideo()
+            // this.props.clearVideo()
             this.props.loadVideo(this.props.match.params.googleId);
         }
     }
     componentWillUnmount() {
-        this.props.clearVideo()
+        // this.props.clearVideo()
+        // this.props.updateTime(0, 0);
     }
 
 	render() {
         if(this.props.video.snippet) {
             return(
                 <div>
+                    {this.props.currentVideo.videoId && (
+                        <YoutubePlayer
+                            width="375px"
+                            height="210px"
+                            videoId={this.props.currentVideo.videoId}
+                        />
+                    )}
+
                     {this.props.video.snippet.title}
+
                 </div>
             )
         } return(
@@ -60,13 +84,16 @@ function mapStateToProps(state) {
 	return {
         user: state.app.user,
         pageVideo: state.pageVideo,
-        video: state.pageVideo.singleVideo
+        video: state.pageVideo.singleVideo,
+        currentVideo: state.currentVideo,
 	};
 }
 
 export default {
 	component: connect(mapStateToProps, {
         loadVideo,
-        clearVideo
+        clearVideo,
+        updateTime,
+        updateCurrentVideo
     })(PageVideo)
 }

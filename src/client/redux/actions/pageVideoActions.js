@@ -4,7 +4,8 @@ import axios from "axios";
 import {
     LOAD_VIDEO,
     LOAD_VIDEO_SUCCESS,
-    CLEAR_PAGE_VIDEO
+	CLEAR_PAGE_VIDEO,
+	CURRENT_VIDEO_UPDATE
 } from "../actions/types";
 
 import { reset, submit } from "redux-form";
@@ -24,7 +25,17 @@ export const loadVideo = (googleId) => async (dispatch, getState, api) => {
 		type: LOAD_VIDEO_SUCCESS,
 		payload: res.data
 	})
+
+	// if(res.data) {
+	// 	dispatch({
+	// 		type: CURRENT_VIDEO_UPDATE,
+	// 		payload: googleId,
+	// 		playerAction: "stop"
+	// 	});
+	// }
 }
+	
+	
 
 export const clearVideo = () => dispatch => {
 	dispatch({

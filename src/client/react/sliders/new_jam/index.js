@@ -265,5 +265,5 @@ export default connect(mapStateToProps, {
     loadChannelInfo,
     updateToken,
     updateBottomSlider,
-    hideBottomSlider
+    
 })(withRouter(NewVideo));
