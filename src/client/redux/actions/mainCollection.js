@@ -27,6 +27,8 @@ export const collectionSearch = (
 		limit
 	});
 
+	
+
 	const response = await api.post(url, {
 		criteria,
 		sortProperty,
@@ -34,21 +36,19 @@ export const collectionSearch = (
 		limit,
 	});
 
-	if (response.status === 200) {
-		dispatch({
-			type: COLLECTION_SEARCH_SUCCESS,
-			offset: response.data.offset,
-			limit: response.data.limit,
-			all: response.data.all,
-			count: response.data.count
-		});
-		
-        
-        if(success) {
-			success()
-			console.log(getState().mainCollection.searchResults.all)
-        }
-    }
+	console.log(response.data)
+	dispatch({
+		type: COLLECTION_SEARCH_SUCCESS,
+		offset: response.data.offset,
+		limit: response.data.limit,
+		all: response.data.all,
+		count: response.data.count
+	});
+	
+	
+	if(success) {
+		success()
+	}
 };
 
 

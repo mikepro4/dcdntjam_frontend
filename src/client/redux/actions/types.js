@@ -5,6 +5,7 @@
 export const COLLECTION_SEARCH = "app/COLLECTION_SEARCH";
 export const COLLECTION_SEARCH_MORE = "app/COLLECTION_SEARCH_MORE";
 export const COLLECTION_SEARCH_SUCCESS = "app/COLLECTION_SEARCH_SUCCESS";
+export const COLLECTION_SETTINGS_UPDATE = "app/COLLECTION_SETTINGS_UPDATE";
 
 
 // =============================================================================
@@ -91,5 +92,6 @@ export const PROFILE_CLEAR_MY_SUBMISSIONS = "app/PROFILE_CLEAR_MY_SUBMISSIONS";
 
 // =============================================================================
 
-export const PAGE_SEARCH_UPDATE_RESULTS = "app/PAGE_SEARCH_UPDATE_RESULTS";
+export const PAGE_SEARCH_COLLECTION_VIDEO_UPDATE = "app/PAGE_SEARCH_COLLECTION_VIDEO_UPDATE";
+export const PAGE_SEARCH_COLLECTION_CLEAR = "app/PAGE_SEARCH_COLLECTION_CLEAR";
 
