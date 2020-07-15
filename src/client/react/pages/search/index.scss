@@ -1,3 +1,14 @@
 .search-container {
     height: 3000px;
+    padding-top: 0;
+}
+
+.search-header  {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: black;
+    z-index: 100;
 }

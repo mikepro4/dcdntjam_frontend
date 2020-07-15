@@ -1,5 +1,8 @@
 import React, { PropTypes } from "react";
 import classnames from "classnames";
+import { fromPairs } from "lodash";
+import SmallSearch from "../../icons/small_search"
+import SmallCross from "../../icons/small_cross"
 
 const Input = ({
 	input,
@@ -35,6 +38,8 @@ const Input = ({
 
 			<div className="search-input-group-right">
 
+				<SmallSearch/>
+
 				<input
 					{...input}
 					className={inputClassName}
@@ -42,9 +47,15 @@ const Input = ({
 					type={type}
 				/>
 
-				{touched && error ? (
+				{touched && (
 					<div className="search-input-error">
 						{touched && error && <span>{error}</span>}
+					</div>
+				)}
+
+				{touched ? (
+					<div className="search-input-clear">
+						<SmallCross />
 					</div>
 				) : (
 					""

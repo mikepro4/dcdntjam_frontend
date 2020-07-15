@@ -137,12 +137,17 @@ x
 	render() {
         return (
             <div className="search-container">
-                Search
-                <MainSearchForm
-                    touchOnChange={true}
-                    onSubmit={() => {}}
-                    onChange={this.debouncedOnChange}
-                />
+                <div className="search-header">
+                    <div className="search-header-content">
+                        <div className="search-input-wrapper">
+                            <MainSearchForm
+                                touchOnChange={true}
+                                onSubmit={() => {}}
+                                onChange={this.debouncedOnChange}
+                            />
+                        </div>
+                    </div>
+                </div>
                 {this.renderTab()}
             </div>
         )
