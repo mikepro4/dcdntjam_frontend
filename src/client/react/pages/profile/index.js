@@ -33,7 +33,12 @@ class ProfilePage extends Component {
     constructor(props){
 		super(props)
 		this.state = {
-            activeTab: 1
+            activeTab: 1,
+            scroll: 0,
+            topHeight: 100,
+            topFixed: false,
+            paddingTop: 0,
+            topOffset: 0,
 		}
 		// this.handleChange = this.handleChange.bind(this)
     }
@@ -66,6 +71,8 @@ class ProfilePage extends Component {
 	}
 x
 	componentDidMount() {
+        window.addEventListener('scroll', this.listenToScroll)
+
         if(this.props.match.params.googleId) {
             this.props.fetchUser(this.props.match.params.googleId);
 
@@ -74,11 +81,10 @@ x
             }
         }
 
-        if(this.props.externalUser) {
+        this.updateExternalUser(() => {
             this.props.profileLoadMyVideos(this.props.externalUser.channelId)
-        }
+        })
 
-        this.updateExternalUser()
     }
 
     componentDidUpdate(prevprops, prevparams) {
@@ -92,7 +98,58 @@ x
     }
     componentWillUnmount() {
         this.props.profileClearMyVideos()
+        window.removeEventListener('scroll', this.listenToScroll)
+
     }
+
+
+    listenToScroll = (event) => {
+        let node = document.body
+   
+        let top = document.getElementById("profile-top")
+        let scrollValue
+
+        if(node.scrollTop > 0) {
+            scrollValue = node.scrollTop
+        } else {
+            scrollValue = 0
+        }
+
+        if(top.clientHeight-node.scrollTop < this.state.topHeight - 58) {
+            this.setState({
+                topFixed: true, 
+                paddingTop: top.clientHeight, 
+                scroll: scrollValue,
+                topOffset: top.clientHeight-this.state.topHeight
+            })
+        } else {
+            this.setState({
+                topFixed: false, 
+                paddingTop: 0, 
+                topOffset: 0,
+                scroll: scrollValue
+            })
+        }
+        console.log(this.state)
+    }
+
+    // listenToScroll = () => {
+    //     // const winScroll =
+    //     //   document.body.scrollTop || document.documentElement.scrollTop
+      
+    //     // const height =
+    //     //   document.documentElement.scrollHeight -
+    //     //   document.documentElement.clientHeight
+      
+    //     // const scrolled = winScroll / height
+      
+    //     this.setState({
+    //       scroll: document.body.scrollTop,
+    //     })
+
+    //     console.log(this.state)
+    //   }
+
 
     updateExternalUser(success) {
         if(this.checkAtChannelSymbol()) {
@@ -113,6 +170,8 @@ x
             }
         }
     }
+
+
     
     checkAtSymbol() {
         var re = new RegExp("^@", "i");
@@ -185,140 +244,160 @@ x
             </div>
         )
     }
+
+
+    
     
     renderUser(user) {
         if(user) {
             return(
-                <div className="profile-page">
-    
-                    {user && (
-                        <div>
-                            <div className="profile-avatar">
-                                {this.renderPhoto(user)}
-                            </div>
-    
-                            <div className="profile-name">
-                                {user.displayName ? (user.displayName): (user.profile.displayName)}
-                            </div>
-    
-                            {user.customUrl && (
-                                <div className="profile-username">
-                                    <Link to={`/@${user.customUrl}`}>
-                                        @{user.customUrl}
-                                    </Link>
-                                </div> 
-                            )}
+                <div 
+                    className="profile-page"
+                    style={{paddingTop: this.state.paddingTop + "px"}}
+                >
 
-                            {(!user.customUrl && user.channelId ) && (
-                                <div className="profile-username">
-                                    <Link to={`/@channel=${user.channelId}`}>
-                                        @channel={user.channelId}
-                                    </Link>
-                                </div> 
-                            )}
+                    <div 
+                        id="profile-top"
+                        className={classNames({
+                            "fixed": this.state.topFixed
+                        }, "profile-top")}
+                        style={{
+                            top: -this.state.topOffset
+                        }}
+                    >
+    
+                        {user && (
+                            <div>
+                                <div className="profile-avatar">
+                                    {this.renderPhoto(user)}
+                                </div>
+        
+                                <div className="profile-name">
+                                    {user.displayName ? (user.displayName): (user.profile.displayName)}
+                                </div>
+        
+                                {user.customUrl && (
+                                    <div className="profile-username">
+                                        <Link to={`/@${user.customUrl}`}>
+                                            @{user.customUrl}
+                                        </Link>
+                                    </div> 
+                                )}
+
+                                {(!user.customUrl && user.channelId ) && (
+                                    <div className="profile-username">
+                                        <Link to={`/@channel=${user.channelId}`}>
+                                            @channel={user.channelId}
+                                        </Link>
+                                    </div> 
+                                )}
+                            
+                            </div>
+                        )}
                         
+        
+                        <ul className="profile-stats">
+                            <li className="single-stat">
+                                <div className="stat-number" onClick={() => {
+                                    this.props.updateRightSlider({
+                                        type: "claps"
+                                    });
+                                }}>
+                                    0
+                                </div>
+        
+                                <div className="stat-label">Watched</div>
+                            </li>
+        
+                            <li className="single-stat" onClick={() => {
+                                    this.props.updateRightSlider({
+                                        type: "watch"
+                                    });
+                                }}>
+                                <div className="stat-number">
+                                    0
+                                </div>
+        
+                                <div className="stat-label">CLAPS</div>
+                            </li>
+        
+                            <li className="single-stat">
+                                <div className="stat-number">
+                                    0
+                                </div>
+        
+                                <div className="stat-label">FANS</div>
+                            </li>
+        
+                            <li className="single-stat">
+                                <div className="stat-number">
+                                    0
+                                </div>
+        
+                                <div className="stat-label">FOLLOWING</div>
+                            </li>
+                        </ul>
+        
+                        <div className="actions-container" onClick={() => {
+                                    this.props.updateBottomSlider({
+                                        type: "edit"
+                                    });
+                                }}>
+                            <div className="main-group">
+                                <a className="button button-edit">Edit profile</a>
+                            </div>
                         </div>
-                    )}
-                    
-    
-                    <ul className="profile-stats">
-                        <li className="single-stat">
-                            <div className="stat-number" onClick={() => {
-                                this.props.updateRightSlider({
-                                    type: "claps"
-                                });
-                            }}>
-                                0
+        
+                        {user.bio && (
+                            <div className="profile-bio">
+                                {user.bio}
                             </div>
-    
-                            <div className="stat-label">Claps</div>
-                        </li>
-    
-                        <li className="single-stat" onClick={() => {
-                                this.props.updateRightSlider({
-                                    type: "watch"
-                                });
-                            }}>
-                            <div className="stat-number">
-                                0
+                        )}
+        
+                        
+                        {user.website && (
+                            <div className="profile-link">
+                                <div className="youtube-icon">
+                                    <YoutubeIcon />
+                                </div>
+                                <a href={`http://${this.props.user.website}`} target="_blank">
+                                    {user.website}
+                                </a>
                             </div>
-    
-                            <div className="stat-label">WATCHED</div>
-                        </li>
-    
-                        <li className="single-stat">
-                            <div className="stat-number">
-                                0
-                            </div>
-    
-                            <div className="stat-label">FOLLOWERS</div>
-                        </li>
-    
-                        <li className="single-stat">
-                            <div className="stat-number">
-                                0
-                            </div>
-    
-                            <div className="stat-label">FOLLOWING</div>
-                        </li>
-                    </ul>
-    
-                    <div className="actions-container" onClick={() => {
-                                this.props.updateBottomSlider({
-                                    type: "edit"
-                                });
-                            }}>
-                        <div className="main-group">
-                            <a className="button button-edit">Edit profile</a>
-                        </div>
-                    </div>
-    
-                    {user.bio && (
-                        <div className="profile-bio">
-                            {user.bio}
-                        </div>
-                    )}
-    
-                    
-                    {user.website && (
-                        <div className="profile-link">
-                            <div className="youtube-icon">
-                                <YoutubeIcon />
-                            </div>
-                            <a href={`http://${this.props.user.website}`} target="_blank">
-                                {user.website}
-                            </a>
-                        </div>
-                    )}
-                    
-    
-                    <div className="tab-container">
+                        )}
+                        
+        
                         <div 
-                            className={
-                                classNames({"active": this.state.activeTab == 1}
-                            , "tab")}
-                            onClick={() => this.changeTab(1)}
+                            className="tab-container"
                         >
-                            <div className="tab-label">Videos</div>
+                            <div 
+                                className={
+                                    classNames({"active": this.state.activeTab == 1}
+                                , "tab")}
+                                onClick={() => this.changeTab(1)}
+                            >
+                                <div className="tab-label">Videos</div>
+                            </div>
+        
+                            <div  
+                                className={
+                                    classNames({"active": this.state.activeTab == 2}
+                                , "tab")}
+                                onClick={() => this.changeTab(2)}
+                            >
+                                <div className="tab-label">Hardware</div>
+                            </div>
+        
+                            <div  
+                                className={
+                                    classNames({"active": this.state.activeTab == 3}
+                                , "tab")}
+                                onClick={() => this.changeTab(3)}
+                            >
+                                <div className="tab-label">Reposts</div>
+                            </div>
                         </div>
-    
-                        <div  
-                            className={
-                                classNames({"active": this.state.activeTab == 2}
-                            , "tab")}
-                            onClick={() => this.changeTab(2)}
-                        >
-                            <div className="tab-label">Hardware</div>
-                        </div>
-    
-                        <div  
-                            className={
-                                classNames({"active": this.state.activeTab == 3}
-                            , "tab")}
-                            onClick={() => this.changeTab(3)}
-                        >
-                            <div className="tab-label">Reposts</div>
-                        </div>
+
                     </div>
 
                     <div className="tab-results-container">

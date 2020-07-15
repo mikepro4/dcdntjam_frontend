@@ -1,0 +1,35 @@
+.results-container {
+    max-width: 1000px;
+    margin: 0 auto;
+
+    &.results-grid {
+        .results-single-item {
+            position: relative;
+            width: 50%;
+            display: inline-block;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+
+            img {
+                width: 100%;
+            }
+
+            .stats {
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                z-index: 10;
+                display: none;
+                
+            }
+        }
+    }
+
+    &.results-list {
+        
+    }
+
+    &.results-timeline {
+        
+    }
+}

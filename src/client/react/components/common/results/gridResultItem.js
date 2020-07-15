@@ -4,6 +4,7 @@ import { withRouter, Link } from "react-router-dom";
 import classNames from "classnames"
 
 class GridResultItem extends Component {
+    
 
 	render() {
 		return (
@@ -15,6 +16,8 @@ class GridResultItem extends Component {
                 >
                     <img src={this.props.video.snippet.thumbnails.medium.url}/>
                </Link>
+
+               <div className="stats">1.2hrs</div>
 
             </div>
 			
