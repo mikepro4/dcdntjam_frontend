@@ -1,76 +1,170 @@
-import React, { PropTypes } from "react";
+import React, { Component, PropTypes } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import classnames from "classnames";
 import { fromPairs } from "lodash";
 import SmallSearch from "../../icons/small_search"
 import SmallCross from "../../icons/small_cross"
 
-const Input = ({
-	input,
-	label,
-	placeholder,
-	icon,
-	large,
-	type,
-	meta: { touched, error }
-}) => {
-	let containerClassName = classnames({
-		"search-input-group": true,
-		"search-input-large": large,
-		"search-input-valid": touched && !error,
-		"search-input-invalid": touched && error
-	});
+import { resetForm } from "../../../../redux/actions/appActions";
 
-	let inputClassName = classnames({
-		"search-input": true,
-		"search-intent-success": touched && !error,
-		"search-intent-danger": touched && error
-	});
+class SearchInput extends Component {
+	render() {
+		const {
+			input,
+			label,
+			placeholder,
+			icon,
+			large,
+			type,
+			meta: { touched, error }
+		} = this.props;
 
-	return (
-		<div className={containerClassName}>
-			{label ? (
-				<div className="search-input-group-left">
-					<div className="search-input-label">{label}</div>
+		let containerClassName = classnames({
+			"search-input-group": true,
+			"search-input-large": large,
+			"search-input-valid": touched && !error,
+			"search-input-invalid": touched && error
+		});
+	
+		let inputClassName = classnames({
+			"search-input": true,
+			"search-intent-success": touched && !error,
+			"search-intent-danger": touched && error
+		});
+		return (
+			<div className={containerClassName}>
+				{label ? (
+					<div className="search-input-group-left">
+						<div className="search-input-label">{label}</div>
+					</div>
+				) : (
+					""
+				)}
+	
+				<div className="search-input-group-right">
+					
+					<div className="search-icon-container">
+						<SmallSearch/>
+					</div>
+	
+					<input
+						{...input}
+						className={inputClassName}
+						placeholder={placeholder}
+						type={type}
+					/>
+	
+					{touched && (
+						<div className="search-input-error">
+							{touched && error && <span>{error}</span>}
+						</div>
+					)}
+	
+					{touched ? (
+						<div 
+							className="search-input-clear"
+							onClick={() => {
+								this.props.resetForm("mainSearchForm")
+							}}
+						>
+							<SmallCross />
+						</div>
+					) : (
+						""
+					)}
+	
+					{touched && !error ? (
+						<div className="search-input-valid">
+							<span className="pt-icon pt-icon-small-tick" />
+						</div>
+					) : (
+						""
+					)}
 				</div>
-			) : (
-				""
-			)}
-
-			<div className="search-input-group-right">
-
-				<SmallSearch/>
-
-				<input
-					{...input}
-					className={inputClassName}
-					placeholder={placeholder}
-					type={type}
-				/>
-
-				{touched && (
-					<div className="search-input-error">
-						{touched && error && <span>{error}</span>}
-					</div>
-				)}
-
-				{touched ? (
-					<div className="search-input-clear">
-						<SmallCross />
-					</div>
-				) : (
-					""
-				)}
-
-				{touched && !error ? (
-					<div className="search-input-valid">
-						<span className="pt-icon pt-icon-small-tick" />
-					</div>
-				) : (
-					""
-				)}
 			</div>
-		</div>
-	);
-};
+		)
+	}
+}
 
-export default Input;
+const mapStateToProps = state => ({});
+
+export default withRouter(
+	connect(mapStateToProps, { 
+		resetForm
+	 })(SearchInput)
+);
+
+
+// const Input = ({
+// 	input,
+// 	label,
+// 	placeholder,
+// 	icon,
+// 	large,
+// 	type,
+// 	meta: { touched, error }
+// }) => {
+	// let containerClassName = classnames({
+	// 	"search-input-group": true,
+	// 	"search-input-large": large,
+	// 	"search-input-valid": touched && !error,
+	// 	"search-input-invalid": touched && error
+	// });
+
+	// let inputClassName = classnames({
+	// 	"search-input": true,
+	// 	"search-intent-success": touched && !error,
+	// 	"search-intent-danger": touched && error
+	// });
+
+	// return (
+	// 	<div className={containerClassName}>
+	// 		{label ? (
+	// 			<div className="search-input-group-left">
+	// 				<div className="search-input-label">{label}</div>
+	// 			</div>
+	// 		) : (
+	// 			""
+	// 		)}
+
+	// 		<div className="search-input-group-right">
+				
+	// 			<div className="search-icon-container">
+	// 				<SmallSearch/>
+	// 			</div>
+
+	// 			<input
+	// 				{...input}
+	// 				className={inputClassName}
+	// 				placeholder={placeholder}
+	// 				type={type}
+	// 			/>
+
+	// 			{touched && (
+	// 				<div className="search-input-error">
+	// 					{touched && error && <span>{error}</span>}
+	// 				</div>
+	// 			)}
+
+	// 			{touched ? (
+	// 				<div className="search-input-clear">
+	// 					<SmallCross />
+	// 				</div>
+	// 			) : (
+	// 				""
+	// 			)}
+
+	// 			{touched && !error ? (
+	// 				<div className="search-input-valid">
+	// 					<span className="pt-icon pt-icon-small-tick" />
+	// 				</div>
+	// 			) : (
+	// 				""
+	// 			)}
+	// 		</div>
+	// 	</div>
+// 	);
+// };
+
+// export default Input;

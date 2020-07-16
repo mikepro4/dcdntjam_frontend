@@ -4,7 +4,7 @@
 	min-height: 55px;
 	position: relative;
 	max-width: 1000px;
-	margin: 0 auto;
+	margin: 10px auto;
 
 	// &:last-child {
 	// 	margin: 0;
@@ -26,6 +26,7 @@
 		flex-grow: 1;
 		display: flex;
 		align-items: center;
+		position: relative;
 		position: relative;
 
 		.search-input-valid {
@@ -49,6 +50,23 @@
 		.Select {
 			width: 100%;
 		}
+
+		.search-icon-container {
+			position: absolute;
+			top: 19px;
+			left: 32px;
+			transition: all 0.2s;
+			opacity: 0.5;
+		}
+
+		.search-input-clear {
+			position: absolute;
+			top: 21px;
+			right: 32px;
+			transition: all 0.2s;
+			opacity: 1.0;
+			z-index: 100;
+		}
 	}
 
 	.search-input {
@@ -56,18 +74,21 @@
 		box-shadow: none;
 		border: none;
 		box-shadow: none;
-		background-color: transparent;
+		background-color: rgba(255, 255, 255, 0.08);
 		color: #ffffff;
 		border-radius: none;
 		-webkit-appearance: none;
-		padding: 20px 0 7px 0;
+		padding: 8px 0 10px 38px;
 		font-size: 14px;
         transition: all 0.2s;
-        width: 100%;
+		width: 100%;
+		height: 36px;
+		margin: 0 20px 0 20px;
+		border-radius: 4px;
 
 		&::placeholder {
 			color: rgba(255,255,255,0.3);
-			font-weight: 100;
+			font-weight: 200;
 		}
 
 		&.intent-danger {

@@ -21,6 +21,7 @@ class PageSearch extends Component {
 		this.state = {
             collectionVideo: [],
             collectionVideoUrl: "/search/videos",
+            collectionVideoCount: 0,
             videoTitle: null,
             accountName: null,
             activeTab: 1,
@@ -52,7 +53,8 @@ x
             limit,
             (data) => {
                 this.setState({
-                    collectionVideo: this.props.mainCollection.collection.all
+                    collectionVideo: this.props.mainCollection.collection.all,
+                    collectionVideoCount: this.props.mainCollection.collection.count
                 })
                 console.log(this.state)
 
@@ -70,7 +72,8 @@ x
             this.setState({
                 videoTitle: null,
                 accountName: null,
-                collectionVideo: []
+                collectionVideo: [],
+                collectionVideoCount: 0
             }) 
         } else {
             if(this.state.activeTab == 1) {
@@ -134,6 +137,12 @@ x
         )
     }
 
+    changeTab(tab) {
+		this.setState({
+			activeTab: tab
+		})
+    }
+
 	render() {
         return (
             <div className="search-container">
@@ -146,6 +155,51 @@ x
                                 onChange={this.debouncedOnChange}
                             />
                         </div>
+
+                        <div 
+                            className="small-tab-container"
+                        >
+                            <div 
+                                className={
+                                    classNames({"active": this.state.activeTab == 1}
+                                , "small-tab")}
+                                onClick={() => this.changeTab(1)}
+                            >
+                                <div className="small-tab-label">Videos</div>
+                            </div>
+        
+                            <div  
+                                className={
+                                    classNames({"active": this.state.activeTab == 2}
+                                , "small-tab")}
+                                onClick={() => this.changeTab(2)}
+                            >
+                                <div className="small-tab-label">Channels</div>
+                            </div>
+        
+                            <div  
+                                className={
+                                    classNames({"active": this.state.activeTab == 3}
+                                , "small-tab")}
+                                onClick={() => this.changeTab(3)}
+                            >
+                                <div className="small-tab-label">Hardware</div>
+                            </div>
+                        </div>
+{/* 
+                        <div className="search-count-header">
+                            {this.state.collectionVideoCount > 0 ? (
+                                    <div className="search-count-wrapper">
+                                        {this.state.collectionVideoCount}
+                                        result{this.state.collectionVideoCount == 0 || this.state.collectionVideoCount > 1 && "s"}
+                                    </div>
+                                ):(
+                                    <div className="search-count-wrapper empty">
+                                    </div>
+                                )}
+                        </div> */}
+
+
                     </div>
                 </div>
                 {this.renderTab()}
