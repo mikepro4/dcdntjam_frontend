@@ -32,14 +32,21 @@ class PageVideo extends Component {
 	}
 x
 	componentDidMount() {
+        console.log(this.props.match.params.googleId)
+        this.props.updateCurrentVideo(
+            this.props.match.params.googleId,
+            "stop"
+        )
+        
         if(this.props.match.params.googleId !== this.props.pageVideo.googleId) {
             this.props.loadVideo(this.props.match.params.googleId);
+      
         }
         if(this.props.match.params.googleId) {
-            this.props.updateCurrentVideo(
-                this.props.match.params.googleId,
-                "stop"
-            )
+            // this.props.updateCurrentVideo(
+            //     this.props.match.params.googleId,
+            //     "stop"
+            // )
         }
        
     }
@@ -48,6 +55,10 @@ x
         if(prevprops.match.params.googleId !== this.props.match.params.googleId) {
             // this.props.clearVideo()
             this.props.loadVideo(this.props.match.params.googleId);
+            this.props.updateCurrentVideo(
+                this.props.match.params.googleId,
+                "stop"
+            )
         }
     }
     componentWillUnmount() {
@@ -67,7 +78,7 @@ x
                         />
                     )}
 
-                    {this.props.video.snippet.title}
+                    {this.props.pageVideo.singleVideo  && this.props.pageVideo.singleVideo.googleId == this.props.match.params.googleId && this.props.video.snippet.title}
 
                 </div>
             )

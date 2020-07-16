@@ -167,8 +167,10 @@ class YoutubePlayer extends React.Component {
 	stopVideo() {
 		this.clearTime();
 		console.log("stop video");
-		this.state.player.stopVideo();
-		this.props.updateCurrentVideo(this.props.currentVideo.videoId, "stopped");
+		if(this.state.player) {
+			this.state.player.stopVideo();
+			this.props.updateCurrentVideo(this.props.currentVideo.videoId, "stopped");
+		}
 	}
 
 	seekVideo() {
@@ -204,10 +206,12 @@ class YoutubePlayer extends React.Component {
 		console.log("onPause");
 		clearInterval(this.state.timeInterval);
 		this.props.updateCurrentVideo(this.props.currentVideo.videoId, "paused");
-		this.props.updateTime(
-			this.state.player.getDuration(),
-			this.state.player.getCurrentTime()
-		);
+		if (this.state.player) {
+			this.props.updateTime(
+				this.state.player.getDuration(),
+				this.state.player.getCurrentTime()
+			)
+		}
 	}
 
 	startTimeInterval() {
@@ -227,15 +231,20 @@ class YoutubePlayer extends React.Component {
 
 	componentWillUnmount() {
 		clearInterval(this.state.timeInterval);
-		this.props.updateCurrentVideo(null, "cleared");
+		// this.props.updateCurrentVideo(null, "cleared");
 	}
 
 	clearTime() {
-		this.props.updateTime(this.state.player.getDuration(), 0);
+		if(this.state.player) {
+			this.props.updateTime(this.state.player.getDuration(), 0);
+		}
+		
 	}
 
 	onStop() {
-		this.props.updateTime(this.state.player.getDuration(), 0);
+		if(this.state.player) {
+			this.props.updateTime(this.state.player.getDuration(), 0);
+		}
 	}
 
 	render() {
