@@ -41,6 +41,13 @@ x
     }
 
     componentDidUpdate(prevprops, prevparams) {
+        if(this.props.pageSearch.activeTab !== prevprops.pageSearch.activeTab) {
+            if(this.props.pageSearch.searchTerm) {
+                this.onChange({
+                    search: this.props.pageSearch.searchTerm
+                }, true)
+            }
+        }
     }
     componentWillUnmount() {
         window.removeEventListener('scroll', this.listenToScroll)
@@ -160,10 +167,10 @@ x
         );
     }
 
-    onChange = (newValue) => {
+    onChange = (newValue, load) => {
         console.log("onchange")
 
-        if(newValue.search !== this.props.pageSearch.searchTerm) {
+        if(newValue.search !== this.props.pageSearch.searchTerm || load) {
             
             if(!newValue.search) {
                 this.props.searchTermUpdate(null)

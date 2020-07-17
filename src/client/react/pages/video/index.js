@@ -15,6 +15,7 @@ import {
 } from "../../../redux/actions/player";
 
 import YoutubePlayer from "../../components/common/player/Player";
+import VideoHeader from "../../components/common/video_header";
 
 
 class PageVideo extends Component {
@@ -79,8 +80,12 @@ x
                         />
                     )}
 
-                    {this.props.pageVideo.singleVideo  && this.props.pageVideo.singleVideo.googleId == this.props.match.params.googleId && this.props.video.snippet.title}
-
+                    <VideoHeader
+                        avatarUrl={this.props.video.channelAvatar}
+                        videoTitle={this.props.video.snippet.title}
+                        author={this.props.video.snippet.channelTitle}
+                        customUrl={`channel=${this.props.video.snippet.channelId}`}
+                    />
                 </div>
             )
         } return(
