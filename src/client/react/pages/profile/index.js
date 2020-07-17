@@ -26,7 +26,9 @@ import {
     scrollUpdate,
     collectionClear,
     collectionVideoUpdate,
-    collectionVideoAppend
+    collectionVideoAppend,
+    collectionRepostsUpdate,
+    collectionRepostsAppend
 } from "../../../redux/actions/pageProfileActions";
 
 
@@ -252,6 +254,20 @@ x
         }
     }
 
+    getUserlId() {
+        if(this.props.match.params.googleId) {
+            return this.props.user.googleId
+        } else {
+            if(this.props.externalUser) {
+                if(this.props.externalUser.googleId) {
+                    return this.props.externalUser.googleId
+                } else {
+                    return this.props.externalUser.channelId
+                }
+            }
+        }
+    }
+
     getCollection(offset, limit, url, update, success){
         let criteria 
 
@@ -267,7 +283,7 @@ x
                 break
             case 3:
                 criteria = {
-                    submittedBy: this.getChannelId()
+                    submittedBy: this.getUserlId()
                 }
                 break
         }
@@ -355,7 +371,10 @@ x
                         , "tab")}
                         onClick={() =>  {
                             this.props.tabUpdate(tab.id)
-                            this.load()
+                            setTimeout(()=> {
+                                this.load()
+                            }, 100)
+                            
                         }}
                         key={tab.title}
                     >
@@ -387,7 +406,7 @@ x
                 results = this.renderResults(
                     this.props.repostsCollection.all,
                     this.props.repostsCollection.count,
-                    "account_list",
+                    "grid",
                     (success) => {
                         this.loadMoreCollectionReposts(success)
                     }
@@ -625,6 +644,8 @@ export default {
         collectionClear,
         collectionVideoUpdate,
         collectionVideoAppend,
+        collectionRepostsUpdate,
+        collectionRepostsAppend,
         clearExternalUser
     })(ProfilePage)
 }

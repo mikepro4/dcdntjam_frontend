@@ -6,7 +6,9 @@ import {
 	PAGE_PROFILE_TAB_UPDATE,
 	PAGE_PROFILE_COLLECTION_CLEAR,
 	PAGE_PROFILE_COLLECTION_VIDEO_UPDATE,
-	PAGE_PROFILE_COLLECTION_VIDEO_APPEND
+	PAGE_PROFILE_COLLECTION_VIDEO_APPEND,
+	PAGE_PROFILE_COLLECTION_REPOSTS_UPDATE,
+	PAGE_PROFILE_COLLECTION_REPOSTS_APPEND
 } from "../actions/types";
 
 export const initialState = {
@@ -98,6 +100,43 @@ export const pageProfileReducer = (state = initialState, action) => {
 			return {
 				...state,
 				videos: adjustedCollection
+			}
+
+		//////// VIDEO COLLECTION ACTIONS
+
+		case PAGE_PROFILE_COLLECTION_REPOSTS_UPDATE:
+			let newReposts = {
+				...state.reposts,
+				collection: {
+					...state.reposts.collection,
+					all: action.payload.all,
+					offset: action.payload.offset,
+					limit: action.payload.limit,
+					count: action.payload.count
+				}
+			}
+
+			return {
+				...state,
+				reposts: newReposts,
+				initial: false
+			}
+
+		case PAGE_PROFILE_COLLECTION_REPOSTS_APPEND:
+			let newAllReposts = state.reposts.collection.all.concat(action.payload.all);
+			let adjustedCollectionReposts = {
+				...state.reposts,
+				collection: {
+					...state.reposts.collection,
+					all: newAllReposts,
+					offset: action.payload.offset,
+					limit: action.payload.limit,
+					count: action.payload.count
+				}
+			}
+			return {
+				...state,
+				reposts: adjustedCollectionReposts
 			}
 		default:
 			return state;

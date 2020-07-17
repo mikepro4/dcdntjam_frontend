@@ -6,7 +6,9 @@ import {
     PAGE_PROFILE_TAB_UPDATE,
     PAGE_PROFILE_COLLECTION_CLEAR,
 	PAGE_PROFILE_COLLECTION_VIDEO_UPDATE,
-	PAGE_PROFILE_COLLECTION_VIDEO_APPEND
+    PAGE_PROFILE_COLLECTION_VIDEO_APPEND,
+    PAGE_PROFILE_COLLECTION_REPOSTS_UPDATE,
+    PAGE_PROFILE_COLLECTION_REPOSTS_APPEND
 } from "../actions/types";
 
 // =============================================================================
@@ -24,6 +26,7 @@ export const tabUpdate = (tab) => async (dispatch, getState, api) => {
         type: PAGE_PROFILE_TAB_UPDATE,
         payload: tab
     })
+ 
 }
 
 export const scrollUpdate = (scroll) => async (dispatch, getState, api) => {
@@ -52,5 +55,21 @@ export const collectionVideoAppend = (collection) => async (dispatch, getState, 
 }
 
 // // =============================================================================
+
+// Collection Reposts
+
+export const collectionRepostsUpdate = (collection) => async (dispatch, getState, api) => {
+    dispatch({
+        type: PAGE_PROFILE_COLLECTION_REPOSTS_UPDATE,
+        payload: collection
+    })
+}
+
+export const collectionRepostsAppend = (collection) => async (dispatch, getState, api) => {
+    dispatch({
+        type: PAGE_PROFILE_COLLECTION_REPOSTS_APPEND,
+        payload: collection
+    })
+}
 
 
