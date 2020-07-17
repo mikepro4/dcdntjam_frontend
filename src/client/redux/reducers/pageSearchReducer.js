@@ -4,9 +4,11 @@ import {
 	PAGE_SEARCH_TAB_UPDATE,
 	PAGE_SEARCH_TERM_UPDATE,
 	PAGE_SEARCH_SCROLL_UPDATE,
+	PAGE_SEARCH_COLLECTION_CLEAR,
+	PAGE_SEARCH_COLLECTION_USERS_UPDATE,
+	PAGE_SEARCH_COLLECTION_USERS_APPEND,
 	PAGE_SEARCH_COLLECTION_VIDEO_UPDATE,
 	PAGE_SEARCH_COLLECTION_VIDEO_APPEND,
-	PAGE_SEARCH_COLLECTION_CLEAR
 } from "../actions/types";
 
 export const initialState = {
@@ -90,6 +92,9 @@ export const pageSearchReducer = (state = initialState, action) => {
 			return assign({}, state, {
 				activeTab: action.payload
 			});
+
+		//////// VIDEO COLLECTION ACTIONS
+
         case PAGE_SEARCH_COLLECTION_VIDEO_UPDATE:
 			let newVideos = {
 				...state.videos,
@@ -121,6 +126,42 @@ export const pageSearchReducer = (state = initialState, action) => {
 			return {
 				...state,
 				videos: adjustedCollection
+			}
+
+		//////// USERS COLLECTION ACTIONS
+
+		case PAGE_SEARCH_COLLECTION_USERS_UPDATE:
+			let newUsersUpdate = {
+				...state.users,
+				collection: {
+					...state.users.collection,
+					all: action.payload.all,
+					offset: action.payload.offset,
+					limit: action.payload.limit,
+					count: action.payload.count
+				}
+			}
+
+			return {
+				...state,
+				users: newUsersUpdate
+			}
+
+		case PAGE_SEARCH_COLLECTION_USERS_APPEND:
+			let newUsersAppend = state.users.collection.all.concat(action.payload.all);
+			let adjustedUsersCollection = {
+				...state.users,
+				collection: {
+					...state.users.collection,
+					all: newUsersAppend,
+					offset: action.payload.offset,
+					limit: action.payload.limit,
+					count: action.payload.count
+				}
+			}
+			return {
+				...state,
+				users: adjustedUsersCollection
 			}
 		case PAGE_SEARCH_COLLECTION_CLEAR:
 			return initialState

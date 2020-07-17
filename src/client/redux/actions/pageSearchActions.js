@@ -4,9 +4,11 @@ import {
     PAGE_SEARCH_TERM_UPDATE,
     PAGE_SEARCH_TAB_UPDATE,
     PAGE_SEARCH_SCROLL_UPDATE,
-	PAGE_SEARCH_COLLECTION_VIDEO_UPDATE,
+    PAGE_SEARCH_COLLECTION_CLEAR,
+    PAGE_SEARCH_COLLECTION_VIDEO_UPDATE,
 	PAGE_SEARCH_COLLECTION_VIDEO_APPEND,
-	PAGE_SEARCH_COLLECTION_CLEAR
+    PAGE_SEARCH_COLLECTION_USERS_UPDATE,
+	PAGE_SEARCH_COLLECTION_USERS_APPEND
 } from "../actions/types";
 
 // // =============================================================================
@@ -54,6 +56,24 @@ export const collectionVideoUpdate = (collection) => async (dispatch, getState, 
 export const collectionVideoAppend = (collection) => async (dispatch, getState, api) => {
     dispatch({
         type: PAGE_SEARCH_COLLECTION_VIDEO_APPEND,
+        payload: collection
+    })
+}
+
+// // =============================================================================
+
+// Collection User
+
+export const collectionUsersUpdate = (collection) => async (dispatch, getState, api) => {
+    dispatch({
+        type: PAGE_SEARCH_COLLECTION_USERS_UPDATE,
+        payload: collection
+    })
+}
+
+export const collectionUsersAppend = (collection) => async (dispatch, getState, api) => {
+    dispatch({
+        type: PAGE_SEARCH_COLLECTION_USERS_APPEND,
         payload: collection
     })
 }

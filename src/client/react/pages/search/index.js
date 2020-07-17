@@ -15,7 +15,9 @@ import {
     scrollUpdate,
     collectionClear,
     collectionVideoUpdate,
-    collectionVideoAppend
+    collectionVideoAppend,
+    collectionUsersUpdate,
+    collectionUsersAppend
 } from "../../../redux/actions/pageSearchActions";
 
 import MainSearchForm from './searchForm'
@@ -50,31 +52,6 @@ x
 
     listenToScroll = (event) => {
         let node = document.body
-   
-        // let scrollValue
-
-        // if(node.scrollTop > 0) {
-        //     scrollValue = node.scrollTop
-        // } else {
-        //     scrollValue = 0
-        // }
-
-        // if(top.clientHeight-node.scrollTop < this.state.topHeight - 58) {
-        //     this.setState({
-        //         topFixed: true, 
-        //         paddingTop: top.clientHeight, 
-        //         scroll: scrollValue,
-        //         topOffset: top.clientHeight-this.state.topHeight
-        //     })
-        // } else {
-        //     this.setState({
-        //         topFixed: false, 
-        //         paddingTop: 0, 
-        //         topOffset: 0,
-        //         scroll: scrollValue
-        //     })
-        // }
-        // console.log(this.state)
         this.props.scrollUpdate(node.scrollTop)
     }
 
@@ -150,6 +127,7 @@ x
                             this.props.collectionVideoUpdate(this.props.mainCollection)
                             break
                         case 2:
+                            this.props.collectionUsersUpdate(this.props.mainCollection)
                             break
                         case 3:
                            
@@ -171,6 +149,7 @@ x
                             this.props.collectionVideoAppend(this.props.mainCollection)
                             break
                         case 2:
+                            this.props.collectionUsersAppend(this.props.mainCollection)
                             break
                         case 3:
                            
@@ -332,6 +311,8 @@ export default {
         scrollUpdate,
         collectionClear,
         collectionVideoUpdate,
-        collectionVideoAppend
+        collectionVideoAppend,
+        collectionUsersUpdate,
+        collectionUsersAppend
     })(PageSearch)
 }
