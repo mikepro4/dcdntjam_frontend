@@ -2,48 +2,55 @@ import * as _ from "lodash";
 import axios from "axios";
 
 import {
-    PROFILE_LOAD_MY_VIDEOS,
-    PROFILE_LOAD_MY_VIDEOS_SUCCESS,
-    PROFILE_CLEAR_MY_LOADED_VIDEOS,
-
-    PROFILE_LOAD_MY_HARDWARE,
-    PROFILE_LOAD_MY_HARDWARE_SUCCESS,
-    PROFILE_CLEAR_MY_HARDWARE,
-
-    PROFILE_LOAD_MY_SUBMISSIONS,
-    PROFILE_LOAD_MY_SUBMISSIONS_SUCCESS,
-    PROFILE_CLEAR_MY_SUBMISSIONS
+	PAGE_PROFILE_SCROLL_UPDATE,
+    PAGE_PROFILE_TAB_UPDATE,
+    PAGE_PROFILE_COLLECTION_CLEAR,
+	PAGE_PROFILE_COLLECTION_VIDEO_UPDATE,
+	PAGE_PROFILE_COLLECTION_VIDEO_APPEND
 } from "../actions/types";
-
 
 // =============================================================================
 
-export const profileLoadMyVideos = (channelId) => async (dispatch, getState, api) => {
-    const res = await api.post("/search/videos", 
-        {
-            criteria: {
-                channelId: channelId
-            },
-            sortProperty: {
-                "created": -1
-            },
-            offset: 0,
-            limit: 20
-        }
-    );
-    
-    dispatch({
-		type: PROFILE_LOAD_MY_VIDEOS,
-	})
+// Page Actions
 
-	dispatch({
-		type: PROFILE_LOAD_MY_VIDEOS_SUCCESS,
-		payload: res.data
+export const collectionClear = () => async (dispatch, getState, api) => {
+    dispatch({
+		type: PAGE_PROFILE_COLLECTION_CLEAR
 	})
 }
 
-export const profileClearMyVideos = () => dispatch => {
-	dispatch({
-		type: PROFILE_CLEAR_MY_LOADED_VIDEOS
-	});
-};
+export const tabUpdate = (tab) => async (dispatch, getState, api) => {
+    dispatch({
+        type: PAGE_PROFILE_TAB_UPDATE,
+        payload: tab
+    })
+}
+
+export const scrollUpdate = (scroll) => async (dispatch, getState, api) => {
+    dispatch({
+        type: PAGE_PROFILE_SCROLL_UPDATE,
+        payload: scroll
+    })
+}
+
+// // =============================================================================
+
+// Collection Video
+
+export const collectionVideoUpdate = (collection) => async (dispatch, getState, api) => {
+    dispatch({
+        type: PAGE_PROFILE_COLLECTION_VIDEO_UPDATE,
+        payload: collection
+    })
+}
+
+export const collectionVideoAppend = (collection) => async (dispatch, getState, api) => {
+    dispatch({
+        type: PAGE_PROFILE_COLLECTION_VIDEO_APPEND,
+        payload: collection
+    })
+}
+
+// // =============================================================================
+
+

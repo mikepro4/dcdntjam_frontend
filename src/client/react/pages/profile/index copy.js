@@ -4,6 +4,7 @@ import React, { Component, useCallback, useEffect, useState, useRef, useMemo } f
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+
 import {
     updateUser,
     updateRightSlider,
@@ -13,24 +14,17 @@ import {
 } from "../../../redux/actions/appActions";
 
 import {
-    fetchUser,
-    clearExternalUser
+    fetchUser
 } from "../../../redux/actions/userActions";
 
 import {
-    collectionSearch
-} from "../../../redux/actions/mainCollection";
-
-import {
-    tabUpdate,
-    scrollUpdate,
-    collectionClear,
-    collectionVideoUpdate,
-    collectionVideoAppend
+    profileLoadMyVideos,
+    profileClearMyVideos
 } from "../../../redux/actions/pageProfileActions";
 
 
 import YoutubeIcon from "../../components/icons/youtube"
+
 import Results from "../../components/common/results"
 
 
@@ -46,6 +40,7 @@ class ProfilePage extends Component {
             paddingTop: 0,
             topOffset: 0,
 		}
+		// this.handleChange = this.handleChange.bind(this)
     }
     
     static loadData(store, match) {
@@ -73,145 +68,41 @@ class ProfilePage extends Component {
             }
         }
         
-    }
-    
-    componentWillMount() {
-        // this.props.collectionClear()
-        // this.props.clearExternalUser()
-    }
+	}
 x
 	componentDidMount() {
         window.addEventListener('scroll', this.listenToScroll)
         document.body.scrollTop = 0
-        this.props.collectionClear()
-        // this.props.clearExternalUser()
 
         if(this.props.match.params.googleId) {
             this.props.fetchUser(this.props.match.params.googleId);
 
             if(this.props.user && this.props.user.channelId) {
-                this.load()
+                this.props.profileLoadMyVideos(this.props.user.channelId)
             }
         }
 
         this.updateExternalUser(() => {
-           this.load()
+            this.props.profileLoadMyVideos(this.props.externalUser.channelId)
         })
 
-       
-    }
-
-    load() {
-        switch (this.props.pageProfile.activeTab) {
-            case 1:
-                this.loadCollectionVideos()
-                break
-            case 2:
-                break
-            case 3:
-                this.loadCollectionReposts()
-                break
-        }
-    }
-
-    loadCollectionVideos() {
-        this.getCollection(
-            0,
-            15,
-            this.props.pageProfile.videos.url,
-            true
-        )
-    }
-
-    loadMoreCollectionVideos(success)  {
-        console.log("load more videos")
-
-        this.getCollection(
-            this.props.videoCollection.offset + 15,
-            this.props.videoCollection.limit + 15,
-            this.props.pageProfile.videos.url,
-            false,
-            () => {
-                if(success) {
-                    success()
-                }
-            }
-        )
-    }
-
-    loadCollectionReposts() {
-        this.getCollection(
-            0,
-            15,
-            this.props.pageProfile.reposts.url,
-            true
-        )
-    }
-
-    loadMoreCollectionReposts(success)  {
-        console.log("load more videos")
-
-        this.getCollection(
-            this.props.repostsCollection.offset + 15,
-            this.props.repostsCollection.limit + 15,
-            this.props.pageProfile.videos.url,
-            false,
-            () => {
-                if(success) {
-                    success()
-                }
-            }
-        )
     }
 
     componentDidUpdate(prevprops, prevparams) {
         if(prevprops.match.params.customUrl !== this.props.match.params.customUrl) {
-            this.props.collectionClear()
+            this.props.profileClearMyVideos()
+
             this.updateExternalUser(() => {
-                this.load()
+                this.props.profileLoadMyVideos(this.props.externalUser.channelId)
             })
         }
     }
-
     componentWillUnmount() {
+        this.props.profileClearMyVideos()
         window.removeEventListener('scroll', this.listenToScroll)
-        this.props.collectionClear()
-        this.props.clearExternalUser()
+
     }
 
-    checkAtSymbol() {
-        var re = new RegExp("^@", "i");
-        var str = this.props.match.params.customUrl;
-        var containsAt = re.test(str);
-        return containsAt
-    }
-
-    checkAtChannelSymbol() {
-        var re = new RegExp("^@channel=", "i");
-        var str = this.props.match.params.customUrl;
-        var containsAt = re.test(str);
-        return containsAt
-    }
-
-    updateExternalUser(success) {
-        if(this.checkAtChannelSymbol()) {
-            if(this.props.match.params.customUrl) {
-                this.props.fetchUserByChannelId(
-                    this.props.match.params.customUrl.substr(9),
-                    success
-                );
-            }
-        } else {
-            if(this.checkAtSymbol()) {
-                if(this.props.match.params.customUrl) {
-                    this.props.fetchUserByCustomUrl(
-                        this.props.match.params.customUrl.substr(1),
-                        success
-                    );
-                }
-            }
-        }
-    }
 
     listenToScroll = (event) => {
         let node = document.body
@@ -240,87 +131,63 @@ x
                 scroll: scrollValue
             })
         }
+        console.log(this.state)
     }
 
-    getChannelId() {
-        if(this.props.match.params.googleId) {
-            return this.props.user.channelId
+    // listenToScroll = () => {
+    //     // const winScroll =
+    //     //   document.body.scrollTop || document.documentElement.scrollTop
+      
+    //     // const height =
+    //     //   document.documentElement.scrollHeight -
+    //     //   document.documentElement.clientHeight
+      
+    //     // const scrolled = winScroll / height
+      
+    //     this.setState({
+    //       scroll: document.body.scrollTop,
+    //     })
+
+    //     console.log(this.state)
+    //   }
+
+
+    updateExternalUser(success) {
+        if(this.checkAtChannelSymbol()) {
+            if(this.props.match.params.customUrl) {
+                this.props.fetchUserByChannelId(
+                    this.props.match.params.customUrl.substr(9),
+                    success
+                );
+            }
         } else {
-            if(this.props.externalUser) {
-                return this.props.externalUser.channelId
+            if(this.checkAtSymbol()) {
+                if(this.props.match.params.customUrl) {
+                    this.props.fetchUserByCustomUrl(
+                        this.props.match.params.customUrl.substr(1),
+                        success
+                    );
+                }
             }
         }
     }
 
-    getCollection(offset, limit, url, update, success){
-        let criteria 
 
-        switch (this.props.pageProfile.activeTab) {
-            case 1:
-                criteria = {
-                    channelId: this.getChannelId()
-                }
-                break
-            case 2:
-                criteria = {
-                }
-                break
-            case 3:
-                criteria = {
-                    submittedBy: this.getChannelId()
-                }
-                break
-        }
-
-        
-        this.props.collectionSearch(
-            url,
-            criteria,
-            {
-                "created": -1
-            },
-            offset,
-            limit,
-            (data) => {
-            
-                if(update) {
-                    // console.log("new collection")
-
-                    switch (this.props.pageProfile.activeTab) {
-                        case 1:
-                            this.props.collectionVideoUpdate(this.props.mainCollection)
-                            break
-                        case 2:
-                            break
-                        case 3:
-                            this.props.collectionRepostsUpdate(this.props.mainCollection)
-                            break
-                    }
-                    if(success) {
-                        success()
-                    }
-
-                } else {
-                    // console.log("append to collection")
-                    
-                    if(success) {
-                        success()
-                    }
-
-                    switch (this.props.pageProfile.activeTab) {
-                        case 1:
-                            this.props.collectionVideoAppend(this.props.mainCollection)
-                            break
-                        case 2:
-                            break
-                        case 3:
-                            this.props.collectionRepostsAppend(this.props.mainCollection)
-                            break
-                    }
-                }
-            }
-        );
+    
+    checkAtSymbol() {
+        var re = new RegExp("^@", "i");
+        var str = this.props.match.params.customUrl;
+        var containsAt = re.test(str);
+        return containsAt
     }
+
+    checkAtChannelSymbol() {
+        var re = new RegExp("^@channel=", "i");
+        var str = this.props.match.params.customUrl;
+        var containsAt = re.test(str);
+        return containsAt
+    }
+
 
     handleSubmit = values => {
         console.log(values)
@@ -333,6 +200,12 @@ x
 		);
     };
 
+    changeTab(tab) {
+		this.setState({
+			activeTab: tab
+		})
+    }
+
     renderPhoto(user) {
         if(user.profile && user.profile.photos) {
             return (<img src={user.profile.photos[0].value}/>)
@@ -343,80 +216,40 @@ x
         }
     }
 
-    renderTabs() {
-        return (
-            <div 
-                className="tab-container"
-            >
-                {this.props.pageProfile.tabs.map(tab => (
-                    <div  
-                        className={
-                            classNames({"active": this.props.pageProfile.activeTab == tab.id}
-                        , "tab")}
-                        onClick={() =>  {
-                            this.props.tabUpdate(tab.id)
-                            this.load()
-                        }}
-                        key={tab.title}
-                    >
-                        <div className="tab-label">{tab.title}</div>
-                    </div>
-                ))}
-            </div>
-        )
-    }
-
-    renderTabResults() {
+    renderTab() {
         let results
 
-        switch (this.props.pageProfile.activeTab) {
+        switch (this.state.activeTab) {
             case 1:
-                results = this.renderResults(
-                    this.props.videoCollection.all,
-                    this.props.videoCollection.count,
-                    "grid",
-                    (success) => {
-                        this.loadMoreCollectionVideos(success)
-                    }
+                results = (
+                    <Results
+                        searchResults={
+                            this.props.pageProfile.videos ? this.props.pageProfile.videos.all : []
+                        }
+                        format="grid"
+                        isFetching={this.props.pageProfile.isFetching}
+                    />
                 )
                 break
             case 2:
                 results = " my hardware"
                 break
             case 3:
-                results = this.renderResults(
-                    this.props.repostsCollection.all,
-                    this.props.repostsCollection.count,
-                    "account_list",
-                    (success) => {
-                        this.loadMoreCollectionReposts(success)
-                    }
-                )
+                results = " my submissions"
                 break
         }
+
         return (
-            <div className="search-results-container">
+            <div>
                 {results}
             </div>
         )
     }
 
-    renderResults(searchResults, count, format, loadMore) {
-        return(
-            <Results
-                searchResults={searchResults}
-                totalCount={count}
-                format={format}
-                isFetching={this.props.mainCollection.fetching}
-                loadMore={(success) => {
-                    loadMore(success)
-                }}
-            />
-        )
-    }
 
+    
+    
     renderUser(user) {
-        console.log("fetchingExternalUser", this.props.fetchingExternalUser)
         if(user) {
             return(
                 <div 
@@ -535,24 +368,58 @@ x
                         )}
                         
         
-                        
-                        {this.renderTabs()}
+                        <div 
+                            className="tab-container"
+                        >
+                            <div 
+                                className={
+                                    classNames({"active": this.state.activeTab == 1}
+                                , "tab")}
+                                onClick={() => this.changeTab(1)}
+                            >
+                                <div className="tab-label">Videos</div>
+                            </div>
+        
+                            <div  
+                                className={
+                                    classNames({"active": this.state.activeTab == 2}
+                                , "tab")}
+                                onClick={() => this.changeTab(2)}
+                            >
+                                <div className="tab-label">Hardware</div>
+                            </div>
+        
+                            <div  
+                                className={
+                                    classNames({"active": this.state.activeTab == 3}
+                                , "tab")}
+                                onClick={() => this.changeTab(3)}
+                            >
+                                <div className="tab-label">Reposts</div>
+                            </div>
+                        </div>
 
                     </div>
 
                     <div className="tab-results-container">
-                        {this.renderTabResults()}
+                        {this.renderTab()}
                     </div>
+                    {/* {this.props.match.params.googleId && this.props.match.params.googleId}
+                    <UserEditorForm
+                    initialValues={
+                        this.props.user
+                    }
+                    onSubmit={this.handleSubmit.bind(this)}
+                /> */}
             </div>
         );
         } else {
-            // some logic for 404
-            return(<div> {!this.props.pageProfile.initial && (<div>404 user</div>)}</div>)
+            return(<div>404 user</div>)
         }
         
     }
 
-    render() {
+	render() {
 
 
         let user = null
@@ -596,35 +463,28 @@ x
             return this.renderUser(user)
             
         }
-    }
+     
+        
+	}
 }
 
 function mapStateToProps(state) {
 	return {
         user: state.app.user,
         externalUser: state.app.externalUser,
-        fetchingExternalUser: state.app.fetchingExternalUser,
-        pageProfile: state.pageProfile,
-        videoCollection: state.pageProfile.videos.collection,
-        repostsCollection: state.pageProfile.reposts.collection,
-        mainCollection: state.mainCollection
+        pageProfile: state.pageProfile
 	};
 }
 
 export default {
 	component: connect(mapStateToProps, {
-        fetchUser,
         updateUser,
+        fetchUser,
         updateRightSlider,
         updateBottomSlider,
         fetchUserByCustomUrl,
         fetchUserByChannelId,
-        collectionSearch,
-        tabUpdate,
-        scrollUpdate,
-        collectionClear,
-        collectionVideoUpdate,
-        collectionVideoAppend,
-        clearExternalUser
+        profileLoadMyVideos,
+        profileClearMyVideos
     })(ProfilePage)
 }

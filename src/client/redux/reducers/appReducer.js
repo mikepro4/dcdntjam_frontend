@@ -4,13 +4,15 @@ import {
 	SCROLLING_DOWN,
 	LOADING_START,
 	LOADING_END,
+	FETCH_USER_START,
 	FETCH_USER,
 	UPDATE_RIGHT_SLIDER,
 	UPDATE_BOTTOM_SLIDER,
 	CLEAR_RIGHT_SLIDER,
 	CLEAR_BOTTOM_SLIDER,
 	HIDE_BOTTOM_SLIDER,
-	UPDATE_TOKEN
+	UPDATE_TOKEN,
+	CLEAR_EXTERNAL_USER
 } from "../actions/types";
 import { action } from "popmotion";
 
@@ -51,10 +53,21 @@ export const appReducer = (state = initialState, action) => {
 				...state,
 				scrollingDown: true
 			}
+		case FETCH_USER_START:
+			return {
+				...state,
+				fetchingExternalUser: true
+			}
 		case FETCH_USER:
 			return {
 				...state,
-				externalUser: action.payload
+				externalUser: action.payload,
+				fetchingExternalUser: false
+			}
+		case CLEAR_EXTERNAL_USER: 
+			return {
+				...state,
+				externalUser: ""
 			}
 		case UPDATE_RIGHT_SLIDER:
 			return {

@@ -4,7 +4,8 @@ import axios from "axios";
 import {
     FETCH_USER,
     LOADING_START,
-    LOADING_END
+    LOADING_END,
+    CLEAR_EXTERNAL_USER
 } from "../actions/types";
 
 
@@ -34,4 +35,14 @@ export const fetchUser = (googleId, success) => async (
 	if (success) {
 		success();
 	}
+};
+
+export const clearExternalUser = () => async (
+	dispatch,
+	getState,
+	api
+) => {
+	dispatch({
+		type: CLEAR_EXTERNAL_USER
+    });
 };

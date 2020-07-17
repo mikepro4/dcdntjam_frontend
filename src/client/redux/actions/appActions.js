@@ -13,6 +13,7 @@ import {
 	CURRENT_VIDEO_UPDATE,
 	RESET_INITIAL,
 	FETCH_USER,
+	FETCH_USER_START,
 	LOAD_CHANNEL_INFO
 } from "../actions/types";
 
@@ -39,6 +40,10 @@ export const fetchUserByCustomUrl = (url, success) => async (dispatch, getState,
 	});
 
 	dispatch({
+		type: FETCH_USER_START
+	})
+
+	dispatch({
 		type: FETCH_USER,
 		payload: res.data
 	})
@@ -52,6 +57,10 @@ export const fetchUserByChannelId = (channelId, success) => async (dispatch, get
 	const res = await api.post("/current_user_by_channelId", {
 		channelId: channelId
 	});
+
+	dispatch({
+		type: FETCH_USER_START
+	})
 
 	dispatch({
 		type: FETCH_USER,

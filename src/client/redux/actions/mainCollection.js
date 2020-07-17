@@ -34,6 +34,8 @@ export const collectionSearch = (
 		limit,
 	});
 
+	console.log(response.data)
+
 	dispatch({
 		type: COLLECTION_SEARCH_SUCCESS,
 		offset: response.data.offset,
