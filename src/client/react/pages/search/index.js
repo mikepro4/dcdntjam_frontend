@@ -9,6 +9,15 @@ import {
     collectionSearch
 } from "../../../redux/actions/mainCollection";
 
+import {
+    searchTermUpdate,
+    tabUpdate,
+    scrollUpdate,
+    collectionClear,
+    collectionVideoUpdate,
+    collectionVideoAppend
+} from "../../../redux/actions/pageSearchActions";
+
 import MainSearchForm from './searchForm'
 
 import Results from "../../components/common/results"
@@ -19,48 +28,106 @@ class PageSearch extends Component {
     constructor(props){
 		super(props)
 		this.state = {
-            collectionVideo: [],
-            collectionVideoUrl: "/search/videos",
-            collectionVideoCount: 0,
-            collectionUser: [],
-            collectionUserUrl: "/search/users",
-            collectionUserCount: 0,
-            videoTitle: null,
-            accountName: null,
-            activeTab: 1,
         }
         
         this.debouncedOnChange = debounce(this.onChange, 300);
     }
 x
 	componentDidMount() {
-        // this.getVideoCollection()
+        window.addEventListener('scroll', this.listenToScroll)
+        document.body.scrollTop = this.props.pageSearch.scroll
     }
 
     componentDidUpdate(prevprops, prevparams) {
     }
     componentWillUnmount() {
+        window.removeEventListener('scroll', this.listenToScroll)
+    }
+
+    onChange(value) {
+
+    }
+
+    listenToScroll = (event) => {
+        let node = document.body
+   
+        // let scrollValue
+
+        // if(node.scrollTop > 0) {
+        //     scrollValue = node.scrollTop
+        // } else {
+        //     scrollValue = 0
+        // }
+
+        // if(top.clientHeight-node.scrollTop < this.state.topHeight - 58) {
+        //     this.setState({
+        //         topFixed: true, 
+        //         paddingTop: top.clientHeight, 
+        //         scroll: scrollValue,
+        //         topOffset: top.clientHeight-this.state.topHeight
+        //     })
+        // } else {
+        //     this.setState({
+        //         topFixed: false, 
+        //         paddingTop: 0, 
+        //         topOffset: 0,
+        //         scroll: scrollValue
+        //     })
+        // }
+        // console.log(this.state)
+        this.props.scrollUpdate(node.scrollTop)
+    }
+
+    loadMoreCollectionVideo(success)  {
+        console.log("load more videos")
+
+        this.getCollection(
+            this.props.videoCollection.offset + 15,
+            this.props.videoCollection.limit + 15,
+            this.props.pageSearch.videos.url,
+            false,
+            () => {
+                if(success) {
+                    success()
+                }
+            }
+        )
+    }
+
+    loadMoreCollectionUser(success)  {
+        console.log("load more videos")
+        this.getCollection(
+            this.props.userCollection.offset + 15,
+            this.props.userCollection.limit + 15,
+            this.props.pageSearch.users.url,
+            false,
+            () => {
+                if(success) {
+                    success()
+                }
+            }
+        )
     }
 
     getCollection(offset, limit, url, update, success){
-        console.log("load collection")
 
         let criteria 
+        let searchTerm = this.props.pageSearch.searchTerm
 
-        switch (this.state.activeTab) {
+        switch (this.props.pageSearch.activeTab) {
             case 1:
                 criteria = {
-                    video: this.state.search
+                    video: searchTerm
                 }
                 break
             case 2:
                 criteria = {
-                    account: this.state.search
+                    account: searchTerm
                 }
                 break
             case 3:
                 criteria = {
-                    hardware: this.state.search
+                    hardware: searchTerm
                 }
                 break
         }
@@ -76,57 +143,38 @@ x
                 console.log(this.state)
 
                 if(update) {
-                    console.log("new collection")
+                    // console.log("new collection")
+
+                    switch (this.props.pageSearch.activeTab) {
+                        case 1:
+                            this.props.collectionVideoUpdate(this.props.mainCollection)
+                            break
+                        case 2:
+                            break
+                        case 3:
+                           
+                            break
+                    }
                     if(success) {
                         success()
                     }
 
-                    switch (this.state.activeTab) {
-                        case 1:
-                            this.setState({
-                                collectionVideo: this.props.mainCollection.collection.all,
-                                collectionVideoCount: this.props.mainCollection.collection.count
-                            })
-                            break
-                        case 2:
-                            this.setState({
-                                collectionUser: this.props.mainCollection.collection.all,
-                                collectionUserCount: this.props.mainCollection.collection.count
-                            })
-                            break
-                        case 3:
-                            this.setState({
-                                collectionHardware: this.props.mainCollection.collection.all,
-                                collectionHardwareCount: this.props.mainCollection.collection.count
-                            })
-                            break
-                        }
                 } else {
-                    console.log("append to collection")
+                    // console.log("append to collection")
                     
-                    let newArray
-                    switch (this.state.activeTab) {
-                        case 1:
-                            newArray = this.state.collectionVideo.concat(this.props.mainCollection.collection.all);
-                            this.setState({
-                                collectionVideo: newArray
-                            })
-                            break
-                        case 2:
-                             newArray = this.state.collectionUser.concat(this.props.mainCollection.collection.all);
-                            this.setState({
-                                collectionUser: newArray
-                            })
-                            break
-                        case 3:
-                            newArray = this.state.collectionHardware.concat(this.props.mainCollection.collection.all);
-                            this.setState({
-                                collectionHardware: newArray
-                            })
-                            break
-                        }
                     if(success) {
                         success()
+                    }
+
+                    switch (this.props.pageSearch.activeTab) {
+                        case 1:
+                            this.props.collectionVideoAppend(this.props.mainCollection)
+                            break
+                        case 2:
+                            break
+                        case 3:
+                           
+                            break
                     }
                 }
             }
@@ -134,123 +182,109 @@ x
     }
 
     onChange = (newValue) => {
-        if(!newValue.search) {
-            this.setState({
-                search: null,
-                collectionVideo: [],
-                collectionVideoCount: 0,
-                collectionUser: [],
-                collectionUserCount: 0
-            }) 
-        } else {
-            this.setState({
-                search: newValue.search
-            })
-            if(this.state.activeTab == 1) {
-               
-                this.getCollection(
-                    0,
-                    15,
-                    this.state.collectionVideoUrl,
-                    true
-                )
-            } if(this.state.activeTab == 2) {
+        console.log("onchange")
+
+        if(newValue.search !== this.props.pageSearch.searchTerm) {
+            
+            if(!newValue.search) {
+                this.props.searchTermUpdate(null)
     
-                this.getCollection(
-                    0,
-                    20,
-                    this.state.collectionUserUrl,
-                    true
-                )
+            } else {
+                this.props.searchTermUpdate(newValue.search)
+    
+                switch (this.props.pageSearch.activeTab) {
+                    case 1:
+                        this.getCollection(
+                            0,
+                            15,
+                            this.props.pageSearch.videos.url,
+                            true
+                        )
+                        break
+                    case 2:
+                        this.getCollection(
+                            0,
+                            15,
+                            this.props.pageSearch.users.url,
+                            true
+                        )
+                        break
+                    case 3:
+                        break
+                }
             }
         }
-    }
-    
-    loadMoreCollectionVideo(success)  {
-        console.log("load more videos")
 
-        this.getCollection(
-            this.props.mainCollection.collection.offset + 15,
-            this.props.mainCollection.collection.limit + 15,
-            this.state.collectionVideoUrl,
-            false,
-            () => {
-                if(success) {
-                    success()
-                }
-                console.log(this.props.mainCollection.collection)
-            }
+    }
+
+    renderResults(searchResults, count, format, loadMore) {
+        return(
+            <Results
+                searchResults={searchResults}
+                totalCount={count}
+                format={format}
+                isFetching={this.props.mainCollection.fetching}
+                loadMore={(success) => {
+                    loadMore(success)
+                }}
+            />
         )
     }
 
-    loadMoreCollectionUser(success)  {
-        console.log("load more videos")
 
-        this.getCollection(
-            this.props.mainCollection.collection.offset + 15,
-            this.props.mainCollection.collection.limit + 15,
-            this.state.collectionUserUrl,
-            false,
-            () => {
-                if(success) {
-                    success()
-                }
-                console.log(this.props.mainCollection.collection)
-            }
-        )
-    }
-
-    renderTab() {
+    renderTabResults() {
         let results
 
-        switch (this.state.activeTab) {
+        switch (this.props.pageSearch.activeTab) {
             case 1:
-                results = (
-                    <Results
-                        searchResults={this.state.collectionVideo}
-                        totalCount={this.state.collectionVideoCount}
-                        format="grid"
-                        isFetching={this.props.mainCollection.collection.fetching}
-                        loadMore={(success) => {
-                            this.loadMoreCollectionVideo(success)
-                        }}
-                    />
+                results = this.renderResults(
+                    this.props.videoCollection.all,
+                    this.props.videoCollection.count,
+                    "grid",
+                    (success) => {
+                        this.loadMoreCollectionVideo(success)
+                    }
                 )
                 break
             case 2:
-                results = (
-                    <Results
-                        searchResults={this.state.collectionUser}
-                        totalCount={this.state.collectionUserCount}
-                        format="account_list"
-                        isFetching={this.props.mainCollection.collection.fetching}
-                        loadMore={(success) => {
-                            this.loadMoreCollectionUser(success)
-                        }}
-                    />
+                results = this.renderResults(
+                    this.props.userCollection.all,
+                    this.props.userCollection.count,
+                    "account_list",
+                    (success) => {
+                        this.loadMoreCollectionUser(success)
+                    }
                 )
                 break
             case 3:
                 results = " my submissions"
                 break
         }
-
         return (
-            <div>
-                {results}
+            <div className="search-results-container">
+                {this.props.pageSearch.searchTerm && results}
             </div>
         )
     }
 
-    changeTab(tab) {
-		this.setState({
-            activeTab: tab,
-        }, () => {
-            if(this.state.search) {
-                this.onChange({search: this.state.search})
-            }
-        })
-       
+    renderTabs() {
+        return (
+            <div 
+                className="small-tab-container"
+            >
+                {this.props.pageSearch.tabs.map(tab => (
+                    <div  
+                        className={
+                            classNames({"active": this.props.pageSearch.activeTab == tab.id}
+                        , "small-tab")}
+                        onClick={() => this.props.tabUpdate(tab.id)}
+                        key={tab.title}
+                    >
+                        <div className="small-tab-label">{tab.title}</div>
+                    </div>
+                ))}
+            </div>
+        )
     }
 
 	render() {
@@ -260,59 +294,22 @@ x
                     <div className="search-header-content">
                         <div className="search-input-wrapper">
                             <MainSearchForm
+                                initialValues={ 
+                                    {
+                                        search: this.props.pageSearch.searchTerm
+                                    }
+                                }
+                                enableReinitialize={true}
                                 touchOnChange={true}
                                 onSubmit={() => {}}
                                 onChange={this.debouncedOnChange}
                             />
                         </div>
-
-                        <div 
-                            className="small-tab-container"
-                        >
-                            <div 
-                                className={
-                                    classNames({"active": this.state.activeTab == 1}
-                                , "small-tab")}
-                                onClick={() => this.changeTab(1)}
-                            >
-                                <div className="small-tab-label">Videos</div>
-                            </div>
-        
-                            <div  
-                                className={
-                                    classNames({"active": this.state.activeTab == 2}
-                                , "small-tab")}
-                                onClick={() => this.changeTab(2)}
-                            >
-                                <div className="small-tab-label">Channels</div>
-                            </div>
-        
-                            <div  
-                                className={
-                                    classNames({"active": this.state.activeTab == 3}
-                                , "small-tab")}
-                                onClick={() => this.changeTab(3)}
-                            >
-                                <div className="small-tab-label">Hardware</div>
-                            </div>
-                        </div>
-{/* 
-                        <div className="search-count-header">
-                            {this.state.collectionVideoCount > 0 ? (
-                                    <div className="search-count-wrapper">
-                                        {this.state.collectionVideoCount}
-                                        result{this.state.collectionVideoCount == 0 || this.state.collectionVideoCount > 1 && "s"}
-                                    </div>
-                                ):(
-                                    <div className="search-count-wrapper empty">
-                                    </div>
-                                )}
-                        </div> */}
-
-
+                        
+                        {this.renderTabs()}
                     </div>
                 </div>
-                {this.renderTab()}
+                {this.renderTabResults()}
             </div>
         )
 	}
@@ -320,14 +317,21 @@ x
 
 function mapStateToProps(state) {
 	return {
-        user: state.app.user,
-        pageSearch: state.pageVideo,
-        mainCollection: state.mainCollection
+        pageSearch: state.pageSearch,
+        videoCollection: state.pageSearch.videos.collection,
+        userCollection: state.pageSearch.users.collection,
+        mainCollection: state.mainCollection,
 	};
 }
 
 export default {
 	component: connect(mapStateToProps, {
-        collectionSearch
+        collectionSearch,
+        searchTermUpdate,
+        tabUpdate,
+        scrollUpdate,
+        collectionClear,
+        collectionVideoUpdate,
+        collectionVideoAppend
     })(PageSearch)
 }

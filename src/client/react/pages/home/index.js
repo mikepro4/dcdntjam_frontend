@@ -9,6 +9,10 @@ const REACT_VERSION = React.version;
 
 class HomePage extends Component {
 
+	componentDidMount() {
+        document.body.scrollTop = 0
+    }
+
 	render() {
 
 		return (

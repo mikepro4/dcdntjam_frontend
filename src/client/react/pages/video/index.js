@@ -33,6 +33,7 @@ class PageVideo extends Component {
 x
 	componentDidMount() {
         console.log(this.props.match.params.googleId)
+        document.body.scrollTop = 0
         this.props.updateCurrentVideo(
             this.props.match.params.googleId,
             "stop"

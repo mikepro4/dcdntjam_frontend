@@ -72,6 +72,7 @@ class ProfilePage extends Component {
 x
 	componentDidMount() {
         window.addEventListener('scroll', this.listenToScroll)
+        document.body.scrollTop = 0
 
         if(this.props.match.params.googleId) {
             this.props.fetchUser(this.props.match.params.googleId);

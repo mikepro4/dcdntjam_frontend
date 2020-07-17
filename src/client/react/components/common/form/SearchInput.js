@@ -7,6 +7,7 @@ import SmallSearch from "../../icons/small_search"
 import SmallCross from "../../icons/small_cross"
 
 import { resetForm } from "../../../../redux/actions/appActions";
+import { searchTermUpdate } from "../../../../redux/actions/pageSearchActions";
 
 class SearchInput extends Component {
 	render() {
@@ -61,10 +62,11 @@ class SearchInput extends Component {
 						</div>
 					)}
 	
-					{touched ? (
+					{input.value ? (
 						<div 
 							className="search-input-clear"
 							onClick={() => {
+								this.props.searchTermUpdate(null)
 								this.props.resetForm("mainSearchForm")
 							}}
 						>
@@ -91,7 +93,8 @@ const mapStateToProps = state => ({});
 
 export default withRouter(
 	connect(mapStateToProps, { 
-		resetForm
+		resetForm,
+		searchTermUpdate
 	 })(SearchInput)
 );
 

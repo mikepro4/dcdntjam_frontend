@@ -10,26 +10,11 @@ import {
 } from "../actions/types";
 
 export const initialState = {
-    collection: {
         fetching: false,
         offset: 0,
         limit: 20,
         count: null,
         all: []
-	},
-    settings: {
-        order: {
-            label: "DESC",
-            value: -1,
-        },
-        sortProperty: {
-            label: "Date Created",
-            value: "created"
-        },
-        offset: 0,
-        limit: 0
-    },
-    type: null
 };
 
 export const mainCollectionReducer = (state = initialState, action) => {
@@ -40,9 +25,7 @@ export const mainCollectionReducer = (state = initialState, action) => {
 				offset: action.offset,
 				limit: action.limit
 			});
-			return assign({}, state, {
-				collection: updatedResults
-			});
+			return assign({}, state, updatedResults);
 		}
 
 		case COLLECTION_SEARCH_SUCCESS: {
@@ -55,30 +38,13 @@ export const mainCollectionReducer = (state = initialState, action) => {
 				count: action.count,
 				all: action.all
 			});
-			return assign({}, state, {
-				collection: updatedResults
-			});
+			return assign({}, state, updatedResults);
         }
 
         case COLLECTION_CLEAR: {
 			return initialState
         }
         
-        case COLLECTION_UPDATE: {
-			return assign({}, state, {
-				type: action.payload
-			});
-		}
-
-		case COLLECTION_SETTINGS_UPDATE:
-            let newColelctionSettings = _.merge({}, state.settings, {
-                [action.prop]: action.payload
-            })
-            return {
-                ...state,
-                settings: newColelctionSettings
-		}
-
 		default:
 			return state;
 	}
