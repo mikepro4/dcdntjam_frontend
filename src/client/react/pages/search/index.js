@@ -22,6 +22,9 @@ class PageSearch extends Component {
             collectionVideo: [],
             collectionVideoUrl: "/search/videos",
             collectionVideoCount: 0,
+            collectionUser: [],
+            collectionUserUrl: "/search/users",
+            collectionUserCount: 0,
             videoTitle: null,
             accountName: null,
             activeTab: 1,
@@ -42,12 +45,29 @@ x
     getCollection(offset, limit, url, update, success){
         console.log("load collection")
 
+        let criteria 
+
+        switch (this.state.activeTab) {
+            case 1:
+                criteria = {
+                    video: this.state.search
+                }
+                break
+            case 2:
+                criteria = {
+                    account: this.state.search
+                }
+                break
+            case 3:
+                criteria = {
+                    hardware: this.state.search
+                }
+                break
+        }
+        
         this.props.collectionSearch(
             url,
-            {
-                video: this.state.videoTitle,
-                account: this.state.accountName
-            },
+            criteria,
             "created",
             offset,
             limit,
@@ -61,16 +81,50 @@ x
                         success()
                     }
 
-                    this.setState({
-                        collectionVideo: this.props.mainCollection.collection.all,
-                        collectionVideoCount: this.props.mainCollection.collection.count
-                    })
+                    switch (this.state.activeTab) {
+                        case 1:
+                            this.setState({
+                                collectionVideo: this.props.mainCollection.collection.all,
+                                collectionVideoCount: this.props.mainCollection.collection.count
+                            })
+                            break
+                        case 2:
+                            this.setState({
+                                collectionUser: this.props.mainCollection.collection.all,
+                                collectionUserCount: this.props.mainCollection.collection.count
+                            })
+                            break
+                        case 3:
+                            this.setState({
+                                collectionHardware: this.props.mainCollection.collection.all,
+                                collectionHardwareCount: this.props.mainCollection.collection.count
+                            })
+                            break
+                        }
                 } else {
                     console.log("append to collection")
-                    let newArray = this.state.collectionVideo.concat(this.props.mainCollection.collection.all);
-                    this.setState({
-                        collectionVideo: newArray
-                    })
+                    
+                    let newArray
+                    switch (this.state.activeTab) {
+                        case 1:
+                            newArray = this.state.collectionVideo.concat(this.props.mainCollection.collection.all);
+                            this.setState({
+                                collectionVideo: newArray
+                            })
+                            break
+                        case 2:
+                             newArray = this.state.collectionUser.concat(this.props.mainCollection.collection.all);
+                            this.setState({
+                                collectionUser: newArray
+                            })
+                            break
+                        case 3:
+                            newArray = this.state.collectionHardware.concat(this.props.mainCollection.collection.all);
+                            this.setState({
+                                collectionHardware: newArray
+                            })
+                            break
+                        }
                     if(success) {
                         success()
                     }
@@ -82,17 +136,18 @@ x
     onChange = (newValue) => {
         if(!newValue.search) {
             this.setState({
-                videoTitle: null,
-                accountName: null,
+                search: null,
                 collectionVideo: [],
-                collectionVideoCount: 0
+                collectionVideoCount: 0,
+                collectionUser: [],
+                collectionUserCount: 0
             }) 
         } else {
+            this.setState({
+                search: newValue.search
+            })
             if(this.state.activeTab == 1) {
-                this.setState({
-                    videoTitle: newValue.search,
-                    accountName: null 
-                })
+               
                 this.getCollection(
                     0,
                     15,
@@ -101,15 +156,10 @@ x
                 )
             } if(this.state.activeTab == 2) {
     
-                this.setState({
-                    videoTitle: "",
-                    accountName: newValue.search  
-                })
-    
                 this.getCollection(
                     0,
                     20,
-                    "/search/user",
+                    this.state.collectionUserUrl,
                     true
                 )
             }
@@ -122,7 +172,24 @@ x
         this.getCollection(
             this.props.mainCollection.collection.offset + 15,
             this.props.mainCollection.collection.limit + 15,
-            "/search/videos",
+            this.state.collectionVideoUrl,
+            false,
+            () => {
+                if(success) {
+                    success()
+                }
+                console.log(this.props.mainCollection.collection)
+            }
+        )
+    }
+
+    loadMoreCollectionUser(success)  {
+        console.log("load more videos")
+
+        this.getCollection(
+            this.props.mainCollection.collection.offset + 15,
+            this.props.mainCollection.collection.limit + 15,
+            this.state.collectionUserUrl,
             false,
             () => {
                 if(success) {
@@ -151,7 +218,17 @@ x
                 )
                 break
             case 2:
-                results = " my hardware"
+                results = (
+                    <Results
+                        searchResults={this.state.collectionUser}
+                        totalCount={this.state.collectionUserCount}
+                        format="account_list"
+                        isFetching={this.props.mainCollection.collection.fetching}
+                        loadMore={(success) => {
+                            this.loadMoreCollectionUser(success)
+                        }}
+                    />
+                )
                 break
             case 3:
                 results = " my submissions"
@@ -168,7 +245,12 @@ x
     changeTab(tab) {
 		this.setState({
 			activeTab: tab
-		})
+        }, () => {
+            if(this.state.search) {
+                this.onChange({search: this.state.search})
+            }
+        })
+       
     }
 
 	render() {

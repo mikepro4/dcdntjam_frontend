@@ -4,6 +4,7 @@ import { withRouter, Link } from "react-router-dom";
 import classNames from "classnames"
 
 import GridResultItem from "./gridResultItem"
+import AccountListItem from "./accountListItem"
 
 class ResultsContainer extends Component {
 
@@ -35,6 +36,23 @@ class ResultsContainer extends Component {
 		// }
     }
 
+    renderAccountList() {
+        return (
+            <div className="account-list-container">
+                {this.props.searchResults && this.props.searchResults.map(account => (
+                    <AccountListItem
+                        key={account._id + new Date()}
+                        user={account}
+                    />
+                ))}
+
+                {!this.state.loadMore && this.props.isFetching && (
+                    <div>Loading</div>
+                )}
+            </div>
+        );
+    }
+
     renderList() {
         return (
             <div>List</div>
@@ -52,7 +70,9 @@ class ResultsContainer extends Component {
 			case "grid":
 				return this.renderGrid();
 			case "list":
-				return this.renderList();
+                return this.renderList();
+            case "account_list":
+                return this.renderAccountList();
 			case "timeline":
                 return this.renderTimeline();
         }
@@ -92,7 +112,7 @@ class ResultsContainer extends Component {
     
     
     renderMoreButton(){
-        if(this.props.totalCount > this.props.searchResults.length) {
+        if(this.props.searchResults && (this.props.totalCount > this.props.searchResults.length)) {
             return(<div ref={(el) => this.yourElement = el}> Load More </div>)
         }
     }
