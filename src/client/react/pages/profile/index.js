@@ -524,17 +524,20 @@ x
                                 <div className="stat-label">FOLLOWING</div>
                             </li>
                         </ul>
-        
-                        <div className="actions-container" onClick={() => {
+
+                        {this.props.match.params.googleId == this.props.user.googleId && (
+                            <div className="actions-container" onClick={() => {
                                     this.props.updateBottomSlider({
                                         type: "edit"
                                     });
                                 }}>
-                            <div className="main-group">
+                                <div className="main-group">
                                 <a className="button button-edit">Edit profile</a>
+                                </div>
                             </div>
-                        </div>
+                        )}
         
+                       
                         {user.bio && (
                             <div className="profile-bio">
                                 {user.bio}
