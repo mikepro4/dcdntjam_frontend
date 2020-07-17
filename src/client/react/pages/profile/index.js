@@ -525,7 +525,7 @@ x
                             </li>
                         </ul>
 
-                        {this.props.match.params.googleId == this.props.user.googleId && (
+                        {this.props.match.params.googleId && (this.props.match.params.googleId == this.props.user.googleId) && (
                             <div className="actions-container" onClick={() => {
                                     this.props.updateBottomSlider({
                                         type: "edit"
