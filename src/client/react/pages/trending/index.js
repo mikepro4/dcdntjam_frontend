@@ -54,8 +54,8 @@ class TrendingPage extends Component {
         console.log("load more feed")
 
         this.getCollection(
-            this.props.feed.offset + 15,
-            this.props.feed.limit + 15,
+            this.props.trending.offset + 15,
+            this.props.trending.limit + 15,
             this.props.pageTrending.trending.url,
             false,
             () => {
