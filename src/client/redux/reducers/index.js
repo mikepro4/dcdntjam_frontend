@@ -11,6 +11,7 @@ import { pageProfileReducer } from "./pageProfileReducer";
 import { mainCollectionReducer } from "./mainCollectionReducer";
 import { pageSearchReducer } from "./pageSearchReducer"
 import { pageHomeReducer } from "./pageHomeReducer"
+import { pageTrendingReducer } from "./pageTrendingReducer"
 import playerReducer from "./playerReducer";
 
 
@@ -26,5 +27,6 @@ export default (history) => combineReducers({
 	pageVideo: pageVideoReducer,
 	pageProfile: pageProfileReducer,
 	pageSearch: pageSearchReducer,
+	pageTrending: pageTrendingReducer,
 	pageHome: pageHomeReducer
 })

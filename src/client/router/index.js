@@ -4,6 +4,7 @@ import Home from "../react/pages/home";
 import Profile from "../react/pages/profile";
 import Video from "../react/pages/video";
 import Search from "../react/pages/search";
+import Trending from "../react/pages/trending";
 
 export default [
 	{
@@ -24,6 +25,14 @@ export default [
 				exact: true,
 				params: {
 					name: "search"
+				}
+			},
+			{
+				...Trending,
+				path: "/trending",
+				exact: true,
+				params: {
+					name: "trending"
 				}
 			},
 			{
