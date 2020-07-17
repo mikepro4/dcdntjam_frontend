@@ -39,7 +39,7 @@ x
     componentWillUnmount() {
     }
 
-    getCollection(offset, limit, url, update) {
+    getCollection(offset, limit, url, update, success){
         console.log("load collection")
 
         this.props.collectionSearch(
@@ -52,16 +52,28 @@ x
             offset,
             limit,
             (data) => {
-                this.setState({
-                    collectionVideo: this.props.mainCollection.collection.all,
-                    collectionVideoCount: this.props.mainCollection.collection.count
-                })
+              
                 console.log(this.state)
 
                 if(update) {
                     console.log("new collection")
+                    if(success) {
+                        success()
+                    }
+
+                    this.setState({
+                        collectionVideo: this.props.mainCollection.collection.all,
+                        collectionVideoCount: this.props.mainCollection.collection.count
+                    })
                 } else {
                     console.log("append to collection")
+                    let newArray = this.state.collectionVideo.concat(this.props.mainCollection.collection.all);
+                    this.setState({
+                        collectionVideo: newArray
+                    })
+                    if(success) {
+                        success()
+                    }
                 }
             }
         );
@@ -83,7 +95,7 @@ x
                 })
                 this.getCollection(
                     0,
-                    20,
+                    15,
                     this.state.collectionVideoUrl,
                     true
                 )
@@ -104,9 +116,21 @@ x
         }
     }
     
+    loadMoreCollectionVideo(success)  {
+        console.log("load more videos")
 
-    handleFormSubmit() { 
-
+        this.getCollection(
+            this.props.mainCollection.collection.offset + 15,
+            this.props.mainCollection.collection.limit + 15,
+            "/search/videos",
+            false,
+            () => {
+                if(success) {
+                    success()
+                }
+                console.log(this.props.mainCollection.collection)
+            }
+        )
     }
 
     renderTab() {
@@ -117,8 +141,12 @@ x
                 results = (
                     <Results
                         searchResults={this.state.collectionVideo}
+                        totalCount={this.state.collectionVideoCount}
                         format="grid"
                         isFetching={this.props.mainCollection.collection.fetching}
+                        loadMore={(success) => {
+                            this.loadMoreCollectionVideo(success)
+                        }}
                     />
                 )
                 break
