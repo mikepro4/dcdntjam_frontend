@@ -23,10 +23,6 @@ export const initialState = {
 		{
 			title: "Channels",
 			id: 2
-		},
-		{
-			title: "Hardware",
-			id: 3
 		}
 	],
 	videos: {
@@ -58,22 +54,7 @@ export const initialState = {
 				value: "created"
 			}
 		},
-	},
-	hardware: {
-		url: "/search/hardware",
-		criteria: {},
-		collection: {},
-		settings: {
-			order: {
-				label: "DESC",
-				value: -1,
-			},
-			sortProperty: {
-				label: "Date Created",
-				value: "created"
-			},
-		},
-	},
+	}
 };
 
 export const pageSearchReducer = (state = initialState, action) => {

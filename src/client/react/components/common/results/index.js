@@ -44,12 +44,37 @@ class ResultsContainer extends Component {
                     <div>Loading</div>
                 ): ( */}
                 <div>
-                        {this.props.searchResults && this.props.searchResults.map(account => (
-                        <AccountListItem
-                            key={account._id + new Date()}
-                            user={account}
-                        />
-                    ))}
+                        {this.props.searchResults && this.props.searchResults.map(account => {
+                            let customUrl = account.customUrl ? account.customUrl : `channel=${account.channelId}`
+
+                            let avatarUrl
+                            let displayName
+                            if(account.channelInfo && account.channelInfo.thumbnails) {
+                                avatarUrl = account.channelInfo.thumbnails.default.url
+                            } else {
+                                if(account.profile && account.profile[0]) {
+                                    avatarUrl = account.profile.photos[0].value
+                                }
+                            }
+
+                            if(account.channelInfo) {
+                                displayName = account.channelInfo.title
+                            } else {
+                                displayName = account.profile.displayName
+                            }
+
+                            if(account) {
+                                return (
+                                    <AccountListItem
+                                        key={account._id + new Date()}
+                                        firstLine={displayName}
+                                        customUrl={customUrl}
+                                        avatarUrl={avatarUrl}
+                                    />
+                                )
+                            }
+                        
+                        })}
                 </div>
                 {/* )} */}
             </div>

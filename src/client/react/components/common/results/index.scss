@@ -33,3 +33,51 @@
         
     }
 }
+
+.account-list-container {
+    margin: 10px 0 0 0;
+    .results-single-item {
+        position: relative;
+
+        a {
+            display: flex;
+            width: 100%;
+
+            img {
+                width: 60px;
+            }
+
+            .result-account-left {
+                width: 60px;
+                flex-grow: 0;
+                flex-shrink: 0;
+                margin: 10px 20px;
+                border-radius: 150px;
+                overflow: hidden;
+            }
+
+            .result-account-right {
+                flex-grow: 1;
+                flex-shrink: 1;
+                height: 80px;
+                flex-direction: column;
+                display: flex;
+                // align-items: center;
+                justify-content: center;
+
+                .result-account-first-line {
+                    font-size: 16px;
+                }
+
+                .result-account-second-line {
+                    font-size: 12px;
+                    font-weight: 300;
+                    margin: 3px 0 0  0;
+                    opacity: 0.5;
+                }
+            }
+        }
+
+
+    }
+}
