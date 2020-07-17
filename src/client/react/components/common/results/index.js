@@ -60,7 +60,9 @@ class ResultsContainer extends Component {
                             if(account.channelInfo) {
                                 displayName = account.channelInfo.title
                             } else {
-                                displayName = account.profile.displayName
+                                if(account.profile && account.profile.displayName)  {
+                                    displayName = account.profile.displayName
+                                }
                             }
 
                             if(account) {
