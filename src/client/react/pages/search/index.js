@@ -244,7 +244,7 @@ x
 
     changeTab(tab) {
 		this.setState({
-			activeTab: tab
+            activeTab: tab,
         }, () => {
             if(this.state.search) {
                 this.onChange({search: this.state.search})

@@ -28,9 +28,9 @@ class ResultsContainer extends Component {
 						/>
 					))}
 
-                    {!this.state.loadMore && this.props.isFetching && (
+                    {/* {!this.state.loadMore && this.props.isFetching && (
                         <div>Loading</div>
-                    )}
+                    )} */}
 				</div>
 			);
 		// }
@@ -39,16 +39,19 @@ class ResultsContainer extends Component {
     renderAccountList() {
         return (
             <div className="account-list-container">
-                {this.props.searchResults && this.props.searchResults.map(account => (
-                    <AccountListItem
-                        key={account._id + new Date()}
-                        user={account}
-                    />
-                ))}
-
-                {!this.state.loadMore && this.props.isFetching && (
+    
+                {/* {!this.state.loadMore && this.props.isFetching ? (
                     <div>Loading</div>
-                )}
+                ): ( */}
+                <div>
+                        {this.props.searchResults && this.props.searchResults.map(account => (
+                        <AccountListItem
+                            key={account._id + new Date()}
+                            user={account}
+                        />
+                    ))}
+                </div>
+                {/* )} */}
             </div>
         );
     }

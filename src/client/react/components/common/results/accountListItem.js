@@ -11,13 +11,11 @@ class AccountListItem extends Component {
             <div 
                 className="results-single-item"
             >
-               {/* <Link
-                    to={`/video/${this.props.video.googleId}`}
+               <Link
+                    to={`/@${this.props.user.customUrl}`}
                 >
-                    <img src={this.props.video.snippet.thumbnails.medium.url}/>
-               </Link> */}
-
-               <div className="stats">{this.props.user.displayName}</div>
+                    <div className="stats">{this.props.user.displayName}</div>
+               </Link>
 
             </div>
 			
