@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 
 import {
     loadVideo,
-    clearVideo
+    clearVideo,
+    viewVideo
 } from "../../../redux/actions/pageVideoActions";
 
 import {
@@ -33,7 +34,8 @@ class PageVideo extends Component {
 	}
 x
 	componentDidMount() {
-        console.log(this.props.match.params.googleId)
+        this.props.viewVideo(this.props.match.params.googleId)
+
         document.body.scrollTop = 0
         this.props.updateCurrentVideo(
             this.props.match.params.googleId,
@@ -50,7 +52,6 @@ x
             //     "stop"
             // )
         }
-       
     }
 
     componentDidUpdate(prevprops, prevparams) {
@@ -111,6 +112,7 @@ export default {
         loadVideo,
         clearVideo,
         updateTime,
-        updateCurrentVideo
+        updateCurrentVideo,
+        viewVideo
     })(PageVideo)
 }

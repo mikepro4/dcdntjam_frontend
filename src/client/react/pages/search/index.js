@@ -119,7 +119,9 @@ x
         this.props.collectionSearch(
             url,
             criteria,
-            "created",
+            {
+				"created": -1
+			},
             offset,
             limit,
             (data) => {

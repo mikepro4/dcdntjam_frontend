@@ -24,7 +24,9 @@ export const profileLoadMyVideos = (channelId) => async (dispatch, getState, api
             criteria: {
                 channelId: channelId
             },
-            sortProperty: "created",
+            sortProperty: {
+                "created": -1
+            },
             offset: 0,
             limit: 20
         }

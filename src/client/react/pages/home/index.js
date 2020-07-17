@@ -26,6 +26,7 @@ import Results from "../../components/common/results"
 
 class HomePage extends Component {
 
+
 	componentDidMount() {
         document.body.scrollTop = 0
 	}
@@ -73,7 +74,9 @@ class HomePage extends Component {
         this.props.collectionSearch(
             url,
             criteria,
-            "created",
+            {
+				"created": -1
+			},
             offset,
             limit,
             (data) => {

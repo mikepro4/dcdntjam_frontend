@@ -72,6 +72,7 @@ export const LOAD_CHANNEL_INFO = "app/LOAD_CHANNEL_INFO";
 export const LOAD_VIDEO = "app/LOAD_VIDEO";
 export const LOAD_VIDEO_SUCCESS = "app/LOAD_VIDEO_SUCCESS";
 export const CLEAR_PAGE_VIDEO = "app/CLEAR_PAGE_VIDEO";
+export const VIEW_VIDEO = "app/VIEW_VIDEO"
 
 
 // =============================================================================
