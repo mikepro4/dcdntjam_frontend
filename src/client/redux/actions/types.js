@@ -92,6 +92,8 @@ export const PROFILE_CLEAR_MY_SUBMISSIONS = "app/PROFILE_CLEAR_MY_SUBMISSIONS";
 
 // =============================================================================
 
+// Page Search
+
 export const PAGE_SEARCH_TAB_UPDATE = "app/PAGE_SEARCH_TAB_UPDATE";
 export const PAGE_SEARCH_TERM_UPDATE = "app/PAGE_SEARCH_TERM_UPDATE";
 export const PAGE_SEARCH_SCROLL_UPDATE = "app/PAGE_SEARCH_SCROLL_UPDATE";
@@ -102,6 +104,19 @@ export const PAGE_SEARCH_COLLECTION_VIDEO_APPEND = "app/PAGE_SEARCH_COLLECTION_V
 
 export const PAGE_SEARCH_COLLECTION_USERS_UPDATE = "app/PAGE_SEARCH_COLLECTION_USERS_UPDATE";
 export const PAGE_SEARCH_COLLECTION_USERS_APPEND = "app/PAGE_SEARCH_COLLECTION_USERS_APPEND";
+
+
+// =============================================================================
+
+// Page HOME
+
+export const PAGE_HOME_TAB_UPDATE = "app/PAGE_HOME_TAB_UPDATE";
+export const PAGE_HOME_SCROLL_UPDATE = "app/PAGE_HOME_SCROLL_UPDATE";
+export const PAGE_HOME_COLLECTION_CLEAR = "app/PAGE_HOME_COLLECTION_CLEAR";
+
+export const PAGE_HOME_COLLECTION_FEED_UPDATE = "app/PAGE_HOME_COLLECTION_FEED_UPDATE";
+export const PAGE_HOME_COLLECTION_FEED_APPEND = "app/PAGE_HOME_COLLECTION_FEED_APPEND";
+
 
 
 

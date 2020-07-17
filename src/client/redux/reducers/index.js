@@ -10,6 +10,7 @@ import { pageVideoReducer } from "./pageVideoReducer";
 import { pageProfileReducer } from "./pageProfileReducer";
 import { mainCollectionReducer } from "./mainCollectionReducer";
 import { pageSearchReducer } from "./pageSearchReducer"
+import { pageHomeReducer } from "./pageHomeReducer"
 import playerReducer from "./playerReducer";
 
 
@@ -21,8 +22,9 @@ export default (history) => combineReducers({
 	currentVideo: currentVideo,
 	youtubeVideoSearch: youtubeVideoSearch,
 	sliderNewVideo: sliderNewVideoReducer,
+	mainCollection: mainCollectionReducer,
 	pageVideo: pageVideoReducer,
 	pageProfile: pageProfileReducer,
 	pageSearch: pageSearchReducer,
-	mainCollection: mainCollectionReducer
+	pageHome: pageHomeReducer
 })

@@ -87,6 +87,7 @@
 		"react-dom": "^16.13.1",
 		"react-dropzone": "^4.2.8",
 		"react-helmet": "^5.2.0",
+		"react-js-pull-to-refresh": "^1.2.2",
 		"react-keydown": "^1.9.6",
 		"react-pose": "^3.4.0",
 		"react-pose-text": "^3.1.0",
