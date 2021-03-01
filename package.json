@@ -108,7 +108,7 @@
 		"sendgrid": "^5.2.3",
 		"serialize-javascript": "^3.0.0",
 		"style-loader": "^0.19.1",
-		"three": "^0.115.0",
+		"three": "^0.125.0",
 		"url-loader": "^0.6.2",
 		"webpack-cli": "^2.1.3"
 	}
